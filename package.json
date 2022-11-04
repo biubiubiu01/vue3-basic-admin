@@ -6,7 +6,9 @@
   "scripts": {
     "start": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint --ext=vue,js src",
+    "lint:fix": "eslint --ext=vue,js --fix src"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",

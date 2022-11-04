@@ -5,8 +5,8 @@ module.exports = {
     node: true
   },
   extends: [
-    'plugin:vue/essential',
-    'standard'
+    'standard',
+    'plugin:vue/vue3-essential'
   ],
   parserOptions: {
     ecmaVersion: 'latest',
