@@ -1,0 +1,23 @@
+.base-table {
+    padding: 10px;
+    box-sizing: border-box;
+    .base-table-required {
+        color: var(--el-color-danger);
+    }
+}
+
+.base-table-pagination {
+    display: flex;
+    &.base-table-pagination-bottomLeft,
+    &.base-table-pagination-topLeft {
+        justify-content: flex-start;
+    }
+    &.base-table-pagination-bottomCenter,
+    &.base-table-pagination-topCenter {
+        justify-content: center;
+    }
+    &.base-table-pagination-bottomRight,
+    &.base-table-pagination-topRight {
+        justify-content: flex-end;
+    }
+}

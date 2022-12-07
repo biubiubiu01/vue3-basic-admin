@@ -1,0 +1,65 @@
+.dialog-fade-enter-active .el-dialog.base-dialog {
+    animation: cocoFadeIn 0.3s;
+}
+.dialog-fade-leave-active .el-dialog.base-dialog {
+    animation: cocoFadeOut 0.3s;
+}
+
+.el-overlay.blur {
+    backdrop-filter: blur(5px);
+}
+
+.base-dialog {
+    .el-dialog__header {
+        padding-top: 6px;
+        padding-bottom: 0;
+        border-bottom: 1px solid var(--base-dialog-border-color);
+        margin-right: 0;
+        .base-dialog-header {
+            height: 52px;
+            line-height: 50px;
+            .base-header-icon {
+                position: absolute;
+                right: 10px;
+                top: 22px;
+                .el-icon:hover {
+                    color: var(--el-color-primary);
+                    transform: scale(1.3);
+                }
+            }
+        }
+    }
+
+    .el-dialog__footer {
+        padding-bottom: 10px;
+        border-top: 1px solid var(--base-dialog-border-color);
+    }
+    &.el-dialog.is-fullscreen {
+        display: flex;
+        flex-direction: column;
+        .el-dialog__body {
+            flex: 1;
+        }
+    }
+}
+
+@keyframes cocoFadeIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+@keyframes cocoFadeOut {
+    0% {
+        transform: scale3d(1, 1, 1);
+        opacity: 1;
+    }
+    to {
+        transform: scale3d(0.1, 0.1, 0.1);
+        opacity: 0;
+    }
+}
