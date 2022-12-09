@@ -1,10 +1,6 @@
 //配置dark下的样式
 
-$--colors: (
-    "primary": (
-        "base": red
-    )
-);
+$--colors: ();
 
 @forward "element-plus/theme-chalk/src/dark/var.scss" with (
     $colors: $--colors

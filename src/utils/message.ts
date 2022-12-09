@@ -1,6 +1,6 @@
 import { ElMessageBox, ElMessage } from "element-plus";
 
-interface messageBoxConfig {
+interface MessageBoxConfig {
     title: string;
     icon?: string;
     type?: "success" | "info" | "warning" | "error";
@@ -18,9 +18,26 @@ interface messageBoxConfig {
     cancelBack?: () => void;
 }
 
-type messageType = "success" | "warning" | "info" | "error";
+type MessageType = "success" | "warning" | "info" | "error";
 
-const defaultConfig: messageBoxConfig = {
+type MessageConfig = {
+    icon?: string;
+    dangerouslyUseHTMLString?: boolean;
+    customClass?: string;
+    duration?: number;
+    showClose?: boolean;
+    center?: boolean;
+    offset?: number;
+    grouping?: boolean;
+};
+
+const defaultMessageConfig: MessageConfig = {
+    center: true,
+    duration: 2000,
+    grouping: true
+};
+
+const defaultConfig: MessageBoxConfig = {
     title: "提示",
     type: "warning",
     showClose: true,
@@ -34,7 +51,7 @@ const defaultConfig: messageBoxConfig = {
     draggable: false
 };
 
-export const messageBox = async (message: string, config: messageBoxConfig) => {
+export const messageBox = async (message: string, config: MessageBoxConfig) => {
     const options = Object.assign({}, defaultConfig, config);
     const { title, confirmBack, cancelBack, ...rest } = options;
     return new Promise((resolve, reject) => {
@@ -52,16 +69,17 @@ export const messageBox = async (message: string, config: messageBoxConfig) => {
     });
 };
 
-export const message = (text: string, close: () => void) => {
-    const messageArr: messageType[] = ["success", "warning", "info", "error"];
-    return messageArr.map((type: messageType) => {
-        return ElMessage({
-            message: text,
-            type,
-            center: true,
-            duration: 2000,
-            onClose: close,
-            grouping: true
-        });
+const message = (type: MessageType, text: string, close: () => void, config: MessageConfig) => {
+    const options = Object.assign({}, defaultMessageConfig, config);
+    return ElMessage({
+        message: text,
+        type,
+        onClose: close,
+        ...options
     });
 };
+
+export const messageSuccess = (text: string, close: () => void, config: MessageConfig) => message("success", text, close, config);
+export const messageWarning = (text: string, close: () => void, config: MessageConfig) => message("warning", text, close, config);
+export const messageInfo = (text: string, close: () => void, config: MessageConfig) => message("info", text, close, config);
+export const messageError = (text: string, close: () => void, config: MessageConfig) => message("error", text, close, config);

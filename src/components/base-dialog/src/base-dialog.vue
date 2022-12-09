@@ -61,7 +61,7 @@ const getBodyStyle = computed(() => {
     const { minHeight, height } = props;
     return {
         minHeight,
-        height
+        height: unref(getPropsValue).fullscreen ? "100%" : height
     };
 });
 

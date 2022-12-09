@@ -22,8 +22,8 @@
             :closeFun="handleReset"
             @save="handleSave"
         >
-            <el-row class="base-column-content">
-                <el-col :span="18" class="base-column-list">
+            <div class="base-column-content flex">
+                <div class="base-column-list flex-auto">
                     <div class="base-column-title pl15">
                         <el-checkbox v-model="state.checkAll" :indeterminate="state.isIndeterminate" @change="handleCheckAllChange">
                             全部字段
@@ -41,53 +41,52 @@
                             >
                         </el-checkbox-group>
                     </div>
-                </el-col>
-                <el-col :span="6" class="base-column-choose">
-                    <div class="base-column-title pl10">已选字段</div>
-                </el-col>
-            </el-row>
+                </div>
+                <div class="base-column-choose">
+                    <div class="base-column-title pl15">已选字段</div>
+                    <div class="pt5 pb5 border-box base-column-choose-content">
+                        <el-scrollbar>
+                            <Draggable v-model="state.checkColumnList" :animation="100" item-key="fieldName" :forceFallback="true" handle=".move">
+                                <template #item="{ element }">
+                                    <div class="base-column-choose-item flex-row-center pl10 pr10" v-if="element.active">
+                                        <base-icon el-name="rank" :size="16" class="move mr5" />
+                                        <div class="text-hidden w100" :title="element.fieldDesc">{{ element.fieldDesc }}</div>
+                                        <base-icon el-name="close" :size="14" class="pointer" @click="handleRemoveCheck(element.fieldName)" />
+                                    </div>
+                                </template>
+                            </Draggable>
+                        </el-scrollbar>
+                    </div>
+                </div>
+            </div>
+            <div class="base-column-setting-tip">
+                注：拖动
+                <base-icon el-name="rank" :size="14" class="ml5 mr5" />
+                图标可调整顺序
+            </div>
         </base-dialog>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { isUndefined } from "@/utils";
-import { Column } from "../base-table/props";
-import { useVModel } from "@vueuse/core";
-import { PropType } from "vue";
+import columnProps from "./props";
+import Draggable from "vuedraggable";
+import { deepClone, isUndefined } from "@/utils";
+import type { Column, ColumnState } from "./types";
 
-interface State {
-    dialogTitle: string;
-    checkAll: boolean;
-    checkedList: string[];
-    defaultCheckList: Column[];
-    isIndeterminate: boolean;
-}
+const props = defineProps(columnProps);
 
-const props = defineProps({
-    tableName: {
-        type: String,
-        default: ""
-    },
-    columns: {
-        type: Array as PropType<Column[]>,
-        default: () => []
-    }
-});
-
-const emit = defineEmits(["update:columns", "change"]);
+const emit = defineEmits(["update:columns", "columns-change"]);
 
 const { proxy } = getCurrentInstance() as any;
 
-const state = reactive<State>({
+const state = reactive<ColumnState>({
     dialogTitle: "",
     isIndeterminate: false,
     checkAll: true,
     checkedList: [],
-    defaultCheckList: []
+    checkColumnList: []
 });
-
-const tableColumn = useVModel(props, "columns", emit, { defaultValue: [] });
 
 const baseDialogRef = ref();
 
@@ -96,8 +95,7 @@ const baseDialogRef = ref();
  */
 const handleShowColumn = (val: string) => {
     state.dialogTitle = val;
-    state.checkedList = props.columns.filter((item) => isUndefined(item.active) || item.active).map((item) => item.fieldName);
-
+    handleReset();
     unref(baseDialogRef).showDialog();
 };
 
@@ -105,19 +103,28 @@ const handleShowColumn = (val: string) => {
  * 全选
  * @param {Boolean} bool
  */
-const handleCheckAllChange = (bool: any) => {
+const handleCheckAllChange = (bool: boolean) => {
     state.checkedList = bool ? props.columns.map((item) => item.fieldName) : [];
     state.isIndeterminate = false;
 };
 
 /**
  * 勾选列
- * @param value
+ * @param {String[]} value
  */
-const handleCheckedCitiesChange = (value: any[]) => {
+const handleCheckedCitiesChange = (value: string[]) => {
     const checkedCount = value.length;
     state.checkAll = checkedCount === props.columns.length;
     state.isIndeterminate = checkedCount > 0 && checkedCount < props.columns.length;
+};
+
+/**
+ * 关闭取消勾选列
+ * @param {String} fieldName
+ */
+const handleRemoveCheck = (fieldName: string) => {
+    state.checkedList = state.checkedList.filter((item) => item !== fieldName);
+    handleCheckedCitiesChange(state.checkedList);
 };
 
 /**
@@ -125,13 +132,14 @@ const handleCheckedCitiesChange = (value: any[]) => {
  */
 const handleSave = () => {
     if (state.checkedList.length === 0) {
-        proxy.$message.warning("请至少勾选一项再进行该操作");
+        proxy.$messageWarning("请至少勾选一项再进行该操作");
+        return;
     }
-    tableColumn.value = props.columns.map((item) => {
-        item.active = state.checkedList.includes(item.fieldName);
-        return item;
-    });
-    emit("change", tableColumn.value);
+    emit("update:columns", state.checkColumnList);
+    emit(
+        "columns-change",
+        state.checkColumnList.filter((item) => isUndefined(item.active) || item.active)
+    );
     unref(baseDialogRef).hideDialog();
 };
 
@@ -141,6 +149,17 @@ const handleSave = () => {
 const handleReset = () => {
     state.checkedList = props.columns.filter((item) => isUndefined(item.active) || item.active).map((item) => item.fieldName);
 };
+
+watch(
+    () => state.checkedList,
+    () => {
+        const deepColumns: Column[] = deepClone(props.columns);
+        state.checkColumnList = deepColumns.map((item) => {
+            item.active = state.checkedList.includes(item.fieldName);
+            return item;
+        });
+    }
+);
 </script>
 
 <style lang="scss" scoped>

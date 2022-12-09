@@ -1,4 +1,4 @@
-type formatO = {
+type FormatO = {
     "M+": number;
     "D+": number;
     "H+": number;
@@ -18,7 +18,7 @@ export const formatTime = (date: any, format = "YYYY-MM-DD", fill = true): strin
     if (!date && !fill) return "";
     const cDate = date ? new Date(date) : new Date();
     if (!cDate) return "";
-    const o: formatO = {
+    const o: FormatO = {
         "M+": cDate.getMonth() + 1, // 月份
         "D+": cDate.getDate(), // 日
         "H+": cDate.getHours(), // 小时

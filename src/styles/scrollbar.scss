@@ -1,0 +1,31 @@
+//自定义滚动条样式
+$scrollbar-track-color: #f8f8f8;
+$scrollbar-thumb: rgba(144, 147, 153, 0.5);
+$scrollbar-thumb-hover: rgba(144, 147, 153, 0.8);
+
+.el-scrollbar__bar {
+    z-index: 4;
+}
+.el-scrollbar__wrap {
+    max-height: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+::-webkit-scrollbar-track-piece {
+    background-color: $scrollbar-track-color;
+}
+// 滚动条的设置
+::-webkit-scrollbar-thumb {
+    background-color: $scrollbar-thumb;
+    background-clip: padding-box;
+    min-height: 28px;
+    border-radius: 5px;
+    transition: 0.3s background-color;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: $scrollbar-thumb-hover;
+}

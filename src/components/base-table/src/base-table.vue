@@ -19,8 +19,8 @@
             <el-table-column label="序号" fixed="left" type="index" width="60" align="center" v-if="indexShow" />
             <template v-if="!$slots.default">
                 <el-table-column
-                    v-for="item in columnList"
-                    :key="item.fieldName"
+                    v-for="(item, index) in columnList"
+                    :key="index"
                     :column-key="item.fieldName"
                     :prop="item.fieldName"
                     :label="item.fieldDesc"
@@ -117,18 +117,8 @@ const handleCurrentChange = () => {
         [currentKey]: props.pagination[currentKey]
     });
 };
-
-watch(
-    () => props.tableName,
-    (nl) => {
-        // console.log(nl);
-    },
-    {
-        immediate: true
-    }
-);
 </script>
 
 <style lang="scss" scoped>
-@use "./base-table.scss";
+@use "./index.scss";
 </style>

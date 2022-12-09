@@ -1,3 +1,5 @@
+import { isObject } from "./is";
+
 /**
  * 排除掉obj里面的key值
  * @param {object} obj
@@ -39,4 +41,18 @@ export function deepClone(source: any) {
         }
     });
     return targetObj;
+}
+
+/**
+ * 深度合并
+ * @param {*} src
+ * @param {*} target
+ * @returns {*}
+ */
+export function deepMerge<T = any>(src: any = {}, target: any = {}): T {
+    let key: string;
+    for (key in target) {
+        src[key] = isObject(target[key]) ? deepMerge(src[key], target[key]) : (src[key] = target[key]);
+    }
+    return src;
 }

@@ -1,9 +1,10 @@
 import { createWebHashHistory, createRouter, RouteRecordRaw } from "vue-router";
+import LAYOUT from "@/layouts/default/index.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {
         path: "/",
-        component: () => import("@/views/c-test.vue")
+        component: LAYOUT
     }
 ];
 

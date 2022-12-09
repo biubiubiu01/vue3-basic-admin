@@ -43,7 +43,7 @@ export default defineConfig({
         createSvgIconsPlugin({
             iconDirs: [resolve("src/icons")],
             // 指定symbolId格式
-            symbolId: "icon-[name]"
+            symbolId: "svg-[name]"
         }),
         ElementPlus({
             useSource: true

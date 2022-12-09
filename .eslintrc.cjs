@@ -30,7 +30,8 @@ module.exports = {
         "no-useless-escape": "off",
         "no-unused-vars": "off",
         "vue/attribute-hyphenation": "off",
-        "vue/custom-event-name-casing": "off"
+        "vue/custom-event-name-casing": "off",
+        "vue/multi-word-component-names": "off"
     },
     plugins: ["vue", "@typescript-eslint"]
 };
