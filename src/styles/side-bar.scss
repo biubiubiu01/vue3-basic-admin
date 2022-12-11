@@ -1,42 +1,55 @@
 $menuItemHeight: 48px;
 
-.base-side-container {
-    background-color: var(--base-menu-bg-color);
+.el-aside {
     transition: all 0.2s;
-    &.collapse {
+    .base-side-container {
+        background-color: var(--el-menu-bg-color);
+
+        &.collapse {
+            .side-logo {
+                padding-left: 0;
+            }
+            .side-logo-title {
+                display: none;
+            }
+
+            .el-menu-item {
+                .base-menu-title {
+                    display: none;
+                    transition: all 0.2s;
+                }
+            }
+        }
         .side-logo {
-            padding-left: 0;
+            height: 54px;
+            line-height: 54px;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+            padding-left: 24px;
+            .side-logo-title {
+                color: var(--base-menu-color);
+                font-weight: 600;
+                transition: all 0.5s;
+                margin-left: 12px;
+                font-size: 19px;
+            }
         }
-    }
-    .side-logo {
-        height: 54px;
-        line-height: 54px;
-        transition: all 0.2s ease;
-        box-sizing: border-box;
-        padding-left: 24px;
-        .side-logo-title {
-            color: var(--base-menu-color);
-            font-weight: 600;
-            transition: all 0.5s;
-            margin-left: 12px;
-            font-size: 19px;
-        }
-    }
-    .el-menu {
-        background-color: transparent !important;
-        border-right: 0;
-        .el-sub-menu__title:hover,
-        .el-menu-item:hover {
-            color: var(--base-menu-hover-text-color);
-        }
-        .el-menu-item.is-active {
-            background-color: var(--base-menu-active-bg-color);
-        }
-        .el-menu-item {
-            height: $menuItemHeight;
-        }
-        .el-sub-menu__title {
-            height: $menuItemHeight;
+        .el-menu {
+            background-color: transparent !important;
+            border-right: 0;
+            .el-sub-menu__title:hover,
+            .el-menu-item:hover {
+                color: var(--base-menu-hover-text-color);
+            }
+            .el-menu-item.is-active {
+                background-color: var(--base-menu-active-bg-color);
+            }
+            .el-menu-item {
+                height: $menuItemHeight;
+            }
+            .el-sub-menu__title {
+                height: $menuItemHeight;
+            }
         }
     }
 }

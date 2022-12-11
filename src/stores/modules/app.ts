@@ -22,7 +22,7 @@ export const useAppStore = defineStore({
             mode: "vertical",
             collapse: false,
             sideWidth: 240,
-            sideCollapsed: 48,
+            sideCollapsed: 64,
             systemTitle: "Vue3 Basic admin"
         }
     }),

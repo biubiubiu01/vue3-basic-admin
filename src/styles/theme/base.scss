@@ -11,7 +11,7 @@ html {
     //menu基础颜色
     --base-menu-color: #fff;
     //menu背景颜色
-    --base-menu-bg-color: rgb(41, 51, 72);
+    --el-menu-bg-color: rgb(41, 51, 72) !important;
     // menu 文字颜色
     --el-menu-text-color: #ffffffb3 !important;
 
@@ -24,4 +24,11 @@ html {
     --base-menu-active-bg-color: var(--el-color-primary);
     //menu active文字颜色
     --el-menu-active-color: var(--base-menu-color) !important;
+
+    //navbar 背景颜色
+    --base-nav-bar-bg-color: #fff;
+    //navbar 图标hover颜色
+    --base-nav-bar-box-hover: rgba(0, 0, 0, 0.025);
+    //nav shadow
+    --base-nav-shadow: rgba(0, 21, 41, 0.08);
 }

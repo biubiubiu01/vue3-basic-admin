@@ -1,12 +1,14 @@
 <template>
-    <div class="base-side-container flex-direction-column h100" :class="{ collapse: getCollapse }" :style="{ width: sideBarWidth + 'px' }">
-        <Logo :title="getSystemTitle" :collapse="getCollapse" />
-        <el-scrollbar class="side-main flex-auto">
-            <el-menu :mode="getMode" :collapse="getCollapse" :default-active="$route.path" :collapse-transition="false" unique-opened router>
-                <SideBarItem v-for="route in asyncRoute" :key="route.path" :item="route" />
-            </el-menu>
-        </el-scrollbar>
-    </div>
+    <el-aside :width="`${sideBarWidth}px`">
+        <div class="base-side-container flex-direction-column h100" :class="{ collapse: getCollapse }">
+            <Logo :title="getSystemTitle" />
+            <el-scrollbar class="side-main flex-auto">
+                <el-menu :mode="getMode" :collapse="getCollapse" :default-active="$route.path" :collapse-transition="false" unique-opened router>
+                    <SideBarItem v-for="route in asyncRoute" :key="route.path" :item="route" />
+                </el-menu>
+            </el-scrollbar>
+        </div>
+    </el-aside>
 </template>
 
 <script lang="ts" setup>
@@ -51,8 +53,7 @@ const asyncRoute = computed((): AppRouteType[] => {
                     path: "test",
                     name: "",
                     meta: {
-                        title: "测字111",
-                        icon: "location"
+                        title: "测字111"
                     }
                 }
             ]

@@ -53,11 +53,20 @@ export default defineComponent({
         };
 
         const renderElIcon = () => {
-            return h(resolveComponent(props.icon));
+            if (props.icon) {
+                return h(resolveComponent(props.icon));
+            }
+            if (props.elName) {
+                return h(resolveComponent(props.elName));
+            }
+            return null;
         };
 
         const renderIcon = () => {
-            return <i class={["iconfont", props.icon, getHover.value]} style={iconStyle.value}></i>;
+            if (!props.icon && !props.iconName) {
+                return null;
+            }
+            return <i class={["iconfont", props.icon || props.iconName, getHover.value]} style={iconStyle.value}></i>;
         };
 
         return () => {
@@ -75,17 +84,20 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
-.base-icon-hover:hover {
-    color: var(--el-color-primary);
-    transform: scale(1.3);
-    vertical-align: -0.15em;
-}
-.svgClass {
-    width: 1em;
-    height: 1em;
-    fill: currentColor;
-    overflow: hidden;
-    outline: 0;
+<style lang="scss" scoped>
+.el-icon {
+    &.base-icon-hover:hover {
+        color: var(--el-color-primary);
+        transform: scale(1.3);
+        vertical-align: -0.15em;
+    }
+    .svgClass {
+        width: 1em;
+        height: 1em;
+        fill: currentColor;
+        overflow: hidden;
+        outline: 0;
+        vertical-align: -0.15em;
+    }
 }
 </style>
