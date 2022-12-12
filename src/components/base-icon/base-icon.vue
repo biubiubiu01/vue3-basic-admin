@@ -13,7 +13,7 @@ export default defineComponent({
         },
         hover: {
             type: Boolean,
-            default: true
+            default: false
         },
         svgName: {
             type: String

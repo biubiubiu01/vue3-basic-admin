@@ -1,7 +1,7 @@
 <template>
     <template v-if="!item?.children">
         <el-menu-item :index="item?.path" :title="item?.meta?.title">
-            <base-icon :icon="item?.meta?.icon" :hover="false" />
+            <base-icon :icon="item?.meta?.icon" />
             <template #title>
                 <span class="base-menu-title text-hidden">{{ item?.meta?.title }}</span>
             </template>
@@ -9,7 +9,7 @@
     </template>
     <el-sub-menu v-else :index="item.path" :title="item?.meta?.title">
         <template #title>
-            <base-icon :icon="item?.meta?.icon" :hover="false" />
+            <base-icon :icon="item?.meta?.icon" />
             <span class="base-menu-title text-hidden">{{ item?.meta?.title }}</span>
         </template>
         <side-bar-item v-for="child in item.children" :key="child.path" :item="child" />

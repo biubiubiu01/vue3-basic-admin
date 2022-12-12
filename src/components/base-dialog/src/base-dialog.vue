@@ -10,8 +10,9 @@
                         :svg-name="fullscreen ? 'fullOutScreen' : 'fullScreen'"
                         @click="toggleFullScreen"
                         class="pointer"
+                        hover
                     />
-                    <base-icon svg-name="close" class="pointer" @click="close" :size="19"></base-icon>
+                    <base-icon svg-name="close" class="pointer" @click="close" :size="19" hover />
                 </el-space>
             </div>
         </template>

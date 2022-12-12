@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import type { Mode } from "@/enums/LayoutEnum";
+import type { TextTypeEnum } from "@/enums/SizeEnum";
 import { store } from "../index";
 import { deepMerge } from "@/utils";
 
@@ -11,8 +12,13 @@ export interface MenuSetting {
     systemTitle?: string;
 }
 
+export interface HeaderConfig {
+    textType: `${TextTypeEnum}`;
+}
+
 interface AppState {
-    menuConfig: MenuSetting;
+    menuConfig?: MenuSetting;
+    headerConfig?: HeaderConfig;
 }
 
 export const useAppStore = defineStore({
@@ -24,6 +30,9 @@ export const useAppStore = defineStore({
             sideWidth: 240,
             sideCollapsed: 64,
             systemTitle: "Vue3 Basic admin"
+        },
+        headerConfig: {
+            textType: "default"
         }
     }),
     getters: {},

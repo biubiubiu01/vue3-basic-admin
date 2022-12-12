@@ -1,7 +1,7 @@
 <template>
     <div class="base-column-setting">
         <el-dropdown trigger="click">
-            <base-icon el-name="setting" class="pointer base-icon-setting" :size="18" />
+            <base-icon el-name="setting" class="pointer base-icon-setting" :size="18" hover />
             <template #dropdown>
                 <el-dropdown-menu>
                     <el-dropdown-item @click="handleShowColumn('自定义列表字段')">
@@ -49,9 +49,9 @@
                             <Draggable v-model="state.checkColumnList" :animation="100" item-key="fieldName" :forceFallback="true" handle=".move">
                                 <template #item="{ element }">
                                     <div class="base-column-choose-item flex-row-center pl10 pr10" v-if="element.active">
-                                        <base-icon el-name="rank" :size="16" class="move mr5" />
+                                        <base-icon el-name="rank" :size="16" class="move mr5" hover />
                                         <div class="text-hidden w100" :title="element.fieldDesc">{{ element.fieldDesc }}</div>
-                                        <base-icon el-name="close" :size="14" class="pointer" @click="handleRemoveCheck(element.fieldName)" />
+                                        <base-icon el-name="close" :size="14" class="pointer" hover @click="handleRemoveCheck(element.fieldName)" />
                                     </div>
                                 </template>
                             </Draggable>

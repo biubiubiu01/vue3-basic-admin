@@ -1,6 +1,6 @@
 <template>
     <router-link to="/" class="flex-center side-logo">
-        <base-icon svg-name="empty" :size="30" color="#fff" :hover="false" />
+        <base-icon svg-name="empty" :size="30" color="#fff" />
         <div class="side-logo-title text-hidden flex-auto">{{ title }}</div>
     </router-link>
 </template>
