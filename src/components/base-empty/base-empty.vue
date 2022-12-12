@@ -30,7 +30,7 @@ const props = defineProps({
 .base-empty {
     margin: 32px 0;
     color: var(---base-empty-description);
-    font-size: 14px;
+    font-size: var(--el-font-size-base);
     line-height: 1.5715;
     text-align: center;
     .base-empty-image {

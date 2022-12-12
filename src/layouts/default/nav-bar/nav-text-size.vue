@@ -8,8 +8,8 @@
                 <el-dropdown-item
                     v-for="(item, index) in textSize"
                     :key="index"
-                    :class="{ active: getTextType === item.type }"
-                    @click="toggleTextType(item.type)"
+                    :class="{ active: getPageSize === item.type }"
+                    @click="togglePageSize(item.type)"
                 >
                     <base-icon :svg-name="item.icon" :size="item.iconSize" />{{ item.text }}
                 </el-dropdown-item>
@@ -22,7 +22,7 @@
 import { textSize } from "@/enums/SizeEnum";
 import { useHeaderSetting } from "../hooks/useHeaderSetting";
 
-const { getTextType, toggleTextType } = useHeaderSetting();
+const { getPageSize, togglePageSize } = useHeaderSetting();
 </script>
 
 <style lang="scss" scoped>

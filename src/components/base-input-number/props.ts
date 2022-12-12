@@ -30,13 +30,6 @@ export default {
         type: Number,
         default: Number.NEGATIVE_INFINITY
     },
-    size: {
-        type: String,
-        default: "",
-        validator(value: string) {
-            return ["", "default", "small", "large"].includes(value);
-        }
-    },
     step: {
         type: Number,
         default: 1

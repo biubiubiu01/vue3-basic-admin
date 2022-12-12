@@ -19,10 +19,6 @@ const props = defineProps({
             return ["primary", "success", "warning", "danger", "info", "text"].includes(value);
         }
     },
-    size: {
-        type: String,
-        default: "default"
-    },
     plain: {
         type: Boolean,
         default: false

@@ -1,7 +1,7 @@
 /**
  * formType 自定义类型
  */
-export enum tableFormTypeEnum {
+export enum TableFormTypeEnum {
     INPUT = "input",
     NUMBER = "number",
     DATE = "date",

@@ -32,13 +32,6 @@ export const defaultProps = {
         type: Boolean,
         default: true
     },
-    size: {
-        type: String,
-        default: "",
-        validator(value: string) {
-            return ["", "default", "small", "large"].includes(value);
-        }
-    },
     valueKey: {
         type: String,
         default: "value"

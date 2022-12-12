@@ -31,7 +31,7 @@ $menuItemHeight: 48px;
                 font-weight: 600;
                 transition: all 0.5s;
                 margin-left: 12px;
-                font-size: 19px;
+                font-size: var(--base-menu-logo);
             }
         }
         .el-menu {

@@ -1,34 +1,34 @@
 import { HeaderConfig, useAppStoreWithOut } from "@/stores/modules/app";
 import { useColorMode } from "@vueuse/core";
-import type { SizeEnum } from "@/enums/SizeEnum";
+import { SizeEnum } from "@/enums/SizeEnum";
 
 export const useHeaderSetting = () => {
     const appStore = useAppStoreWithOut();
-    const getTextType = computed(() => appStore?.headerConfig?.textType);
+    const getPageSize = computed(() => appStore?.headerConfig?.pageSize);
 
-    const textMode = useColorMode({
-        attribute: "size",
+    const sizeMode = useColorMode({
+        attribute: "page-size",
         modes: {
-            default: "default",
-            plus: "plus",
-            mini: "mini"
+            default: SizeEnum.DEFAULT,
+            large: SizeEnum.LARGE,
+            small: SizeEnum.SMALL
         },
-        initialValue: unref(getTextType)
+        initialValue: unref(getPageSize)
     });
 
     const setHeaderSetting = (headerConfig: HeaderConfig) => {
         appStore.setAppConfig({ headerConfig });
     };
 
-    const toggleTextType = (textType: `${SizeEnum}`) => {
-        textMode.value = textType;
-        setHeaderSetting({ textType });
+    const togglePageSize = (pageSize: `${SizeEnum}`) => {
+        sizeMode.value = pageSize;
+        setHeaderSetting({ pageSize });
     };
 
     return {
-        getTextType,
+        getPageSize,
 
-        toggleTextType,
+        togglePageSize,
         setHeaderSetting
     };
 };

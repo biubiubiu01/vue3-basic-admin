@@ -1,4 +1,4 @@
-import { tableFormTypeEnum } from "@/enums/tableEnum";
+import { TableFormTypeEnum } from "@/enums/TableEnum";
 
 export type Column = {
     fieldName: string;
@@ -11,7 +11,7 @@ export type Column = {
     resizable?: boolean;
     showOverflowTooltip?: boolean;
     required?: boolean;
-    formType?: `${tableFormTypeEnum}` | string;
+    formType?: `${TableFormTypeEnum}` | string;
     active?: boolean;
     sort?: number;
     [key: string]: any;

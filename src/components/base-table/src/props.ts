@@ -17,13 +17,6 @@ export const defaultProps = {
         type: Boolean,
         default: true
     },
-    size: {
-        type: String,
-        default: "",
-        validator(value: string) {
-            return ["", "default", "small", "large"].includes(value);
-        }
-    },
     fit: {
         type: Boolean,
         default: true

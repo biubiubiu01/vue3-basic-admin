@@ -37,13 +37,13 @@
                         <slot name="header" :scope="scope" :column="item"></slot>
                     </template>
                     <template #default="scope">
-                        <template v-if="item.formType === 'input'">
+                        <template v-if="item.formType === TableFormTypeEnum.INPUT">
                             <base-input v-model="scope.row[item.fieldName]" />
                         </template>
-                        <template v-else-if="item.formType === 'number'">
+                        <template v-else-if="item.formType === TableFormTypeEnum.NUMBER">
                             <base-input-number v-model="scope.row[item.fieldName]" class="w100" />
                         </template>
-                        <template v-else-if="item.formType === 'slot'">
+                        <template v-else-if="item.formType === TableFormTypeEnum.SLOT">
                             <slot name="default" :scope="scope" :column="item"></slot>
                         </template>
                         <template v-else>
@@ -74,6 +74,7 @@
 <script lang="ts" setup>
 import tableProps, { extraProps } from "./props";
 import { omit, isUndefined } from "@/utils";
+import { TableFormTypeEnum } from "@/enums/TableEnum";
 
 const props = defineProps(tableProps);
 

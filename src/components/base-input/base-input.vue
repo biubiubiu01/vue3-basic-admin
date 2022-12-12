@@ -10,7 +10,6 @@
         :show-password="showPassword"
         :prefix-icon="prefixIcon"
         :suffix-icon="suffixIcon"
-        :size="size"
         v-if="!text"
         v-bind="$attrs"
     >

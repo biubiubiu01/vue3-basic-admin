@@ -1,0 +1,26 @@
+html[page-size="large"] {
+    --el-font-size-medium: 18px;
+    --el-font-size-base: 16px;
+    --el-font-size-small: 15px;
+    --el-font-size-extra-small: 14px;
+
+    --base-menu-logo: 21px;
+}
+
+html[page-size="default"] {
+    --el-font-size-medium: 16px;
+    --el-font-size-base: 14px;
+    --el-font-size-small: 13px;
+    --el-font-size-extra-small: 12px;
+
+    --base-menu-logo: 19px;
+}
+
+html[page-size="small"] {
+    --el-font-size-medium: 14px;
+    --el-font-size-base: 12px;
+    --el-font-size-small: 11px;
+    --el-font-size-extra-small: 10px;
+
+    --base-menu-logo: 17px;
+}
