@@ -32,7 +32,9 @@ const { getCollapse, toggleCollapse } = useMenuSetting();
 <style lang="scss" scoped>
 .nav-wrapper {
     height: 48px;
-    box-shadow: 0 1px 4px var(--base-nav-shadow);
+    border-bottom: 1px solid var(--base-tag-border);
+    transition: all 0.2s;
+    background-color: var(--base-main-content-bg-color);
     .nav-basic {
         .nav-fold {
             transition: all 0.3s, padding 0s;

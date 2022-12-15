@@ -6,9 +6,9 @@
 
 <script lang="ts" setup>
 import zhCn from "element-plus/lib/locale/lang/zh-cn";
-import { useHeaderSetting } from "@/layouts/default/hooks/useHeaderSetting";
+import { useNavBarSetting } from "@/layouts/default/hooks/useNavBarSetting";
 
-const { getPageSize } = useHeaderSetting();
+const { getPageSize } = useNavBarSetting();
 </script>
 
 <style scoped></style>

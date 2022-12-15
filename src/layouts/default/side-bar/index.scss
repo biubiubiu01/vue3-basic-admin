@@ -16,7 +16,6 @@ $menuItemHeight: 48px;
             .el-menu-item {
                 .base-menu-title {
                     display: none;
-                    transition: all 0.2s;
                 }
             }
         }
@@ -27,7 +26,7 @@ $menuItemHeight: 48px;
             box-sizing: border-box;
             padding-left: 24px;
             .side-logo-title {
-                color: var(--base-menu-color);
+                color: var(--el-menu-active-color);
                 font-weight: 600;
                 transition: all 0.5s;
                 margin-left: 12px;
@@ -39,16 +38,22 @@ $menuItemHeight: 48px;
             border-right: 0;
             .el-sub-menu__title:hover,
             .el-menu-item:hover {
-                color: var(--base-menu-hover-text-color);
+                color: var(--el-menu-active-color);
             }
             .el-menu-item.is-active {
                 background-color: var(--base-menu-active-bg-color);
             }
             .el-menu-item {
+                transition: all 0.2s;
                 height: $menuItemHeight;
             }
             .el-sub-menu__title {
                 height: $menuItemHeight;
+            }
+            .el-sub-menu.is-active {
+                .el-sub-menu__title {
+                    color: var(--el-menu-active-color);
+                }
             }
         }
     }

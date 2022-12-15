@@ -30,7 +30,7 @@ export default defineComponent({
             if (props.svgName) {
                 return `#svg-${props.svgName}`;
             }
-            if (!props.icon?.includes("svg-")) {
+            if (props.icon?.includes("svg-")) {
                 return `#${props.icon}`;
             }
             return null;

@@ -2,7 +2,7 @@ import { HeaderConfig, useAppStoreWithOut } from "@/stores/modules/app";
 import { useColorMode } from "@vueuse/core";
 import { SizeEnum } from "@/enums/SizeEnum";
 
-export const useHeaderSetting = () => {
+export const useNavBarSetting = () => {
     const appStore = useAppStoreWithOut();
     const getPageSize = computed(() => appStore?.headerConfig?.pageSize);
 

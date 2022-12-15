@@ -4,7 +4,7 @@
             <Logo :title="getSystemTitle" />
             <el-scrollbar class="side-main flex-auto">
                 <el-menu :mode="getMode" :collapse="getCollapse" :default-active="$route.path" :collapse-transition="false" unique-opened router>
-                    <SideBarItem v-for="route in asyncRoute" :key="route.path" :item="route" />
+                    <SideBarItem v-for="route in asyncRoutes" :key="route.path" :item="route" />
                 </el-menu>
             </el-scrollbar>
         </div>
@@ -15,53 +15,15 @@
 import Logo from "./logo.vue";
 import SideBarItem from "./side-bar-item.vue";
 import { useMenuSetting } from "../hooks/useMenuSetting";
-import { AppRouteType } from "@/router/types";
+import { asyncRoutes } from "@/router/basic";
 
 const { getCollapse, getMode, getSystemTitle, getSideWidth, getSideCollapsed } = useMenuSetting();
 
 const sideBarWidth = computed(() => {
     return unref(getCollapse) ? unref(getSideCollapsed) : unref(getSideWidth);
 });
-
-const asyncRoute = computed((): AppRouteType[] => {
-    return [
-        {
-            path: "/",
-            name: "",
-            meta: {
-                title: "首页首页首页首页首页首页首页首页首页首页首页首页首页首页",
-                icon: "location"
-            }
-        },
-        {
-            path: "/t",
-            name: "",
-            meta: {
-                title: "测试",
-                icon: "location"
-            }
-        },
-        {
-            path: "/s",
-            name: "",
-            meta: {
-                title: "测试222",
-                icon: "location"
-            },
-            children: [
-                {
-                    path: "test",
-                    name: "",
-                    meta: {
-                        title: "测字111"
-                    }
-                }
-            ]
-        }
-    ].filter((item) => !(item?.meta && item?.meta?.hidden));
-});
 </script>
 
 <style lang="scss">
-@use "@/styles/side-bar.scss";
+@use "./index.scss";
 </style>

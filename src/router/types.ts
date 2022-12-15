@@ -8,14 +8,17 @@ export interface MetaType extends RouteMeta {
     hidden?: boolean;
     role?: string;
     noCache?: boolean;
+    close?: boolean;
     icon?: string;
+    hideChildren?: boolean;
 }
 
 export interface AppRouteType extends Omit<RouteRecordRaw, "props"> {
     name: string;
-    meta: MetaType;
     component?: Component | string;
     components?: Component;
     children?: AppRouteType[];
     fullPath?: string;
+    meta?: MetaType;
+    redirect?: string;
 }

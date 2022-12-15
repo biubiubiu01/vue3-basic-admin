@@ -1,32 +1,36 @@
 html {
-    // base-empty 文字颜色
-    --base-empty-description: #00000040;
+    // // base-empty 文字颜色
+    // --base-empty-description: #00000040;
 
-    // base-dialog border颜色
-    --base-dialog-border-color: #f0f0f0;
+    // // base-dialog border颜色
+    // --base-dialog-border-color: #f0f0f0;
 
-    // base-column-setting 头部颜色
-    --base-column-setting-header-color: #f4f6fa;
+    // // base-column-setting 头部颜色
+    // --base-column-setting-header-color: #f4f6fa;
 
-    //menu基础颜色
-    --base-menu-color: #fff;
+    //navbar 图标hover颜色
+    --base-nav-bar-box-hover: rgba(0, 0, 0, 0.025);
+
+    //tag border
+    --base-tag-border: rgba(175, 175, 175, 0.3);
+    //tag shadow
+    --base-tag-shadow: rgb(0 21 41 / 8%);
+
     //menu背景颜色
     --el-menu-bg-color: rgb(41, 51, 72) !important;
     // menu 文字颜色
-    --el-menu-text-color: #ffffffb3 !important;
+    --el-menu-text-color: hsla(0, 0%, 100%, 0.65) !important;
 
     // menu hover 背景颜色
     --el-menu-hover-bg-color: transparent !important;
-    //menu hover文字颜色
-    --base-menu-hover-text-color: var(--base-menu-color);
 
     //menu active 背景颜色
     --base-menu-active-bg-color: var(--el-color-primary);
     //menu active文字颜色
-    --el-menu-active-color: var(--base-menu-color) !important;
+    --el-menu-active-color: #fff !important;
 
-    //navbar 图标hover颜色
-    --base-nav-bar-box-hover: rgba(0, 0, 0, 0.025);
-    //nav shadow
-    --base-nav-shadow: rgba(0, 21, 41, 0.08);
+    //系统主体背景颜色
+    --base-main-bg-color: #f0f2f5;
+    //系统主体 内容颜色
+    --base-main-content-bg-color: #fff;
 }

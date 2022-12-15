@@ -1,16 +1,11 @@
-import { createWebHashHistory, createRouter, RouteRecordRaw } from "vue-router";
-import LAYOUT from "@/layouts/default/index.vue";
-
-const routes: Array<RouteRecordRaw> = [
-    {
-        path: "/",
-        component: LAYOUT
-    }
-];
+import { createWebHashHistory, createRouter } from "vue-router";
+import { AppRouteType } from "./types";
+import { basicRoutes, asyncRoutes } from "./basic";
 
 const router = createRouter({
     history: createWebHashHistory(import.meta.env.BASE_URL),
-    routes
+    routes: [...basicRoutes, ...asyncRoutes] as AppRouteType[],
+    scrollBehavior: () => ({ left: 0, top: 0 })
 });
 
 export default router;

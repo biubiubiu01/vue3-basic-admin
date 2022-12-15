@@ -20,9 +20,9 @@
 
 <script lang="ts" setup>
 import { textSize } from "@/enums/SizeEnum";
-import { useHeaderSetting } from "../hooks/useHeaderSetting";
+import { useNavBarSetting } from "../hooks/useNavBarSetting";
 
-const { getPageSize, togglePageSize } = useHeaderSetting();
+const { getPageSize, togglePageSize } = useNavBarSetting();
 </script>
 
 <style lang="scss" scoped>
