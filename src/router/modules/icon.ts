@@ -1,5 +1,5 @@
 import type { AppRouteType } from "@/router/types";
-import LAYOUT from "@/layouts/default/index.vue";
+import LAYOUT from "@/layouts/index.vue";
 
 const dashboard: AppRouteType[] = [
     {

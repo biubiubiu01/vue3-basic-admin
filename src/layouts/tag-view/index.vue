@@ -1,9 +1,9 @@
 <template>
     <TagScroll>
         <router-link
-            class="tag-item pointer flex-row-center"
+            class="tag-item relative pointer flex-row-center"
             v-for="item in getTagList"
-            :key="item.path"
+            :key="item.fullPath"
             :to="item.path"
             :class="{ active: $route.fullPath === item.fullPath }"
             :ref="setTagWrapperRef"
@@ -14,16 +14,16 @@
                 class="ml5 close-icon"
                 :size="12"
                 hover
-                @click.prevent.stop="closeTag(item.path)"
+                @click.prevent.stop="closeTag(item)"
                 v-if="item?.meta?.close !== false && getTagList.length !== 1"
             />
         </router-link>
-        <!-- <template #action>
+        <template #action>
             <div class="tag-action tag-shadow flex-row-center">
                 <TagFullScreen />
                 <tagAction :action-list="getActionList" :event="handleMenuEvent" />
             </div>
-        </template> -->
+        </template>
     </TagScroll>
 </template>
 

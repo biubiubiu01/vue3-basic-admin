@@ -23,6 +23,7 @@ interface AppState {
 
 export const useAppStore = defineStore({
     id: "app",
+    persist: true,
     state: (): AppState => ({
         menuConfig: {
             mode: "vertical",

@@ -1,36 +1,79 @@
 import { defineStore } from "pinia";
+import type { RouteLocationNormalizedLoaded } from "vue-router";
 import { store } from "../index";
-import type { RouteLocationNormalized } from "vue-router";
 
-interface tagState {
-    tagList: RouteLocationNormalized[];
+interface TagState {
+    tagList: RouteLocationNormalizedLoaded[];
+    cacheTagList: string[];
     fullscreen: boolean;
+}
+
+interface TagRouteType extends RouteLocationNormalizedLoaded {
+    index: number;
 }
 
 export const useTagStore = defineStore({
     id: "tag-view",
-    state: (): tagState => ({
+    persist: true,
+    state: (): TagState => ({
         tagList: [],
+        cacheTagList: [],
         fullscreen: false
     }),
     getters: {},
     actions: {
-        addTag() {},
-
-        closeTag(index: number) {
-            this.tagList.splice(index, 1);
+        addTag(route: RouteLocationNormalizedLoaded) {
+            const index = this.tagList.findIndex((item) => item.fullPath === route.fullPath);
+            if (index === -1) {
+                this.tagList.push({
+                    ...route
+                });
+            }
+            this.addCacheTag(route);
         },
 
-        toggleFullscreen(flag: boolean) {
-            this.fullscreen = flag;
+        addCacheTag(route: RouteLocationNormalizedLoaded) {
+            const name = route.name as string;
+            if (this.cacheTagList.includes(name)) return;
+            if (route.meta?.keepAlive !== false) {
+                this.cacheTagList.push(name);
+            }
         },
 
-        closeOtherTag(index: number) {
-            this.tagList = this.tagList.filter((item, i) => item.meta.close === false || i === index);
+        deleteTag(current: TagRouteType) {
+            if (current.index === -1) return;
+            this.tagList.splice(current.index, 1);
+            this.deleteCacheTag(current);
         },
 
-        closeAllTag() {
-            this.tagList = this.tagList.filter((item) => item.meta.close === false);
+        deleteCacheTag(current: TagRouteType) {
+            const index = this.cacheTagList.indexOf(<string>current.name);
+            if (index === -1) return;
+            this.cacheTagList.splice(index, 1);
+        },
+
+        deleteOtherTag(current: TagRouteType) {
+            this.tagList = this.tagList.filter((item) => item?.meta?.close === false || item.path === current.path);
+            this.deleteOtherCacheTag(current);
+        },
+
+        deleteOtherCacheTag(current: TagRouteType) {
+            const index = this.cacheTagList.indexOf(<string>current.name);
+            if (index === -1) return;
+            this.cacheTagList = this.cacheTagList.slice(index, index + 1);
+        },
+
+        clearTag() {
+            this.tagList = this.tagList.filter((item) => item?.meta?.close === false);
+            this.clearCacheTag();
+        },
+
+        clearCacheTag() {
+            this.cacheTagList = [];
+        },
+
+        toggleFullscreen() {
+            this.fullscreen = !this.fullscreen;
         }
     }
 });

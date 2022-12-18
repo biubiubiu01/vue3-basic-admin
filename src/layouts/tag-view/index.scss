@@ -14,7 +14,7 @@
                 margin-right: 15px;
             }
             .scroll-body {
-                transition: left 0.3s ease;
+                transition: transform 0.3s ease;
                 z-index: 1;
                 white-space: nowrap;
                 height: 100%;
@@ -33,20 +33,22 @@
                         background: var(--el-color-primary) !important;
                         color: var(--el-menu-active-color) !important;
                         border: none;
+                        padding-left: 20px;
                         .close-icon:hover {
                             color: var(--el-menu-active-color) !important;
                         }
-                        ::before {
+                        &::before {
+                            position: absolute;
+                            left: 7px;
+                            top: 50%;
+                            transform: translateY(-50%);
                             content: "";
                             background: var(--el-menu-active-color);
                             height: 8px;
                             width: 8px;
-                            display: inline-block;
                             border-radius: 50%;
-                            margin-right: 4px;
                         }
                     }
-
                     &:hover {
                         color: var(--el-color-primary);
                         .close-icon {

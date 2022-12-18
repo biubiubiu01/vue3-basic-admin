@@ -11,7 +11,7 @@
                     <RouterView>
                         <template #default="{ Component, route }">
                             <transition name="el-fade-in-linear" mode="out-in">
-                                <keep-alive :include="getCaches">
+                                <keep-alive :include="getCacheTagList">
                                     <component :is="Component" :key="route.fullPath" />
                                 </keep-alive>
                             </transition>
@@ -29,14 +29,10 @@ import NavBar from "./nav-bar/index.vue";
 import TagView from "./tag-view/index.vue";
 import { useTagViewSetting } from "./hooks/useTagViewSetting";
 
-const { getTagFullscreen } = useTagViewSetting();
+const { getTagFullscreen, getCacheTagList } = useTagViewSetting();
 
 const headerHeader = computed(() => {
     return unref(getTagFullscreen) ? "37px" : "85px";
-});
-
-const getCaches = computed(() => {
-    return [];
 });
 </script>
 

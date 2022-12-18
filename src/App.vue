@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import zhCn from "element-plus/lib/locale/lang/zh-cn";
-import { useNavBarSetting } from "@/layouts/default/hooks/useNavBarSetting";
+import { useNavBarSetting } from "@/layouts/hooks/useNavBarSetting";
 
 const { getPageSize } = useNavBarSetting();
 </script>
