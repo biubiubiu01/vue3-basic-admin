@@ -2,6 +2,7 @@
     height: 37px;
     box-shadow: 0 1px 4px var(--base-tag-shadow);
     background-color: var(--base-main-content-bg-color);
+    border-bottom: 1px solid var(--base-tag-border);
     :deep(.tag-view-content) {
         height: 100%;
         .scroll-outer {

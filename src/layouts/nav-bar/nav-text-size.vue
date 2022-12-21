@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts" setup>
-import { textSize } from "@/enums/SizeEnum";
+import { textSize } from "@/enums/sizeEnum";
 import { useNavBarSetting } from "../hooks/useNavBarSetting";
 
 const { getPageSize, togglePageSize } = useNavBarSetting();

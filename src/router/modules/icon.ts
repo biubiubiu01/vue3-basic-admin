@@ -10,7 +10,8 @@ const dashboard: AppRouteType[] = [
         meta: {
             title: "图标",
             icon: "svg-icon",
-            hideChildren: true
+            hideChildren: true,
+            sort: 2
         },
         children: [
             {

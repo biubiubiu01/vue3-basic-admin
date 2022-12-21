@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import type { Mode } from "@/enums/LayoutEnum";
-import type { SizeEnum } from "@/enums/SizeEnum";
+import type { Mode } from "@/enums/layoutEnum";
+import type { SizeEnum } from "@/enums/sizeEnum";
 import { store } from "../index";
 import { deepMerge } from "@/utils";
 

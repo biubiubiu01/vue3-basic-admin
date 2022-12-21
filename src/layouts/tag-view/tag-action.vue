@@ -18,7 +18,7 @@
 
 <script lang="ts" setup>
 import { PropType } from "vue";
-import { DropMenuType } from "@/enums/DropMenuEnum";
+import { DropMenuType } from "@/enums/dropMenuEnum";
 
 const props = defineProps({
     actionList: {

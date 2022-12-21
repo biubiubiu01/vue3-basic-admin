@@ -14,7 +14,9 @@
             </div>
         </div>
         <div class="base-box-content">
-            <slot></slot>
+            <el-scrollbar :max-height="maxHeight" :height="height">
+                <slot></slot>
+            </el-scrollbar>
         </div>
     </div>
 </template>
@@ -40,6 +42,12 @@ const props = defineProps({
     helpText: {
         type: String,
         default: "提示"
+    },
+    maxHeight: {
+        type: [Number, String]
+    },
+    height: {
+        type: [Number, String]
     }
 });
 </script>
@@ -53,6 +61,9 @@ const props = defineProps({
     &.shadow {
         box-shadow: var(--el-box-shadow-light);
     }
+    & + .base-box-container {
+        margin-top: 16px;
+    }
     .base-box-header {
         padding: 16px 24px;
         color: var(--el-text-color-primary);
@@ -61,7 +72,7 @@ const props = defineProps({
         border-bottom: 1px solid var(--base-tag-border);
     }
     .base-box-content {
-        padding: 20px 24px;
+        padding: 25px;
     }
 }
 </style>

@@ -16,6 +16,7 @@
         "axios": "^0.27.2",
         "echarts": "^5.3.3",
         "element-plus": "^2.2.19",
+        "mockjs": "^1.1.0",
         "pinia": "^2.0.18",
         "pinia-plugin-persistedstate": "^2.3.0",
         "vue": "^3.2.37",
@@ -48,6 +49,8 @@
         "unplugin-element-plus": "^0.4.1",
         "unplugin-vue-components": "^0.22.9",
         "vite": "^3.0.6",
+        "vite-plugin-html": "^3.2.0",
+        "vite-plugin-mock": "^2.9.6",
         "vite-plugin-svg-icons": "^2.0.1",
         "vue-tsc": "^0.39.5"
     },

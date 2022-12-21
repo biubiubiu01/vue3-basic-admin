@@ -36,6 +36,16 @@ export default defineComponent({
             return null;
         });
 
+        const getIconName = computed(() => {
+            if (props.iconName) {
+                return `icon-${props.iconName}`;
+            }
+            if (props.icon?.includes("icon-")) {
+                return `${props.icon}`;
+            }
+            return null;
+        });
+
         const iconStyle = computed(() => {
             return { color: props.color, fontSize: `${props.size || 16}px` };
         });
@@ -66,7 +76,7 @@ export default defineComponent({
             if (!props.icon && !props.iconName) {
                 return null;
             }
-            return <i class={["iconfont", props.icon || props.iconName, getHover.value]} style={iconStyle.value}></i>;
+            return <i class={["iconfont", unref(getIconName), getHover.value]} style={iconStyle.value}></i>;
         };
 
         return () => {

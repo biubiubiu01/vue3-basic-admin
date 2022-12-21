@@ -1,6 +1,6 @@
 import { HeaderConfig, useAppStoreWithOut } from "@/stores/modules/app";
 import { useColorMode } from "@vueuse/core";
-import { SizeEnum } from "@/enums/SizeEnum";
+import { SizeEnum } from "@/enums/sizeEnum";
 
 export const useNavBarSetting = () => {
     const appStore = useAppStoreWithOut();

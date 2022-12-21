@@ -13,11 +13,17 @@
         v-if="!text"
         v-bind="$attrs"
     >
-        <template #prefix>
+        <template #prefix v-if="$slots.prefix">
             <slot name="prefix"></slot>
         </template>
-        <template #suffix>
+        <template #suffix v-if="$slots.suffix">
             <slot name="suffix"></slot>
+        </template>
+        <template #prepend v-if="$slots.prepend">
+            <slot name="prepend"></slot>
+        </template>
+        <template #append v-if="$slots.append">
+            <slot name="append"></slot>
         </template>
     </el-input>
     <span v-else>{{ value }}</span>

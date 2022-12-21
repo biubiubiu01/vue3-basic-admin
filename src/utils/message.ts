@@ -20,7 +20,7 @@ interface MessageBoxConfig {
 
 type MessageType = "success" | "warning" | "info" | "error";
 
-type MessageConfig = {
+export type MessageConfig = {
     icon?: string;
     dangerouslyUseHTMLString?: boolean;
     customClass?: string;
@@ -33,7 +33,7 @@ type MessageConfig = {
 
 const defaultMessageConfig: MessageConfig = {
     center: true,
-    duration: 2000,
+    duration: 2500,
     grouping: true
 };
 

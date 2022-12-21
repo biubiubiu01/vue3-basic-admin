@@ -9,7 +9,8 @@ const dashboard: AppRouteType[] = [
         redirect: "/dashboard/analysis",
         meta: {
             title: "首页",
-            icon: "svg-dashboard"
+            icon: "svg-dashboard",
+            sort: 1
         },
         children: [
             {

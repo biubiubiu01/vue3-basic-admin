@@ -10,6 +10,7 @@ export interface MetaType extends RouteMeta {
     close?: boolean;
     icon?: string;
     hideChildren?: boolean;
+    sort?: number;
 }
 
 export interface AppRouteType extends Omit<RouteRecordRaw, "props"> {

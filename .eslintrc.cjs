@@ -31,7 +31,8 @@ module.exports = {
         "no-unused-vars": "off",
         "vue/attribute-hyphenation": "off",
         "vue/custom-event-name-casing": "off",
-        "vue/multi-word-component-names": "off"
+        "vue/multi-word-component-names": "off",
+        "vue/comment-directive": "off"
     },
     plugins: ["vue", "@typescript-eslint"]
 };

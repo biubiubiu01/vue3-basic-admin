@@ -21,7 +21,7 @@
             <base-icon :el-name="controlsAtRight ? 'arrowUp' : 'plus'" />
         </span>
 
-        <base-input v-model="dataValue" type="number" :disabled="disabled" :clearable="false" :size="size" :text="text" @change="handleInputChange" />
+        <base-input v-model="dataValue" type="number" :disabled="disabled" :clearable="false" :text="text" @change="handleInputChange" />
     </div>
 </template>
 
@@ -36,14 +36,8 @@ const emit = defineEmits(["update:modelValue", "change"]);
 const dataValue = ref();
 
 const getInputClass = computed(() => {
-    const { size, disabled, controls } = props;
-    return [
-        "el-input-number",
-        size ? `el-input-number--${size}` : "",
-        { "is-disabled": disabled },
-        { "is-without-controls": !controls },
-        { "is-controls-right": unref(controlsAtRight) }
-    ];
+    const { disabled, controls } = props;
+    return ["el-input-number", { "is-disabled": disabled }, { "is-without-controls": !controls }, { "is-controls-right": unref(controlsAtRight) }];
 });
 
 const controlsAtRight = computed(() => {
