@@ -14,25 +14,25 @@ const systemLog: AppRouteType[] = [
         },
         children: [
             {
-                path: "operation",
+                path: "operation-log",
                 name: "OperationLog",
-                component: () => import("@/views/system-log/operation/index.vue"),
+                component: () => import("@/views/system-log/operation-log/index.vue"),
                 meta: {
                     title: "操作日志"
                 }
             },
             {
-                path: "error",
+                path: "error-log",
                 name: "ErrorLog",
-                component: () => import("@/views/system-log/error/index.vue"),
+                component: () => import("@/views/system-log/error-log/index.vue"),
                 meta: {
                     title: "错误日志"
                 }
             },
             {
-                path: "login",
+                path: "login-log",
                 name: "LoginLog",
-                component: () => import("@/views/system-log/login/index.vue"),
+                component: () => import("@/views/system-log/login-log/index.vue"),
                 meta: {
                     title: "登录日志"
                 }

@@ -14,6 +14,7 @@
     "dependencies": {
         "@element-plus/icons-vue": "^2.0.10",
         "axios": "^0.27.2",
+        "dayjs": "^1.11.7",
         "echarts": "^5.3.3",
         "element-plus": "^2.2.19",
         "mockjs": "^1.1.0",

@@ -21,7 +21,7 @@
             <base-icon :el-name="controlsAtRight ? 'arrowUp' : 'plus'" />
         </span>
 
-        <base-input v-model="dataValue" type="number" :disabled="disabled" :clearable="false" :text="text" @change="handleInputChange" />
+        <base-input v-model="dataValue" type="number" :disabled="disabled" :clearable="false" :text="text" @change="handleInputChange" class="tl" />
     </div>
 </template>
 
@@ -122,5 +122,8 @@ watch(
 <style lang="scss" scoped>
 .el-input-number {
     display: inline-flex;
+    :deep(.el-input__inner) {
+        text-align: left;
+    }
 }
 </style>

@@ -11,6 +11,7 @@ specifiers:
   '@vitejs/plugin-vue-jsx': ^2.1.1
   '@vueuse/core': ^9.6.0
   axios: ^0.27.2
+  dayjs: ^1.11.7
   echarts: ^5.3.3
   element-plus: ^2.2.19
   eslint: ^8.0.1
@@ -44,6 +45,7 @@ specifiers:
 dependencies:
   '@element-plus/icons-vue': 2.0.10_vue@3.2.41
   axios: 0.27.2
+  dayjs: 1.11.7
   echarts: 5.4.0
   element-plus: 2.2.19_vue@3.2.41
   mockjs: 1.1.0
@@ -1857,8 +1859,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /dayjs/1.11.6:
-    resolution: {integrity: sha512-zZbY5giJAinCG+7AGaw0wIhNZ6J8AhWuSXKvuc1KAyMiRsvGQWqh4L+MomvhdAYjN+lqvVCMq1I41e3YHvXkyQ==}
+  /dayjs/1.11.7:
+    resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==}
     dev: false
 
   /debug/2.6.9:
@@ -2098,7 +2100,7 @@ packages:
       '@types/lodash-es': 4.17.6
       '@vueuse/core': 9.6.0_vue@3.2.41
       async-validator: 4.2.5
-      dayjs: 1.11.6
+      dayjs: 1.11.7
       escape-html: 1.0.3
       lodash: 4.17.21
       lodash-es: 4.17.21

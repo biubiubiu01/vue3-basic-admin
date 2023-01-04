@@ -19,7 +19,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
 
     const { VITE_APP_NAME, VITE_PUBLIC_PATH } = loadEnv(mode, root);
 
-    const isBuild = command === "serve";
+    const isBuild = command === "build";
     return {
         base: VITE_PUBLIC_PATH,
         root,

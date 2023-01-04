@@ -3,10 +3,8 @@ import { RequestParams } from "../utils";
 
 export default [
     {
-        url: "/api/getMenuList",
+        url: "/api/user/getMenuList",
         method: "get",
-        response: (request: RequestParams) => {
-            console.log(request);
-        }
+        response: (request: RequestParams) => {}
     }
 ] as MockMethod[];
