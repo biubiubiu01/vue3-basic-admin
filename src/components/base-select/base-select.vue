@@ -1,7 +1,7 @@
 <script lang="tsx">
 import selectProps, { extraProps } from "./props";
 import { useVModel } from "@vueuse/core";
-import { omit, isArray, isEmpty } from "@/utils";
+import { omit, isArray, isEmpty, isFunction } from "@/utils";
 export default defineComponent({
     props: selectProps,
     emits: ["update:modelValue", "update:modelLabel", "change"],
@@ -9,6 +9,7 @@ export default defineComponent({
         const selectValue = useVModel(props, "modelValue", emit, { defaultValue: "" });
         const selectLabel = useVModel(props, "modelLabel", emit, { defaultValue: "" });
         const baseSelectRef = ref();
+        const selectOptions = ref(props.options);
 
         const getPropsValue = computed(() => {
             const newProps = { ...omit(props, Object.keys(extraProps)) } as any;
@@ -17,15 +18,16 @@ export default defineComponent({
 
         onMounted(() => {
             props.multiple && renderTag();
+            props.init && getSelectApi();
         });
 
         const handleChange = (val: any) => {
-            const { options, labelInValue, labelKey, valueKey, multiple, valueObject } = props;
+            const { labelInValue, labelKey, valueKey, multiple, valueObject } = props;
             let newVal = isArray(val) ? (val as string[]) : [val];
             if (valueObject) {
                 newVal = newVal.map((item) => item[valueKey]);
             }
-            const currentOption = options.filter((item) => newVal.includes(item[valueKey]));
+            const currentOption = unref(selectOptions).filter((item) => newVal.includes(item[valueKey]));
             selectLabel.value = multiple ? currentOption?.map((item) => item[labelKey]) : currentOption[0]?.[labelKey];
 
             if (labelInValue) {
@@ -35,6 +37,19 @@ export default defineComponent({
             emit("change", val);
         };
 
+        const handleVisibleChange = async (visible: boolean) => {
+            if (visible && unref(selectOptions).length === 0) {
+                getSelectApi();
+            }
+        };
+
+        const getSelectApi = async () => {
+            const { params, api } = props;
+            if (!isFunction(api)) return;
+            const res = await api(params);
+            selectOptions.value = res.data?.list || res.data;
+        };
+
         const renderTag = () => {
             if (!unref(baseSelectRef)) {
                 return;
@@ -42,7 +57,7 @@ export default defineComponent({
             const tag = document.createElement("span");
             tag.style.display = "none";
             tag.className = "el-tag el-tag--info el-tag--default el-tag--light el-tag-max-count";
-            unref(baseSelectRef).$refs.tags.children[0].appendChild(tag);
+            unref(baseSelectRef).$refs.tags?.children?.[0].appendChild(tag);
         };
 
         const renderMaxTagCount = () => {
@@ -51,7 +66,7 @@ export default defineComponent({
                     return;
                 }
                 const { maxTagCount, maxTagPlaceholder } = props;
-                Array.from(unref(baseSelectRef).$refs.tags.children[0].children)
+                Array.from(unref(baseSelectRef).$refs.tags?.children?.[0].children || [])
                     .filter((item: any) => {
                         if (item.className.includes("el-tag-max-count")) {
                             const selectCount = unref(selectValue) as string[];
@@ -82,52 +97,54 @@ export default defineComponent({
         };
 
         const renderText = () => {
-            const { valueObject, options, modelValue, valueKey, labelKey, textType } = props;
+            const { valueObject, modelValue, valueKey, labelKey } = props;
             let labelList = [];
             const newVal = isArray(modelValue) ? (modelValue as string[]) : [modelValue];
             if (valueObject) {
                 labelList = newVal.map((item: any) => item[labelKey]);
             } else {
                 newVal.forEach((item) => {
-                    const optionFind = options.find((v) => v[valueKey] === item);
-                    if (optionFind) {
-                        labelList.push(optionFind[labelKey]);
-                    } else {
-                        labelList.push(item);
-                    }
+                    const optionFind = unref(selectOptions).find((v) => v[valueKey] === item);
+                    labelList.push(optionFind ? optionFind[labelKey] : item);
                 });
             }
-            if (textType === "text") {
-                return <span>{labelList.join()}</span>;
-            } else if (textType === "tag") {
-                return labelList.map((item) => (
-                    <el-space size={8}>
-                        <el-tag>{item}</el-tag>
-                    </el-space>
-                ));
-            }
-        };
-
-        const renderSelectV2 = () => {
-            <el-select-v2 ref={baseSelectRef} {...getPropsValue.value} vModel={selectValue.value} onChange={handleChange}>
-                {getOptionRender()}
-            </el-select-v2>;
+            return <span>{labelList.join()}</span>;
         };
 
         const renderSelect = () => {
             return (
-                <el-select ref={baseSelectRef} {...getPropsValue.value} vModel={selectValue.value} onChange={handleChange}>
+                <el-select
+                    ref={baseSelectRef}
+                    {...getPropsValue.value}
+                    vModel={selectValue.value}
+                    onChange={handleChange}
+                    onVisible-change={handleVisibleChange}
+                >
                     {getOptionRender()}
                 </el-select>
             );
         };
 
+        const renderTreeSelect = () => {
+            return (
+                <el-tree-select
+                    ref={baseSelectRef}
+                    {...getPropsValue.value}
+                    vModel={selectValue.value}
+                    check-strictly
+                    default-expand-all
+                    onVisible-change={handleVisibleChange}
+                    data={selectOptions.value}
+                />
+            );
+        };
+
         const getOptionRender = () => {
-            const { options, valueKey, labelKey, valueObject, modelValue, modelLabel, multiple } = props;
+            const { valueKey, labelKey, valueObject, modelValue, modelLabel, multiple } = props;
             if (slots.default) {
                 return slots.default();
             }
-            const optionList = options.map((item: any) => {
+            const optionList = unref(selectOptions).map((item: any) => {
                 return (
                     <el-option key={item[valueKey]} label={item[labelKey]} value={valueObject ? item : item[valueKey]} disabled={item.disabled}>
                         {slots.option?.({ scope: item })}
@@ -138,7 +155,7 @@ export default defineComponent({
                 !multiple &&
                 !valueObject &&
                 !isEmpty(modelValue) &&
-                (options.length === 0 || !options.find((item: any) => item[valueKey] === modelValue))
+                (unref(selectOptions).length === 0 || !unref(selectOptions).find((item: any) => item[valueKey] === modelValue))
             ) {
                 optionList.push(<el-option label={modelLabel} value={modelValue} />);
             }
@@ -146,9 +163,17 @@ export default defineComponent({
         };
 
         return () => {
-            const { virtual, text, multiple } = props;
-            multiple && renderMaxTagCount();
-            return text ? renderText() : virtual ? renderSelectV2() : renderSelect();
+            const { text, tree, multiple } = props;
+            if (multiple) {
+                renderMaxTagCount();
+            }
+            if (text) {
+                return renderText();
+            }
+            if (tree) {
+                return renderTreeSelect();
+            }
+            return renderSelect();
         };
     }
 });

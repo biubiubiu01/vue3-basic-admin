@@ -3,7 +3,9 @@ import App from "./App.vue";
 
 import { setupPinia } from "./stores";
 import { setupIcon, setupGlobalUtils } from "@/plugins";
+import { setupLoadingDirective } from "./directive";
 import router from "./router/index";
+import { setupRouterGuard } from "@/router/guard";
 
 import "./styles/index.scss";
 
@@ -18,5 +20,14 @@ const setupPlugins = () => {
     setupGlobalUtils(app);
 };
 
+const setupDirective = () => {
+    // 注册loading自定义指令
+    setupLoadingDirective(app);
+};
+
 setupPlugins();
+setupDirective();
+// 注册路由守卫
+setupRouterGuard(router);
+
 app.use(router).mount("#app");

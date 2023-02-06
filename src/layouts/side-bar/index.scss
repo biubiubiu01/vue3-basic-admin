@@ -50,6 +50,12 @@ $menuItemHeight: 48px;
             .el-sub-menu__title {
                 height: $menuItemHeight;
             }
+            .base-icon {
+                margin-right: 5px;
+                width: var(--el-menu-icon-width);
+                text-align: center;
+                vertical-align: middle;
+            }
             .el-sub-menu.is-active {
                 .el-sub-menu__title {
                     color: var(--el-menu-active-color);

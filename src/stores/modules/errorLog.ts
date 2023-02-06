@@ -2,10 +2,11 @@ import { defineStore } from "pinia";
 import { store } from "../index";
 import { ErrorTypeEnum } from "@/enums/httpEnum";
 import dayjs from "dayjs";
-import { Api, addErrorInfo } from "@/api/error";
+import { Api, addErrorInfo } from "@/api/log";
 
 interface ErrorLogInfo {
     type: ErrorTypeEnum;
+    method: "get" | "post" | "put" | "delete";
     url: string;
     message: string;
     params?: string;

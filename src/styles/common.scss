@@ -47,6 +47,15 @@ div:focus {
 .fl {
     float: left;
 }
+.tc {
+    text-align: center;
+}
+.tl {
+    text-align: left;
+}
+.tr {
+    text-align: right;
+}
 .clearfix {
     &:after {
         visibility: hidden;
@@ -104,6 +113,12 @@ div:focus {
 }
 .justify-between {
     justify-content: space-between;
+}
+.justify-around {
+    justify-content: space-around;
+}
+.justify-end {
+    justify-content: flex-end;
 }
 
 .flex-direction-column {

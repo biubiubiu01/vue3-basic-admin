@@ -1,4 +1,14 @@
-import { TableFormTypeEnum } from "@/enums/TableEnum";
+import { FormTypeEnum } from "@/enums/componentEnum";
+
+export type OperationType = {
+    icon?: string;
+    label: string;
+    confirm?: boolean;
+    tip?: string;
+    callFunction: (val?: any) => void;
+};
+
+export type PaginationPosition = "bottomLeft" | "bottomCenter" | "bottomRight";
 
 export type Column = {
     fieldName: string;
@@ -11,10 +21,13 @@ export type Column = {
     resizable?: boolean;
     showOverflowTooltip?: boolean;
     required?: boolean;
-    formType?: `${TableFormTypeEnum}` | string;
+    formType?: `${FormTypeEnum}` | undefined;
     active?: boolean;
     sort?: number;
+    callFunction?: Function;
+    config?: any;
+    operation?: OperationType[];
+    formatter?: Function;
+    tagType?: Function | string;
     [key: string]: any;
 };
-
-export type PaginationPosition = "bottomLeft" | "bottomCenter" | "bottomRight" | "topLeft" | "topCenter" | "topRight";

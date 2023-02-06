@@ -28,7 +28,7 @@ const toggleDark = useToggle(isDark);
     @extend .transition;
     .nav-switch-action {
         left: 1px;
-        top: 1px;
+        top: 0.5px;
         border-radius: 50%;
         width: 16px;
         height: 16px;
@@ -41,7 +41,7 @@ const toggleDark = useToggle(isDark);
         .el-icon {
             position: absolute;
             left: 1px;
-            bottom: 0.5px;
+            bottom: 0px;
         }
     }
 }

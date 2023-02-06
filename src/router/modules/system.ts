@@ -10,7 +10,8 @@ const system: AppRouteType[] = [
         meta: {
             title: "系统管理",
             icon: "setting",
-            sort: 4
+            sort: 5,
+            permission: "admin_system"
         },
         children: [
             {
@@ -18,7 +19,10 @@ const system: AppRouteType[] = [
                 name: "Account",
                 component: () => import("@/views/system/account/index.vue"),
                 meta: {
-                    title: "用户管理"
+                    title: "用户管理",
+                    icon: "",
+                    sort: 1,
+                    permission: "admin_system_user"
                 }
             },
             {
@@ -26,7 +30,10 @@ const system: AppRouteType[] = [
                 name: "Role",
                 component: () => import("@/views/system/role/index.vue"),
                 meta: {
-                    title: "角色管理"
+                    title: "角色管理",
+                    icon: "",
+                    sort: 2,
+                    permission: "admin_system_role"
                 }
             },
             {
@@ -34,7 +41,10 @@ const system: AppRouteType[] = [
                 name: "Department",
                 component: () => import("@/views/system/department/index.vue"),
                 meta: {
-                    title: "部门管理"
+                    title: "部门管理",
+                    icon: "",
+                    sort: 3,
+                    permission: "admin_system_dept"
                 }
             },
             {
@@ -42,7 +52,10 @@ const system: AppRouteType[] = [
                 name: "Menu",
                 component: () => import("@/views/system/menu/index.vue"),
                 meta: {
-                    title: "菜单管理"
+                    title: "菜单管理",
+                    icon: "",
+                    sort: 4,
+                    permission: "admin_system_menu"
                 }
             },
             {
@@ -50,7 +63,30 @@ const system: AppRouteType[] = [
                 name: "Api",
                 component: () => import("@/views/system/api/index.vue"),
                 meta: {
-                    title: "接口管理"
+                    title: "接口管理",
+                    icon: "",
+                    sort: 5,
+                    permission: "admin_system_api"
+                }
+            },
+            {
+                path: "dictionary-key",
+                name: "DictionaryKey",
+                component: () => import("@/views/system/dictionary-key/index.vue"),
+                meta: {
+                    title: "字典管理",
+                    icon: "",
+                    sort: 6,
+                    permission: "admin_system_dict"
+                }
+            },
+            {
+                path: "dictionary-data/:type",
+                name: "DictionaryData",
+                component: () => import("@/views/system/dictionary-data/index.vue"),
+                meta: {
+                    title: "字典数据",
+                    hidden: true
                 }
             }
         ]

@@ -76,9 +76,12 @@
     }
     .tag-action {
         height: 100%;
-        :deep(.el-icon) {
+        :deep(.base-icon) {
             height: 100%;
             width: 36px;
+        }
+        :deep(.base-icon:first-of-type) {
+            padding: 0 9px;
         }
     }
 }

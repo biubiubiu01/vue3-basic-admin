@@ -15,10 +15,10 @@ export const resultSuccess = (data: any = null, message = "请求成功") => {
     };
 };
 
-export const resultError = (data: any = null, message = "请求失败") => {
+export const resultError = (message = "请求失败") => {
     return {
         code: ResultEnum.ERROR,
-        data,
+        data: null,
         message
     };
 };

@@ -11,7 +11,8 @@ const dashboard: AppRouteType[] = [
             title: "图标",
             icon: "svg-icon",
             hideChildren: true,
-            sort: 2
+            sort: 2,
+            permission: "admin_icon"
         },
         children: [
             {

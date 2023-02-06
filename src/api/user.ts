@@ -1,7 +1,10 @@
 import request from "@/utils/request";
 
 export enum Api {
-    MENU_LIST = "/user/getMenuList1"
+    LOGIN = "/login",
+    GET_USER_INFO = "/getUserInfo"
 }
 
-export const getMenuList = () => request.get(Api.MENU_LIST, { id: 1 });
+export const login = (data?: any) => request.post(Api.LOGIN, data);
+
+export const getUserInfo = (data?: any) => request.get(Api.GET_USER_INFO, data);

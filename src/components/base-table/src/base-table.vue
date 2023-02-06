@@ -1,15 +1,6 @@
 <template>
     <div class="base-table">
-        <base-pagination
-            v-if="showPagination && topPos"
-            v-model:current-page="pagination[currentKey]"
-            v-model:page-size="pagination[pageSizeKey]"
-            v-bind="pagination"
-            @current-change="handleCurrentChange"
-            @size-change="handleCurrentChange"
-            :class="`base-table-pagination mb10 base-table-pagination-${position}`"
-        />
-        <el-table v-bind="getPropsValue" v-loading="loading" row-key="fieldName" header-cell-class-name="base-table-header-cell">
+        <el-table row-key="id" v-bind="getPropsValue" v-loading="loading" header-cell-class-name="base-table-header-cell">
             <el-table-column fixed="left" type="expand" v-if="expandShow">
                 <template #default="scope">
                     <slot name="expand" :scope="scope"></slot>
@@ -28,6 +19,7 @@
                     :fixed="item.fixed"
                     :min-width="item.minWidth || 80"
                     :show-overflow-tooltip="item.showOverflowTooltip"
+                    :align="item.align || 'center'"
                 >
                     <template #header="scope">
                         <template v-if="!$slots.header">
@@ -37,30 +29,49 @@
                         <slot name="header" :scope="scope" :column="item"></slot>
                     </template>
                     <template #default="scope">
-                        <template v-if="item.formType === TableFormTypeEnum.INPUT">
-                            <base-input v-model="scope.row[item.fieldName]" />
+                        <template v-if="item.formType === FormTypeEnum.SLOT">
+                            <slot name="tableColumn" :scope="scope" :column="item"></slot>
                         </template>
-                        <template v-else-if="item.formType === TableFormTypeEnum.NUMBER">
-                            <base-input-number v-model="scope.row[item.fieldName]" class="w100" />
+                        <template v-else-if="item.formType === FormTypeEnum.TAG">
+                            <el-tag
+                                v-for="tag in getTableColumnValue(item, scope)?.split(',')"
+                                :key="tag"
+                                :type="isFunction(item.type) ? item.type(scope.row) : item.type"
+                                >{{ tag }}</el-tag
+                            >
                         </template>
-                        <template v-else-if="item.formType === TableFormTypeEnum.SLOT">
-                            <slot name="default" :scope="scope" :column="item"></slot>
+                        <template v-else-if="item.formType === FormTypeEnum.SWITCH">
+                            <el-switch
+                                v-model="scope.row[item.fieldName]"
+                                :active-value="1"
+                                :inactive-value="0"
+                                :before-change="item?.callFunction?.bind(null, scope.row)"
+                            />
+                        </template>
+                        <template v-else-if="item.formType === FormTypeEnum.OPERATION">
+                            <base-table-operation :operation="item.operation" :scope="scope" />
+                        </template>
+                        <template v-else-if="isUndefined(item.formType)">
+                            {{ getTableColumnValue(item, scope) }}
                         </template>
                         <template v-else>
-                            {{ scope.row[item.fieldName] }}
+                            <component
+                                v-model="scope.row[item.fieldName]"
+                                :is="componentMap.get(item.formType as FormTypeEnum)"
+                                class="w100"
+                                v-bind="item.config"
+                            />
                         </template>
                     </template>
                 </el-table-column>
             </template>
-            <slot name="default"></slot>
-
             <template #empty>
-                <base-empty v-if="!$slots.empty" />
+                <el-empty description="暂无数据" :image-size="64" v-if="!$slots.empty" />
                 <slot name="empty"></slot>
             </template>
         </el-table>
         <base-pagination
-            v-if="showPagination && !topPos"
+            v-if="showPagination"
             v-model:current-page="pagination[currentKey]"
             v-model:page-size="pagination[pageSizeKey]"
             v-bind="getPaginationValue"
@@ -73,8 +84,8 @@
 
 <script lang="ts" setup>
 import tableProps, { extraProps } from "./props";
-import { omit, isUndefined } from "@/utils";
-import { TableFormTypeEnum } from "@/enums/TableEnum";
+import { omit, isUndefined, isFunction } from "@/utils";
+import { FormTypeEnum, componentMap } from "@/enums/componentEnum";
 
 const props = defineProps(tableProps);
 
@@ -95,8 +106,10 @@ const getPaginationValue = computed(() => {
     return { ...newProps };
 });
 
-const topPos = computed(() => {
-    return props.position.indexOf("top") !== -1;
+const getTableColumnValue = computed(() => {
+    return (item: any, scope: any) => {
+        return isFunction(item.formatter) ? item.formatter(scope.row) : scope.row[item.fieldName];
+    };
 });
 
 const columnList = computed(() => {
@@ -121,5 +134,5 @@ const handleCurrentChange = () => {
 </script>
 
 <style lang="scss" scoped>
-@use "./index.scss";
+@use "./base-table.scss";
 </style>

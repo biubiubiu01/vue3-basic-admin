@@ -1,0 +1,11 @@
+<template>
+    <el-space>嵌套菜单1-2 <el-rate v-model="value" class="ml10" /></el-space>
+    <base-input v-model="inputValue" />
+</template>
+
+<script lang="ts" setup>
+const value = ref(5);
+const inputValue = ref("嵌套菜单1-2");
+</script>
+
+<style scoped></style>

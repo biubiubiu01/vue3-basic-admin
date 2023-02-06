@@ -7,17 +7,17 @@
                 <TagView />
             </el-header>
             <el-main class="app-main">
-                <div class="all-container">
-                    <RouterView>
-                        <template #default="{ Component, route }">
-                            <transition name="el-fade-in-linear" mode="out-in">
-                                <keep-alive :include="getCacheTagList">
+                <RouterView>
+                    <template #default="{ Component, route }">
+                        <transition name="el-fade-in-linear" mode="out-in">
+                            <keep-alive :include="getCacheTagList">
+                                <div class="all-container">
                                     <component :is="Component" :key="route.fullPath" />
-                                </keep-alive>
-                            </transition>
-                        </template>
-                    </RouterView>
-                </div>
+                                </div>
+                            </keep-alive>
+                        </transition>
+                    </template>
+                </RouterView>
             </el-main>
         </el-container>
     </el-container>

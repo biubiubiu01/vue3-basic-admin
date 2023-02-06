@@ -36,13 +36,6 @@ export default {
     suffixIcon: {
         type: String
     },
-    size: {
-        type: String,
-        default: "",
-        validator(value: string) {
-            return ["", "default", "small", "large"].includes(value);
-        }
-    },
     text: {
         type: Boolean,
         default: false

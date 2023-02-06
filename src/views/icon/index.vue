@@ -1,6 +1,6 @@
 <template>
     <div class="icon-container">
-        <base-box title="图标选择器" showHelp helpText="点击图标可复制代码">
+        <base-box title="图标选择器" showHelp helpText="点击图标可选择图标">
             <base-icon-picker width="300px" />
         </base-box>
         <base-box title="el-icon 图标" showHelp helpText="点击图标可复制代码">
@@ -67,7 +67,7 @@ const handleCopyIcon = async (icon: string) => {
             background-color: var(--el-border-color-extra-light);
         }
         .icon-title {
-            font-size: 13px;
+            font-size: var(--el-font-size-base);
             margin-top: 8px;
         }
     }

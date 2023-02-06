@@ -1,11 +1,11 @@
 .base-column-setting {
     .base-column-content {
-        border: 1px solid var(--base-dialog-border-color);
         height: calc(100% - 32px);
         .base-column-title {
-            background-color: var(--base-column-setting-header-color);
+            background-color: var(--base-column-header-color);
         }
         .base-column-list {
+            border: 1px solid var(--base-column-header-color);
             .base-column-checkbox {
                 width: calc(33% - 30px);
                 :deep(.el-checkbox__label) {
@@ -17,7 +17,7 @@
             }
         }
         .base-column-choose {
-            border-left: 1px solid var(--base-column-setting-header-color);
+            border: 1px solid var(--base-column-header-color);
             width: 200px;
             .base-column-title {
                 height: 32px;
@@ -43,7 +43,6 @@
         line-height: 32px;
         display: flex;
         align-items: center;
-        justify-content: flex-end;
         margin-right: 15px;
     }
     :deep(.el-dialog.is-fullscreen) {

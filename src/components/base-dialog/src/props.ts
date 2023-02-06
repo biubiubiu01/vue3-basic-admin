@@ -74,7 +74,7 @@ export const extraProps = {
     },
     cancelText: {
         type: String,
-        default: "关 闭"
+        default: "取 消"
     },
     showSaveBtn: {
         type: Boolean,

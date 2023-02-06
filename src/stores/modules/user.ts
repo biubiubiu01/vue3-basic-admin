@@ -1,25 +1,78 @@
 import { defineStore } from "pinia";
 import { store } from "../index";
+import { login, getUserInfo } from "@/api/user";
+import { addLoginInfo } from "@/api/log";
+import type { Router } from "vue-router";
 
 interface UserState {
-    token?: string;
+    token: string;
+    roleIds: string[];
+    userInfo: any;
 }
 
-export const useUser = defineStore({
+interface LoginParams {
+    username: string;
+    password: string;
+}
+
+export const useUserStore = defineStore({
     id: "user",
     persist: true,
     state: (): UserState => ({
-        token: undefined
+        token: "",
+        roleIds: [],
+        userInfo: {}
     }),
-    getters: {},
+    getters: {
+        getToken(): string {
+            return this.token;
+        },
+        getRoleIds(): string[] {
+            return this.roleIds;
+        }
+    },
     actions: {
-        setToken(token: string | undefined) {
+        setToken(token: string) {
             this.token = token;
+        },
+        setRoleId(ids: string[]) {
+            this.roleIds = ids;
+        },
+        setUserInfo(userInfo: any) {
+            this.userInfo = userInfo;
+        },
+        async login(params: LoginParams) {
+            const res = await login(params);
+            this.setToken(res.data.token);
+            await this.getUserInfo();
+            this.addLoginLog();
+        },
+
+        logout(router: Router, route: any) {
+            router.replace({
+                path: "/login",
+                query: {
+                    redirect: route.path
+                }
+            });
+        },
+
+        async getUserInfo() {
+            if (!this.token) return;
+            const res = await getUserInfo();
+            this.setRoleId(res.data.roleIds);
+            this.setUserInfo(res.data);
+        },
+
+        async addLoginLog() {
+            await addLoginInfo({
+                username: this.userInfo.username
+            });
         }
     }
 });
 
 // 便于外部使用
 export const useUserStoreWithOut = () => {
-    return useUser(store);
+    return useUserStore(store);
 };

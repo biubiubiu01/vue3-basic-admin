@@ -1,4 +1,4 @@
-import { messageSuccess, messageWarning, messageInfo, messageError, messageBox, deepClone } from "@/utils";
+import { messageSuccess, messageWarning, messageInfo, messageError, messageBox, deepClone, getDataLabel } from "@/utils";
 import type { App } from "vue";
 
 export default (app: App<Element>) => {
@@ -8,4 +8,5 @@ export default (app: App<Element>) => {
     app.config.globalProperties.$messageInfo = messageInfo;
     app.config.globalProperties.$messageError = messageError;
     app.config.globalProperties.$deepClone = deepClone;
+    app.config.globalProperties.$getDataLabel = getDataLabel;
 };

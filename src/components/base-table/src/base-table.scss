@@ -4,20 +4,20 @@
     .base-table-required {
         color: var(--el-color-danger);
     }
+    .el-tag + .el-tag {
+        margin-left: 8px;
+    }
 }
 
 .base-table-pagination {
     display: flex;
-    &.base-table-pagination-bottomLeft,
-    &.base-table-pagination-topLeft {
+    &.base-table-pagination-bottomLeft {
         justify-content: flex-start;
     }
-    &.base-table-pagination-bottomCenter,
-    &.base-table-pagination-topCenter {
+    &.base-table-pagination-bottomCenter {
         justify-content: center;
     }
-    &.base-table-pagination-bottomRight,
-    &.base-table-pagination-topRight {
+    &.base-table-pagination-bottomRight {
         justify-content: flex-end;
     }
 }

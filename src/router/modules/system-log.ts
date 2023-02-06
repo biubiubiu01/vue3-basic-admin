@@ -8,9 +8,10 @@ const systemLog: AppRouteType[] = [
         component: LAYOUT,
         redirect: "/system-log/operation",
         meta: {
-            title: "系统监控",
+            title: "系统日志",
             icon: "svg-log",
-            sort: 4
+            sort: 4,
+            permission: "admin_system_log"
         },
         children: [
             {
@@ -18,7 +19,10 @@ const systemLog: AppRouteType[] = [
                 name: "OperationLog",
                 component: () => import("@/views/system-log/operation-log/index.vue"),
                 meta: {
-                    title: "操作日志"
+                    title: "操作日志",
+                    icon: "",
+                    sort: 1,
+                    permission: "admin_system_log_operation"
                 }
             },
             {
@@ -26,7 +30,10 @@ const systemLog: AppRouteType[] = [
                 name: "ErrorLog",
                 component: () => import("@/views/system-log/error-log/index.vue"),
                 meta: {
-                    title: "错误日志"
+                    title: "错误日志",
+                    icon: "",
+                    sort: 2,
+                    permission: "admin_system_log_error"
                 }
             },
             {
@@ -34,15 +41,10 @@ const systemLog: AppRouteType[] = [
                 name: "LoginLog",
                 component: () => import("@/views/system-log/login-log/index.vue"),
                 meta: {
-                    title: "登录日志"
-                }
-            },
-            {
-                path: "mock-login",
-                name: "MockLogin",
-                component: () => import("@/views/system-log/mock-login/index.vue"),
-                meta: {
-                    title: "模拟登录"
+                    title: "登录日志",
+                    icon: "",
+                    sort: 3,
+                    permission: "admin_system_log_login"
                 }
             }
         ]

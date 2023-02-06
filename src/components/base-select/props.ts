@@ -30,7 +30,7 @@ export const defaultProps = {
     },
     filterable: {
         type: Boolean,
-        default: true
+        default: false
     },
     valueKey: {
         type: String,
@@ -47,10 +47,6 @@ export const defaultProps = {
 };
 
 export const extraProps = {
-    virtual: {
-        type: Boolean,
-        default: false
-    },
     labelInValue: {
         type: Boolean,
         default: false
@@ -58,10 +54,6 @@ export const extraProps = {
     text: {
         type: Boolean,
         default: false
-    },
-    textType: {
-        type: String as PropType<"text" | "tag">,
-        default: "text"
     },
     labelKey: {
         type: String,
@@ -85,6 +77,20 @@ export const extraProps = {
     modelLabel: {
         type: [Array, String, Number, Boolean, Object],
         default: undefined
+    },
+    api: {
+        type: Function
+    },
+    init: {
+        type: Boolean,
+        default: true
+    },
+    params: {
+        type: Object
+    },
+    tree: {
+        type: Boolean,
+        default: false
     }
 };
 

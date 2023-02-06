@@ -51,27 +51,32 @@ export default defineComponent({
         });
 
         const getHover = computed(() => {
-            return props.hover ? "base-icon-hover" : "";
+            return props.hover ? "base-icon base-icon-hover" : "base-icon";
         });
 
+        // svg 图标
         const renderSvgIcon = () => {
             return (
-                <svg class="svgClass" aria-hidden="true">
+                <svg class={getHover.value} aria-hidden="true" style={iconStyle.value}>
                     <use xlink:href={getSvgName.value}></use>
                 </svg>
             );
         };
 
+        // el 图标
         const renderElIcon = () => {
-            if (props.icon) {
-                return h(resolveComponent(props.icon));
-            }
-            if (props.elName) {
-                return h(resolveComponent(props.elName));
+            const { icon, elName, size, color } = props;
+            if (props.icon || props.elName) {
+                return (
+                    <el-icon size={size} color={color} class={getHover.value}>
+                        {h(resolveComponent(elName || icon))}
+                    </el-icon>
+                );
             }
             return null;
         };
 
+        // iconfont图标
         const renderIcon = () => {
             if (!props.icon && !props.iconName) {
                 return null;
@@ -80,33 +85,34 @@ export default defineComponent({
         };
 
         return () => {
-            const { icon, svgName, iconName, size, color } = props;
+            const { icon, svgName, iconName, elName } = props;
             if (icon?.includes("icon-") || iconName) {
                 return renderIcon();
             }
-            return (
-                <el-icon size={size} color={color} class={getHover.value}>
-                    {icon?.includes("svg-") || svgName ? renderSvgIcon() : renderElIcon()}
-                </el-icon>
-            );
+            if (icon.includes("svg-") || svgName) {
+                return renderSvgIcon();
+            }
+            if (icon || elName) {
+                return renderElIcon();
+            }
+            return null;
         };
     }
 });
 </script>
 
 <style lang="scss" scoped>
-.el-icon {
+.base-icon {
+    height: 1em;
+    width: 1em;
+    fill: currentColor;
+    line-height: 1em;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     &.base-icon-hover:hover {
         color: var(--el-color-primary);
         transform: scale(1.3);
-        vertical-align: -0.15em;
-    }
-    .svgClass {
-        width: 1em;
-        height: 1em;
-        fill: currentColor;
-        overflow: hidden;
-        outline: 0;
         vertical-align: -0.15em;
     }
 }

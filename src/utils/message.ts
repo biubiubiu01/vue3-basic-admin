@@ -1,7 +1,7 @@
 import { ElMessageBox, ElMessage } from "element-plus";
 
 interface MessageBoxConfig {
-    title: string;
+    title?: string;
     icon?: string;
     type?: "success" | "info" | "warning" | "error";
     customClass?: string;
@@ -51,7 +51,7 @@ const defaultConfig: MessageBoxConfig = {
     draggable: false
 };
 
-export const messageBox = async (message: string, config: MessageBoxConfig) => {
+export const messageBox = async (message: string, config?: MessageBoxConfig) => {
     const options = Object.assign({}, defaultConfig, config);
     const { title, confirmBack, cancelBack, ...rest } = options;
     return new Promise((resolve, reject) => {

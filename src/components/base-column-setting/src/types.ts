@@ -1,7 +1,7 @@
 import type { Column } from "@/components/base-table";
 
 export interface ColumnState {
-    dialogTitle: string;
+    dialogType: number;
     checkAll: boolean;
     checkedList: string[];
     checkColumnList: Column[];

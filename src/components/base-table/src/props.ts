@@ -15,7 +15,7 @@ export const defaultProps = {
     },
     border: {
         type: Boolean,
-        default: true
+        default: false
     },
     fit: {
         type: Boolean,
@@ -92,10 +92,6 @@ export const extraProps = {
     columns: {
         type: Array as PropType<Column[]>,
         default: () => []
-    },
-    tableName: {
-        type: String,
-        default: ""
     },
     showPagination: {
         type: Boolean,

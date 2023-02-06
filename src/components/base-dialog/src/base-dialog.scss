@@ -13,7 +13,6 @@
     .el-dialog__header {
         padding-top: 6px;
         padding-bottom: 0;
-        border-bottom: 1px solid var(--base-dialog-border-color);
         margin-right: 0;
         .base-dialog-header {
             height: 52px;
@@ -28,7 +27,6 @@
 
     .el-dialog__footer {
         padding-bottom: 10px;
-        border-top: 1px solid var(--base-dialog-border-color);
     }
     .el-dialog__body {
         padding: 14px !important;

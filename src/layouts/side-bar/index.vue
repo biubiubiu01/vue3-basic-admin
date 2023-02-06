@@ -4,7 +4,7 @@
             <Logo :title="getSystemTitle" />
             <el-scrollbar class="side-main flex-auto">
                 <el-menu :mode="getMode" :collapse="getCollapse" :default-active="$route.path" :collapse-transition="false" unique-opened router>
-                    <SideBarItem v-for="route in asyncRoutes" :key="route.path" :item="route" />
+                    <SideBarItem v-for="route in getRoute" :key="route.path" :item="route" />
                 </el-menu>
             </el-scrollbar>
         </div>
@@ -15,9 +15,11 @@
 import Logo from "./logo.vue";
 import SideBarItem from "./side-bar-item.vue";
 import { useMenuSetting } from "../hooks/useMenuSetting";
-import { asyncRoutes } from "@/router/basic";
+import { usePermissionStoreWithOut } from "@/stores/modules/permission";
 
 const { getCollapse, getMode, getSystemTitle, getSideWidth, getSideCollapsed } = useMenuSetting();
+
+const { getRoute } = usePermissionStoreWithOut();
 
 const sideBarWidth = computed(() => {
     return unref(getCollapse) ? unref(getSideCollapsed) : unref(getSideWidth);

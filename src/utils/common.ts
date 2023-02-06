@@ -1,4 +1,5 @@
-import { isObject } from "./is";
+import { isObject, isUndefined, isString } from "./is";
+import { BasicType } from "@/constant/basic";
 
 /**
  * 排除掉obj里面的key值
@@ -55,4 +56,16 @@ export function deepMerge<T = any>(src: any = {}, target: any = {}): T {
         src[key] = isObject(target[key]) ? deepMerge(src[key], target[key]) : (src[key] = target[key]);
     }
     return src;
+}
+
+/**
+ * 深度合并
+ * @param {Array} list
+ * @param {String} value
+ * @returns {*}
+ */
+export function getDataLabel(list: BasicType[] = [], value: string | number): string | undefined {
+    if (isUndefined(value)) return;
+    const valueStr = value.toString().split(";");
+    return valueStr.map((item) => list.find((val) => val.value.toString() === item)?.label).join();
 }
