@@ -53,7 +53,7 @@ export const useTagStore = defineStore({
         },
 
         deleteOtherTag(current: TagRouteType) {
-            this.tagList = this.tagList.filter((item) => item?.meta?.close === false || item.path === current.path);
+            this.tagList = this.tagList.filter((item) => !!item?.meta?.affix || item.path === current.path);
             this.deleteOtherCacheTag(current);
         },
 
@@ -64,7 +64,7 @@ export const useTagStore = defineStore({
         },
 
         clearTag() {
-            this.tagList = this.tagList.filter((item) => item?.meta?.close === false);
+            this.tagList = this.tagList.filter((item) => !!item?.meta?.affix);
             this.clearCacheTag();
         },
 

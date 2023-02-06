@@ -22,7 +22,8 @@ const dashboard: AppRouteType[] = [
                     title: "分析页",
                     sort: 1,
                     permission: "admin_dashboard_analysis",
-                    icon: ""
+                    icon: "",
+                    affix: true
                 }
             },
             {

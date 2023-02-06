@@ -27,7 +27,6 @@ export const usePermissionStore = defineStore({
             const { getRoleIds } = useUserStore();
             const routeList = filterAsyncRoute(asyncRoutes, getRoleIds);
             sortRoute(routeList);
-            patchHomeTag(routeList);
             this.setRoute(routeList);
             return routeList;
         }
@@ -67,11 +66,6 @@ function sortRoute(route: AppRouteType[]) {
             sortRoute(item.children);
         }
     });
-}
-
-function patchHomeTag(route: AppRouteType[]) {
-    if (!route || route.length === 0) return;
-    route[0].meta!.close = false;
 }
 
 // 便于外部使用

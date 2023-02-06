@@ -1,13 +1,17 @@
 import type { AppRouteType } from "@/router/types";
 import { isArray } from "@/utils";
 
-const LoginRoute: AppRouteType[] = [
-    {
-        path: "/login",
-        name: "Login",
-        component: () => import("@/views/login/index.vue")
-    }
-];
+const LoginRoute: AppRouteType = {
+    path: "/login",
+    name: "Login",
+    component: () => import("@/views/login/index.vue")
+};
+
+const RootRoute: AppRouteType = {
+    path: "/",
+    name: "Root",
+    redirect: "/dashboard"
+};
 
 //  const PageError: AppRouteType[] = [
 //     {
@@ -38,7 +42,7 @@ const getRouteName = (routeList: AppRouteType[]) => {
 };
 
 // 基础路由
-export const basicRoutes = [...LoginRoute];
+export const basicRoutes = [LoginRoute, RootRoute];
 
 // 异步路由
 export const asyncRoutes = getAsyncRoute();

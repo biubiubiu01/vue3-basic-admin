@@ -23,8 +23,8 @@ export const useTagEvent = () => {
     /**
      * 当前标签关闭disabled
      */
-    const closeCurrentDisabled = computed(() => {
-        return route.meta.close === false || unref(getTagList).length <= 1;
+    const closeCurrentDisabled = computed((): boolean => {
+        return !!route?.meta?.affix || unref(getTagList).length <= 1;
     });
 
     /**
@@ -32,7 +32,7 @@ export const useTagEvent = () => {
      */
     const closeLeftDisabled = computed(() => {
         const { index } = getCurrentRoute();
-        return [0, -1].includes(index) || unref(getTagList)[index - 1]?.meta?.close === false;
+        return [0, -1].includes(index) || !!unref(getTagList)[index - 1]?.meta?.affix;
     });
 
     /**
@@ -40,7 +40,7 @@ export const useTagEvent = () => {
      */
     const closeRightDisabled = computed(() => {
         const { index } = getCurrentRoute();
-        return [unref(getTagList).length - 1, -1].includes(index) || tagStore.tagList[index + 1]?.meta?.close === false;
+        return [unref(getTagList).length - 1, -1].includes(index) || !!tagStore.tagList[index + 1]?.meta?.affix;
     });
 
     /**
@@ -49,9 +49,7 @@ export const useTagEvent = () => {
     const closeOtherDisabled = computed(() => {
         const { index } = getCurrentRoute();
         return (
-            index === -1 ||
-            unref(getTagList).length === 1 ||
-            unref(getTagList).filter((item, i) => item?.meta?.close !== false && i !== index).length === 0
+            index === -1 || unref(getTagList).length === 1 || unref(getTagList).filter((item, i) => !!item?.meta?.affix && i !== index).length === 0
         );
     });
 
@@ -59,7 +57,7 @@ export const useTagEvent = () => {
      * 全部标签关闭disabled
      */
     const closeAllDisabled = computed(() => {
-        return unref(getTagList).length === 1 || unref(getTagList).filter((item) => item?.meta?.close !== false).length === 0;
+        return unref(getTagList).length === 1 || unref(getTagList).filter((item) => !!item?.meta?.affix).length === 0;
     });
 
     /**
@@ -157,6 +155,8 @@ export const useTagEvent = () => {
      */
     const toLastTag = () => {
         const latestView = unref(getTagList).slice(-1)[0];
+        console.log(latestView);
+
         if (latestView) {
             router.push(latestView.fullPath);
         } else {
@@ -195,9 +195,8 @@ export const useTagEvent = () => {
      */
     const closeAllTag = () => {
         tagStore.clearTag();
-        if (unref(getTagList).length === 0) {
-            toLastTag();
-        }
+        if (route.meta.affix) return;
+        toLastTag();
     };
 
     return {

@@ -15,7 +15,7 @@
                 :size="12"
                 hover
                 @click.prevent.stop="handleCloseTag(item)"
-                v-if="item?.meta?.close !== false && getTagList.length !== 1"
+                v-if="!item?.meta?.affix && getTagList.length !== 1"
             />
         </router-link>
         <template #action>
@@ -56,25 +56,22 @@ const handleCloseTag = (val: any) => {
 const moveToTag = () => {
     nextTick(() => {
         const index = unref(getTagList).findIndex((item) => item.path === route.path);
+        if (index === -1) return;
         const currentInstance = tagWrapperRefList.value[index];
         const parentInstance = currentInstance.$parent;
-
         const eleWidth = currentInstance.$el.offsetWidth;
         const eleLeft = currentInstance.$el.offsetLeft;
         const scrollOuterWidth = parentInstance.instance.offsetWidth;
         const tagBodyLeft = parentInstance.getBodyLeft;
-
         // 当前是第一个
         if (eleLeft === 0 && index === 0) {
             parentInstance.setBodyLeft(0);
             return;
         }
-
         if (eleLeft <= -tagBodyLeft) {
             parentInstance.setBodyLeft(-eleLeft);
             return;
         }
-
         if (eleLeft > -tagBodyLeft && eleLeft + eleWidth < -tagBodyLeft + scrollOuterWidth) {
             parentInstance.setBodyLeft(Math.min(0, scrollOuterWidth - eleWidth - eleLeft));
             return;
@@ -90,6 +87,7 @@ watch(
         moveToTag();
     },
     {
+        deep: true,
         immediate: true
     }
 );

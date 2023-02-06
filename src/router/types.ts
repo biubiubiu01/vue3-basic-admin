@@ -7,7 +7,7 @@ export interface MetaType extends RouteMeta {
     keepAlive?: boolean;
     hidden?: boolean;
     permission?: string;
-    close?: boolean;
+    affix?: boolean;
     icon?: string;
     hideChildren?: boolean;
     sort?: number;
