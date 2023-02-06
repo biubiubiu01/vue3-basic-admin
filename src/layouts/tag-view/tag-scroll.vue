@@ -18,7 +18,7 @@
                 class="tag-arrow tag-shadow"
                 :class="{ disabled: rightDisabled }"
                 v-if="showArrow"
-                @click="handleScroll(number)"
+                @click="handleScroll(-number)"
             />
         </div>
         <slot name="action"></slot>
@@ -71,7 +71,7 @@ const leftDisabled = computed(() => {
 });
 
 /**
- * 向又 disabled
+ * 向右 disabled
  */
 const rightDisabled = computed(() => {
     return unref(tagBodyLeft) <= unref(scrollOuterRef)?.offsetWidth - unref(scrollBodyRef)?.offsetWidth;
@@ -89,10 +89,14 @@ const handleScroll = (val: number) => {
         return;
     }
     if (val > 0) {
-        tagBodyLeft.value = Math.min(0, unref(tagBodyLeft) + val);
+        setBodyLeft(Math.min(0, unref(tagBodyLeft) + val));
     } else {
-        tagBodyLeft.value = Math.max(unref(tagBodyLeft) + val, unref(scrollOuterRef)?.offsetWidth - unref(scrollBodyRef)?.offsetWidth);
+        setBodyLeft(Math.max(unref(tagBodyLeft) + val, unref(scrollOuterRef)?.offsetWidth - unref(scrollBodyRef)?.offsetWidth));
     }
+};
+
+const setBodyLeft = (val: number) => {
+    tagBodyLeft.value = val;
 };
 
 /**
@@ -103,4 +107,10 @@ const handleMouseWheel = (e: any) => {
     if (!unref(showArrow) || !props.wheelScroll) return;
     e.wheelDelta > 0 ? handleScroll(120) : handleScroll(-120);
 };
+
+defineExpose({
+    instance: scrollOuterRef,
+    getBodyLeft: tagBodyLeft,
+    setBodyLeft
+});
 </script>

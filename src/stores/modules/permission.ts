@@ -71,7 +71,7 @@ function sortRoute(route: AppRouteType[]) {
 
 function patchHomeTag(route: AppRouteType[]) {
     if (!route || route.length === 0) return;
-    route[0].meta!.close = true;
+    route[0].meta!.close = false;
 }
 
 // 便于外部使用

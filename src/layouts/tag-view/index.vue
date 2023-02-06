@@ -14,14 +14,16 @@
                 class="ml5 close-icon"
                 :size="12"
                 hover
-                @click.prevent.stop="closeTag(item)"
+                @click.prevent.stop="handleCloseTag(item)"
                 v-if="item?.meta?.close !== false && getTagList.length !== 1"
             />
         </router-link>
         <template #action>
             <div class="tag-action tag-shadow flex-row-center">
                 <TagFullScreen />
-                <tagAction :action-list="getActionList" :event="handleMenuEvent" />
+                <TagAction :action-list="getActionList" :event="handleMenuEvent">
+                    <base-icon el-name="arrowDown" :size="18" />
+                </TagAction>
             </div>
         </template>
     </TagScroll>
@@ -31,44 +33,61 @@
 import { useTagViewSetting } from "../hooks/useTagViewSetting";
 import TagScroll from "./tag-scroll.vue";
 import TagFullScreen from "./tag-fullscreen.vue";
-import tagAction from "./tag-action.vue";
+import TagAction from "./tag-action.vue";
 
 const { getTagList, getActionList, closeTag, addTag, handleMenuEvent } = useTagViewSetting();
 
 const route = useRoute();
 
-const tagWrapperRefList = ref<HTMLDivElement[]>([]);
+const tagWrapperRefList = ref<any[]>([]);
 
 const setTagWrapperRef = (el: any) => {
     tagWrapperRefList.value.push(el);
+};
+
+const handleCloseTag = (val: any) => {
+    closeTag(val);
+    moveToTag();
 };
 
 /**
  * 移动tag
  */
 const moveToTag = () => {
-    // const index = unref(getTagList).findIndex((item) => item.path === route.path);
-    //     const eleWidth = tagWrapperRefList.value[index].$el.offsetWidth;
-    //     const eleLeft = tagWrapperRefList.value[index].$el.offsetLeft;
-    //     // const scrollOuterWidth = this.$refs.scrollOuter.offsetWidth;
-    //     // // 标签在左边
-    //     // if (eleLeft == 0 && index == 0) {
-    //     //     this.tagBodyLeft = 0;
-    //     //     return;
-    //     // }
-    //     // if (eleLeft < -this.tagBodyLeft) {
-    //     //     this.tagBodyLeft = -eleLeft + 4;
-    //     // } else if (eleLeft > -this.tagBodyLeft && eleLeft + eleWidth < -this.tagBodyLeft + scrollOuterWidth) {
-    //     //     this.tagBodyLeft = Math.min(0, scrollOuterWidth - eleWidth - eleLeft - 4);
-    //     // } else {
-    //     //     this.tagBodyLeft = -(eleLeft - (scrollOuterWidth - 4 - eleWidth));
-    //     // }
+    nextTick(() => {
+        const index = unref(getTagList).findIndex((item) => item.path === route.path);
+        const currentInstance = tagWrapperRefList.value[index];
+        const parentInstance = currentInstance.$parent;
+
+        const eleWidth = currentInstance.$el.offsetWidth;
+        const eleLeft = currentInstance.$el.offsetLeft;
+        const scrollOuterWidth = parentInstance.instance.offsetWidth;
+        const tagBodyLeft = parentInstance.getBodyLeft;
+
+        // 当前是第一个
+        if (eleLeft === 0 && index === 0) {
+            parentInstance.setBodyLeft(0);
+            return;
+        }
+
+        if (eleLeft <= -tagBodyLeft) {
+            parentInstance.setBodyLeft(-eleLeft);
+            return;
+        }
+
+        if (eleLeft > -tagBodyLeft && eleLeft + eleWidth < -tagBodyLeft + scrollOuterWidth) {
+            parentInstance.setBodyLeft(Math.min(0, scrollOuterWidth - eleWidth - eleLeft));
+            return;
+        }
+        parentInstance.setBodyLeft(-(eleLeft - (scrollOuterWidth - eleWidth)));
+    });
 };
 
 watch(
     route,
     (nl) => {
         addTag(nl);
+        moveToTag();
     },
     {
         immediate: true

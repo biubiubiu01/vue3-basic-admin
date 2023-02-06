@@ -1,6 +1,6 @@
 <template>
-    <el-dropdown trigger="click" class="pointer" @command="event">
-        <base-icon el-name="arrowDown" :size="18" />
+    <el-dropdown :trigger="trigger" class="pointer" @command="event">
+        <slot></slot>
         <template #dropdown>
             <el-dropdown-item
                 v-for="(item, index) in actionList"
@@ -9,7 +9,7 @@
                 :disabled="item.disabled"
                 :command="item.command"
             >
-                <base-icon :icon="item.icon" />
+                <base-icon :icon="item.icon" class="mr5" />
                 {{ item.text }}
             </el-dropdown-item>
         </template>
@@ -27,6 +27,10 @@ const props = defineProps({
     },
     event: {
         type: Function as PropType<(command: string | number) => void>
+    },
+    trigger: {
+        type: String as PropType<"hover" | "click" | "contextmenu">,
+        default: "click"
     }
 });
 </script>

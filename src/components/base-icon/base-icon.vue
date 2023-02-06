@@ -110,6 +110,7 @@ export default defineComponent({
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    outline: 0;
     &.base-icon-hover:hover {
         color: var(--el-color-primary);
         transform: scale(1.3);
