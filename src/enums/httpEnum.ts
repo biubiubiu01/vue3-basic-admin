@@ -33,6 +33,6 @@ export enum ErrorMsgEnum {
 
 export enum ErrorTypeEnum {
     VUE = "vue",
-    LINK = "link",
+    SCRIPT = "script",
     AJAX = "ajax"
 }

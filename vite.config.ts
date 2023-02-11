@@ -10,6 +10,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import ElementPlus from "unplugin-element-plus/vite";
 import { viteMockServe } from "vite-plugin-mock";
 import { createHtmlPlugin } from "vite-plugin-html";
+import VueSetupExtend from "vite-plugin-vue-setup-extend";
 
 const resolve = (dir: string) => path.join(__dirname, dir);
 
@@ -81,6 +82,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
                     }
                 }
             })
+            // VueSetupExtend()
         ],
         resolve: {
             alias: {

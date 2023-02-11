@@ -1,7 +1,21 @@
 <template>
-    <div class="">11111</div>
+    <div class="page-analysis-container">
+        <CardList :loading="loading" />
+        <TurnoverAnalysis :loading="loading" class="mt20" />
+        <DetailAnalysis :loading="loading" class="mt20" />
+    </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import CardList from "./components/CardList.vue";
+import TurnoverAnalysis from "./components/TurnoverAnalysis.vue";
+import DetailAnalysis from "./components/DetailAnalysis.vue";
 
-<style scoped></style>
+const loading = ref(true);
+
+setTimeout(() => {
+    loading.value = false;
+}, 1200);
+</script>
+
+<style lang="scss" scoped></style>

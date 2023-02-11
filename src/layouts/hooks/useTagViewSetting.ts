@@ -5,7 +5,7 @@ import type { RouteLocationNormalizedLoaded } from "vue-router";
 export const useTagViewSetting = () => {
     const tagStore = useTagStoreWithOut();
 
-    const { getActionList, handleMenuEvent, closeTag } = useTagEvent();
+    const { closeTag } = useTagEvent();
 
     const getTagList = computed(() => tagStore.tagList);
 
@@ -23,13 +23,11 @@ export const useTagViewSetting = () => {
 
     return {
         getTagList,
-        getActionList,
         getCacheTagList,
         getTagFullscreen,
 
         closeTag,
         addTag,
-        toggleFullscreen,
-        handleMenuEvent
+        toggleFullscreen
     };
 };

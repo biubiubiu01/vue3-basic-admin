@@ -1,27 +1,22 @@
 <template>
-    <TagScroll>
-        <router-link
-            class="tag-item relative pointer flex-row-center"
-            v-for="item in getTagList"
-            :key="item.fullPath"
-            :to="item.path"
-            :class="{ active: $route.fullPath === item.fullPath }"
-            :ref="setTagWrapperRef"
-        >
-            <span class="tag-title">{{ item?.meta?.title }}</span>
-            <base-icon
-                el-name="close"
-                class="ml5 close-icon"
-                :size="12"
-                hover
-                @click.prevent.stop="handleCloseTag(item)"
-                v-if="!item?.meta?.affix && getTagList.length !== 1"
-            />
-        </router-link>
+    <TagScroll ref="tagScrollRef">
+        <template #item>
+            <TagAction
+                trigger="contextmenu"
+                v-for="item in getTagList"
+                :key="item.fullPath"
+                :tag-item="item"
+                is-tab
+                :ref="setTagActionRef"
+                @close-all="handleCloseTagAction"
+            >
+                <TagItem :tag="item" :ref="setTagWrapperRef" :closed="getTagList.length !== 1" @close="closeTag" />
+            </TagAction>
+        </template>
         <template #action>
             <div class="tag-action tag-shadow flex-row-center">
                 <TagFullScreen />
-                <TagAction :action-list="getActionList" :event="handleMenuEvent">
+                <TagAction>
                     <base-icon el-name="arrowDown" :size="18" />
                 </TagAction>
             </div>
@@ -30,65 +25,71 @@
 </template>
 
 <script lang="ts" setup>
+import { useResizeObserver, useDebounceFn } from "@vueuse/core";
 import { useTagViewSetting } from "../hooks/useTagViewSetting";
-import TagScroll from "./tag-scroll.vue";
 import TagFullScreen from "./tag-fullscreen.vue";
 import TagAction from "./tag-action.vue";
-
-const { getTagList, getActionList, closeTag, addTag, handleMenuEvent } = useTagViewSetting();
+import TagScroll from "./tag-scroll.vue";
+import TagItem from "./tag-item.vue";
 
 const route = useRoute();
 
+const { getTagList, closeTag, addTag } = useTagViewSetting();
+
 const tagWrapperRefList = ref<any[]>([]);
+
+const tagActionRefList = ref<any[]>([]);
+
+const tagScrollRef = ref();
 
 const setTagWrapperRef = (el: any) => {
     tagWrapperRefList.value.push(el);
 };
 
-const handleCloseTag = (val: any) => {
-    closeTag(val);
-    moveToTag();
+const setTagActionRef = (el: any) => {
+    tagActionRefList.value.push(el);
 };
 
-/**
- * 移动tag
- */
-const moveToTag = () => {
-    nextTick(() => {
-        const index = unref(getTagList).findIndex((item) => item.path === route.path);
-        if (index === -1) return;
-        const currentInstance = tagWrapperRefList.value[index];
-        const parentInstance = currentInstance.$parent;
-        const eleWidth = currentInstance.$el.offsetWidth;
-        const eleLeft = currentInstance.$el.offsetLeft;
-        const scrollOuterWidth = parentInstance.instance.offsetWidth;
-        const tagBodyLeft = parentInstance.getBodyLeft;
-        // 当前是第一个
-        if (eleLeft === 0 && index === 0) {
-            parentInstance.setBodyLeft(0);
-            return;
-        }
-        if (eleLeft <= -tagBodyLeft) {
-            parentInstance.setBodyLeft(-eleLeft);
-            return;
-        }
-        if (eleLeft > -tagBodyLeft && eleLeft + eleWidth < -tagBodyLeft + scrollOuterWidth) {
-            parentInstance.setBodyLeft(Math.min(0, scrollOuterWidth - eleWidth - eleLeft));
-            return;
-        }
-        parentInstance.setBodyLeft(-(eleLeft - (scrollOuterWidth - eleWidth)));
+const handleCloseTagAction = () => {
+    tagActionRefList.value.forEach((item) => {
+        item?.close?.();
     });
 };
 
+async function handleMoveTag() {
+    await nextTick();
+
+    unref(tagScrollRef).moveToTag({
+        tagList: unref(getTagList),
+        refList: unref(tagWrapperRefList)
+    });
+}
+
+useResizeObserver(
+    tagScrollRef,
+    useDebounceFn(() => {
+        handleMoveTag();
+    }, 200)
+);
+
 watch(
-    route,
-    (nl) => {
-        addTag(nl);
-        moveToTag();
+    () => route.path,
+    () => {
+        addTag(route);
+        handleMoveTag();
     },
     {
         deep: true,
         immediate: true
+    }
+);
+watch(
+    getTagList,
+    () => {
+        handleMoveTag();
+    },
+    {
+        deep: true
     }
 );
 </script>

@@ -1,20 +1,99 @@
 import { FormColumnType } from "@/components/base-form";
 import { FormTypeEnum } from "@/enums/componentEnum";
 import { Column } from "@/components/base-table/src/types";
-import { methodData } from "@/constant/basic";
 
 export function useColumn() {
     const filterColumn: FormColumnType[] = [
         {
-            fieldName: "method",
-            fieldDesc: "请求方式",
-            fieldType: FormTypeEnum.SELECT,
+            fieldName: "time",
+            fieldDesc: "操作时间",
+            fieldType: FormTypeEnum.DATE,
             config: {
-                options: methodData
+                type: "daterange"
+            }
+        },
+        {
+            fieldName: "1",
+            fieldDesc: "操作时间",
+            fieldType: FormTypeEnum.DATE,
+            config: {
+                type: "daterange"
+            }
+        },
+        {
+            fieldName: "2",
+            fieldDesc: "操作时间",
+            fieldType: FormTypeEnum.DATE,
+            config: {
+                type: "daterange"
+            }
+        },
+        {
+            fieldName: "3",
+            fieldDesc: "操作时间",
+            fieldType: FormTypeEnum.DATE,
+            config: {
+                type: "daterange"
+            }
+        },
+        {
+            fieldName: "4",
+            fieldDesc: "操作时间",
+            fieldType: FormTypeEnum.DATE,
+            config: {
+                type: "daterange"
+            }
+        },
+        {
+            fieldName: "5",
+            fieldDesc: "操作时间",
+            fieldType: FormTypeEnum.DATE,
+            config: {
+                type: "daterange"
             }
         },
         {
             fieldName: "time",
+            fieldDesc: "操作时间",
+            fieldType: FormTypeEnum.DATE,
+            config: {
+                type: "daterange"
+            }
+        },
+        {
+            fieldName: "1",
+            fieldDesc: "操作时间",
+            fieldType: FormTypeEnum.DATE,
+            config: {
+                type: "daterange"
+            }
+        },
+        {
+            fieldName: "2",
+            fieldDesc: "操作时间",
+            fieldType: FormTypeEnum.DATE,
+            config: {
+                type: "daterange"
+            }
+        },
+        {
+            fieldName: "3",
+            fieldDesc: "操作时间",
+            fieldType: FormTypeEnum.DATE,
+            config: {
+                type: "daterange"
+            }
+        },
+        {
+            fieldName: "4",
+            fieldDesc: "操作时间",
+            fieldType: FormTypeEnum.DATE,
+            config: {
+                type: "daterange"
+            }
+        },
+        {
+            fieldName: "5",
             fieldDesc: "操作时间",
             fieldType: FormTypeEnum.DATE,
             config: {
@@ -30,11 +109,11 @@ export function useColumn() {
         },
         {
             fieldName: "method",
-            fieldDesc: "请求方式"
+            fieldDesc: "请求方式(来源)"
         },
         {
             fieldName: "url",
-            fieldDesc: "请求接口",
+            fieldDesc: "请求地址",
             showOverflowTooltip: true
         },
         {

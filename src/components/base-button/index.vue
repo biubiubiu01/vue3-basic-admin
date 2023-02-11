@@ -11,6 +11,7 @@
 </template>
 
 <script lang="ts" setup>
+import { useUserStoreWithOut } from "@/stores/modules/user";
 import { omit } from "@/utils";
 const props = defineProps({
     type: {
@@ -33,6 +34,8 @@ const props = defineProps({
     }
 });
 
+const { getRoleIds } = useUserStoreWithOut();
+
 const attrs = useAttrs();
 
 const getPropsValue = computed(() => {
@@ -45,8 +48,8 @@ const getPropsValue = computed(() => {
 });
 
 const hasPermission = computed(() => {
-    // return permissionList.indexOf(props.auth);
-    return true;
+    if (!props.auth) return true;
+    return getRoleIds.includes(props.auth);
 });
 </script>
 

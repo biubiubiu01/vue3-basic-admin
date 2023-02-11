@@ -16,6 +16,10 @@ export default defineComponent({
             type: String,
             default: "rgba(0, 0, 0, .5)"
         },
+        modal: {
+            type: Boolean,
+            default: true
+        },
         spin: {
             type: String as PropType<LoadingEnum>,
             default: "chase"
@@ -36,9 +40,9 @@ export default defineComponent({
         };
 
         return () => {
-            const { text, background, textColor, full } = props;
+            const { text, background, modal, textColor, full } = props;
             return (
-                <div style={{ background }} class={{ "loading-container": true, "is-fullscreen": full }}>
+                <div style={modal ? { background } : {}} class={{ "loading-container": true, "is-fullscreen": full }}>
                     <div class="loading-wrapper">
                         {props.spin === "loading" ? renderBaseLoading() : renderBasicLoading()}
                         <div class="text" style={{ color: textColor }}>

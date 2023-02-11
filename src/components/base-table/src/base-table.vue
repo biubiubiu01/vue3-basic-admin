@@ -126,6 +126,9 @@ const handleSelectable = (row: any, index: Number) => {
 
 const handleCurrentChange = () => {
     const { pageSizeKey, currentKey } = props.pagination;
+    if (isFunction(unref(getPropsValue).onRefresh)) {
+        unref(getPropsValue).onRefresh();
+    }
     emit("pagination-change", {
         [pageSizeKey]: props.pagination[pageSizeKey],
         [currentKey]: props.pagination[currentKey]

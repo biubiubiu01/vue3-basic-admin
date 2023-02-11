@@ -6,7 +6,7 @@ const systemLog: AppRouteType[] = [
         path: "/system-log",
         name: "SystemLog",
         component: LAYOUT,
-        redirect: "/system-log/operation",
+        redirect: "/system-log/operation-log",
         meta: {
             title: "系统日志",
             icon: "svg-log",

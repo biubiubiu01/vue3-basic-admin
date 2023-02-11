@@ -1,5 +1,6 @@
 import type { AppRouteType } from "@/router/types";
 import { isArray } from "@/utils";
+import LAYOUT from "@/layouts/index.vue";
 
 const LoginRoute: AppRouteType = {
     path: "/login",
@@ -11,6 +12,20 @@ const RootRoute: AppRouteType = {
     path: "/",
     name: "Root",
     redirect: "/dashboard"
+};
+
+const RedirectRoute: AppRouteType = {
+    path: "/redirect",
+    name: "Redirect",
+    component: LAYOUT,
+    redirect: "/redirect/index",
+    children: [
+        {
+            path: "/index",
+            name: "RedirectTo",
+            component: () => import("@/views/redirect/index.vue")
+        }
+    ]
 };
 
 //  const PageError: AppRouteType[] = [
@@ -42,7 +57,7 @@ const getRouteName = (routeList: AppRouteType[]) => {
 };
 
 // 基础路由
-export const basicRoutes = [LoginRoute, RootRoute];
+export const basicRoutes = [LoginRoute, RedirectRoute, RootRoute];
 
 // 异步路由
 export const asyncRoutes = getAsyncRoute();

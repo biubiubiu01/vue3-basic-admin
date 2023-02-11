@@ -1,19 +1,27 @@
 <template>
     <div class="system-dict-container">
-        <base-page-table table-title="错误日志" :filter-config="filterConfig" :table-config="tableConfig"> </base-page-table>
+        <base-page-table table-title="错误日志" :filter-config="filterConfig" :table-config="tableConfig">
+            <template #buttons>
+                <base-button type="primary" @click="addAjaxError">触发一个ajax错误</base-button>
+                <base-button type="primary" @click="addVueError">触发一个vue错误</base-button>
+            </template>
+        </base-page-table>
     </div>
 </template>
 
 <script lang="ts" setup>
 import { useColumn } from "./column";
-import { getErrorList } from "@/api/log";
+import { getErrorList, testErrorApi } from "@/api/log";
+import { useErrorLogStoreWithOut } from "@/stores/modules/errorLog";
 
 const { tableColumn, filterColumn } = useColumn();
+
+const errorLogStore = useErrorLogStoreWithOut();
 
 const filterConfig = reactive({
     columns: filterColumn,
     onSearch: handleSearch,
-    showOpen: false,
+    showOpen: true,
     searchInfo: {}
 });
 
@@ -41,6 +49,22 @@ async function handleSearch() {
     tableConfig.data = res.data.list;
     tableConfig.pagination.total = res.data.total;
 }
+
+const addAjaxError = async () => {
+    await testErrorApi();
+};
+
+const addVueError = () => {
+    const a: any = null;
+    a.b = 5;
+};
+
+watch(
+    () => errorLogStore.getErrorCount,
+    () => {
+        handleSearch();
+    }
+);
 </script>
 
 <style lang="scss" scoped></style>

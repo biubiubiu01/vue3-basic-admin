@@ -8,7 +8,6 @@ export const createProgress = (router: Router) => {
     });
 
     router.afterEach(() => {
-        NProgress.done();
         return true;
     });
 };

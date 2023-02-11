@@ -9,7 +9,7 @@
     <RoleDialog ref="roleDialogRef" @success="handleSearch" />
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="Role">
 import { getRoleList, deleteRole, changeRoleStatus } from "@/api/system/role";
 import RoleDialog from "./components/RoleDialog.vue";
 import { useColumn } from "./column";

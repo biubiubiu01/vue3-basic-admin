@@ -1,4 +1,5 @@
 import { MenuSetting, useAppStoreWithOut } from "@/stores/modules/app";
+import { isUndefined } from "@/utils";
 
 export const useMenuSetting = () => {
     const appStore = useAppStoreWithOut();
@@ -17,8 +18,8 @@ export const useMenuSetting = () => {
         appStore.setAppConfig({ menuConfig });
     };
 
-    const toggleCollapse = () => {
-        setMenuSetting({ collapse: !unref(getCollapse) });
+    const toggleCollapse = (flag?: boolean) => {
+        setMenuSetting({ collapse: isUndefined(flag) ? !unref(getCollapse) : flag });
     };
 
     return {

@@ -19,18 +19,22 @@ const getAllApi = () => {
 };
 
 export const getApiList = (data?: any) => {
+    const { currentPage, pageSize, apiName, status } = data;
     let apiData = getAllApi();
-    if (data.apiName) {
-        apiData = apiData.filter((item) => item.apiName.includes(data.apiName.toLocaleUpperCase()));
+    if (apiName) {
+        apiData = apiData.filter((item) => item.apiName.includes(apiName.toLocaleUpperCase()));
     }
-    if (data.status) {
-        apiData = apiData.filter((item) => item.status === data.status);
+    if (status) {
+        apiData = apiData.filter((item) => item.status === status);
     }
 
     return new Promise((resolve) => {
         resolve({
             code: 200,
-            data: apiData,
+            data: {
+                list: apiData.slice((currentPage - 1) * pageSize, currentPage * pageSize),
+                total: apiData.length
+            },
             message: ""
         });
     });

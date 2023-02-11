@@ -47,7 +47,7 @@ export const addAjaxErrorLog = (err: any, message: string) => {
         method,
         message,
         params: ["get", "delete"].includes(<string>method) ? JSON.stringify(params) : JSON.stringify(data),
-        data: JSON.stringify(err.data),
+        data: err.data ? JSON.stringify(err.data) : "",
         detail: JSON.stringify(err),
         time: dayjs().format("YYYY-MM-DD HH:mm:ss")
     });

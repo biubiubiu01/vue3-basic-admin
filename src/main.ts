@@ -2,7 +2,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 
 import { setupPinia } from "./stores";
-import { setupIcon, setupGlobalUtils } from "@/plugins";
+import { setupIcon, setupGlobalUtils, setupErrorHandler } from "@/plugins";
 import { setupLoadingDirective } from "./directive";
 import router from "./router/index";
 import { setupRouterGuard } from "@/router/guard";
@@ -16,6 +16,8 @@ const setupPlugins = () => {
     setupPinia(app);
     // 注册el-icon图标
     setupIcon(app);
+    // 注册error收集
+    setupErrorHandler(app);
     // 注册全局方法
     setupGlobalUtils(app);
 };

@@ -22,7 +22,7 @@
                 .tag-item {
                     border: 1px solid var(--base-tag-border);
                     border-radius: 4px;
-                    padding: 4px 8px;
+                    padding: 7px 8px;
                     margin-right: 10px;
                     font-size: var(--el-font-size-base);
                     color: var(--el-text-color-regular);
@@ -59,18 +59,18 @@
                 }
             }
         }
-    }
-
-    :deep(.tag-arrow) {
-        width: 36px;
-        z-index: 99;
-        height: 100%;
-        &.disabled {
-            color: var(--el-disabled-text-color);
-            cursor: not-allowed;
+        .tag-arrow {
+            width: 36px;
+            z-index: 99;
+            height: 100%;
+            &.disabled {
+                color: var(--el-disabled-text-color);
+                cursor: not-allowed;
+            }
         }
     }
-    :deep(.tag-shadow) {
+
+    .tag-shadow {
         box-shadow: 0px 0px 8px var(--base-tag-shadow);
         cursor: pointer;
     }

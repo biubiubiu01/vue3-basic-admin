@@ -2,7 +2,7 @@ import { useTagStoreWithOut } from "@/stores/modules/tagView";
 import { DropMenuType, DropMenuEnum } from "@/enums/dropMenuEnum";
 import type { RouteLocationNormalizedLoaded } from "vue-router";
 
-export const useTagEvent = () => {
+export const useTagEvent = (tagItem?: RouteLocationNormalizedLoaded, isTab: boolean = false) => {
     const tagStore = useTagStoreWithOut();
 
     const route = useRoute();
@@ -12,13 +12,21 @@ export const useTagEvent = () => {
     const getTagList = computed(() => tagStore.tagList);
 
     /**
-     * 获取关闭的tag 信息
-     * @param {RouteLocationNormalizedLoaded} current
+     * 获取当前选择的tag 信息
+     * @param {RouteLocationNormalizedLoaded} view
      */
-    const getCurrentRoute = (current: RouteLocationNormalizedLoaded = route) => {
+    const getCurrentRoute = (view?: RouteLocationNormalizedLoaded) => {
+        const current = view || (isTab ? <RouteLocationNormalizedLoaded>tagItem : route);
         const index = unref(getTagList).findIndex((item) => item.path === current.path);
         return { ...current, index };
     };
+
+    /**
+     * 刷新页面disabled
+     */
+    const refreshPageDisabled = computed((): boolean => {
+        return isTab ? route.fullPath !== getCurrentRoute().fullPath : false;
+    });
 
     /**
      * 当前标签关闭disabled
@@ -49,7 +57,7 @@ export const useTagEvent = () => {
     const closeOtherDisabled = computed(() => {
         const { index } = getCurrentRoute();
         return (
-            index === -1 || unref(getTagList).length === 1 || unref(getTagList).filter((item, i) => !!item?.meta?.affix && i !== index).length === 0
+            index === -1 || unref(getTagList).length === 1 || unref(getTagList).filter((item, i) => !item?.meta?.affix && i !== index).length === 0
         );
     });
 
@@ -57,7 +65,7 @@ export const useTagEvent = () => {
      * 全部标签关闭disabled
      */
     const closeAllDisabled = computed(() => {
-        return unref(getTagList).length === 1 || unref(getTagList).filter((item) => !!item?.meta?.affix).length === 0;
+        return unref(getTagList).length === 1 || unref(getTagList).filter((item) => !item?.meta?.affix).length === 0;
     });
 
     /**
@@ -68,6 +76,7 @@ export const useTagEvent = () => {
             {
                 icon: "refresh",
                 text: "刷新页面",
+                disabled: unref(refreshPageDisabled),
                 command: DropMenuEnum.REFRESH_PAGE
             },
             {
@@ -136,7 +145,9 @@ export const useTagEvent = () => {
     /**
      * 刷新页面
      */
-    const refreshPage = () => {};
+    const refreshPage = async () => {
+        await tagStore.refreshPage(router);
+    };
 
     /**
      * 关闭当前标签
@@ -155,7 +166,6 @@ export const useTagEvent = () => {
      */
     const toLastTag = () => {
         const latestView = unref(getTagList).slice(-1)[0];
-        console.log(latestView);
 
         if (latestView) {
             router.push(latestView.fullPath);
@@ -166,28 +176,26 @@ export const useTagEvent = () => {
 
     /**
      * 关闭左侧tag
-     * @param {RouteLocationNormalizedLoaded} view
      */
-    const closeLeftTag = (view?: RouteLocationNormalizedLoaded) => {
-        const current = getCurrentRoute(view);
+    const closeLeftTag = () => {
+        const current = getCurrentRoute();
         tagStore.deleteTag({ ...current, index: current.index - 1 });
     };
 
     /**
      * 关闭右侧tag
-     * @param {RouteLocationNormalizedLoaded} view
      */
-    const closeRightTag = (view?: RouteLocationNormalizedLoaded) => {
-        const current = getCurrentRoute(view);
+    const closeRightTag = () => {
+        const current = getCurrentRoute();
         tagStore.deleteTag({ ...current, index: current.index + 1 });
     };
 
     /**
      * 关闭其他tag
-     * @param {RouteLocationNormalizedLoaded} view
      */
-    const closeOtherTag = (view?: RouteLocationNormalizedLoaded) => {
-        tagStore.deleteOtherTag(getCurrentRoute(view));
+    const closeOtherTag = () => {
+        tagStore.deleteOtherTag(getCurrentRoute());
+        toLastTag();
     };
 
     /**

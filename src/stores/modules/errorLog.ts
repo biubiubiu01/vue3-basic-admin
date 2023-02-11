@@ -6,7 +6,7 @@ import { Api, addErrorInfo } from "@/api/log";
 
 interface ErrorLogInfo {
     type: ErrorTypeEnum;
-    method: "get" | "post" | "put" | "delete";
+    method: "get" | "post" | "put" | "delete" | "";
     url: string;
     message: string;
     params?: string;
@@ -26,7 +26,11 @@ export const useErrorLog = defineStore({
         errorLogList: [],
         errorCount: 0
     }),
-    getters: {},
+    getters: {
+        getErrorCount(): number {
+            return this.errorCount;
+        }
+    },
     actions: {
         async addErrorLog(err: ErrorLogInfo) {
             const errorInfo = {

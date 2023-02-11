@@ -12,7 +12,7 @@
     <UserDialog ref="userDialogRef" @success="handleSearch" />
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="Account">
 import { getUserList, deleteUser, changeUserStatus } from "@/api/system/user";
 import { useColumn } from "./column";
 import DeptTree from "./components/DeptTree.vue";

@@ -20,7 +20,11 @@ const filterConfig = reactive({
 const tableConfig = reactive({
     columns: tableColumn,
     data: [],
-    showPagination: false,
+    pagination: {
+        currentPage: 1,
+        pageSize: 10,
+        total: 0
+    },
     indexShow: false,
     onRefresh: handleSearch
 });
@@ -33,8 +37,10 @@ onMounted(() => {
  * 查询
  */
 async function handleSearch() {
-    const res = (await getApiList({ ...filterConfig.searchInfo })) as any;
-    tableConfig.data = res.data;
+    const { currentPage, pageSize } = tableConfig.pagination;
+    const res = (await getApiList({ ...filterConfig.searchInfo, currentPage, pageSize })) as any;
+    tableConfig.data = res.data.list || [];
+    tableConfig.pagination.total = res.data.total || 0;
 }
 </script>
 

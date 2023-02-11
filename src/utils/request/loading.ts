@@ -1,6 +1,8 @@
 import { useLoading } from "@/hooks";
 
-const loading = useLoading();
+const loading = useLoading({
+    minTime: 500
+});
 
 let loadingCount: number = 0;
 

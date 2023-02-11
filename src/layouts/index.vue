@@ -1,5 +1,5 @@
 <template>
-    <el-container class="all-container">
+    <el-container class="all-container" ref="layoutRef">
         <SideBar v-show="!getTagFullscreen" />
         <el-container class="base-app-bg">
             <el-header :height="headerHeader" class="pl0 pr0">
@@ -24,16 +24,38 @@
 </template>
 
 <script lang="ts" setup>
+import { useResizeObserver, useDebounceFn } from "@vueuse/core";
 import SideBar from "./side-bar/index.vue";
 import NavBar from "./nav-bar/index.vue";
 import TagView from "./tag-view/index.vue";
 import { useTagViewSetting } from "./hooks/useTagViewSetting";
+import { useMenuSetting } from "./hooks/useMenuSetting";
 
 const { getTagFullscreen, getCacheTagList } = useTagViewSetting();
+
+const { toggleCollapse } = useMenuSetting();
+
+const layoutRef = ref();
 
 const headerHeader = computed(() => {
     return unref(getTagFullscreen) ? "37px" : "85px";
 });
+
+const resizeLayout = () => {
+    const width = unref(layoutRef).$el.offsetWidth;
+    if (width <= 992) {
+        toggleCollapse(true);
+    } else {
+        toggleCollapse(false);
+    }
+};
+
+useResizeObserver(
+    layoutRef,
+    useDebounceFn(() => {
+        resizeLayout();
+    }, 100)
+);
 </script>
 
 <style lang="scss" scoped>

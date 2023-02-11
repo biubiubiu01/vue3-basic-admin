@@ -69,12 +69,15 @@ const handleToggle = () => {
     :deep(.el-form-item) {
         margin-right: 0 !important;
     }
-    .base-filter-row {
-        height: 47px;
-        overflow: hidden;
-        &.open {
+    &.open {
+        height: auto;
+        :deep(.el-row) {
             height: auto;
         }
+    }
+    :deep(.el-row) {
+        height: 47px;
+        overflow: hidden;
     }
     .base-filter-action {
         margin-bottom: 10px;

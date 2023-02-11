@@ -1,5 +1,5 @@
 <template>
-    <div class="flex-row-center relative pointer nav-switch" @click="toggleDark()">
+    <div class="flex-row-center relative pointer nav-switch" @click="toggle()">
         <div class="nav-switch-action absolute" :class="{ dark: isDark }">
             <base-icon :svg-name="isDark ? 'dark' : 'light'" />
         </div>
@@ -7,11 +7,9 @@
 </template>
 
 <script lang="ts" setup>
-import { useDark, useToggle } from "@vueuse/core";
+import { useDark } from "@/hooks";
 
-const isDark = useDark();
-
-const toggleDark = useToggle(isDark);
+const { isDark, toggle } = useDark();
 </script>
 
 <style lang="scss" scoped>

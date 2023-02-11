@@ -8,6 +8,7 @@ type LoadingType = {
     background?: string;
     spin?: LoadingEnum;
     minTime?: number;
+    modal?: boolean;
 };
 
 export function useLoading(config: LoadingType = {}) {
@@ -33,10 +34,10 @@ export function useLoading(config: LoadingType = {}) {
         endTime = performance.now();
         if (endTime - startTime < minTime) {
             setTimeout(() => {
-                instance.$el.parentNode.removeChild(instance.$el);
+                instance.$el.parentNode?.removeChild(instance.$el);
             }, Math.floor(minTime - (endTime - startTime)));
         } else {
-            instance.$el.parentNode.removeChild(instance.$el);
+            instance.$el.parentNode?.removeChild(instance.$el);
         }
     };
 

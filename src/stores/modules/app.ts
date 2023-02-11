@@ -13,7 +13,7 @@ export interface MenuSetting {
 }
 
 export interface HeaderConfig {
-    pageSize: `${SizeEnum}`;
+    pageSize?: `${SizeEnum}`;
 }
 
 interface AppState {

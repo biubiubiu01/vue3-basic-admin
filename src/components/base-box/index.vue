@@ -17,7 +17,9 @@
         </div>
         <div class="base-box-content">
             <el-scrollbar :max-height="maxHeight" :height="height">
-                <slot></slot>
+                <base-skeleton :loading="loading" is-box>
+                    <slot></slot>
+                </base-skeleton>
             </el-scrollbar>
         </div>
     </div>
@@ -50,6 +52,10 @@ const props = defineProps({
     },
     height: {
         type: [Number, String]
+    },
+    loading: {
+        type: Boolean,
+        default: false
     }
 });
 

@@ -36,10 +36,6 @@ export const createPermission = (router: Router) => {
 
         // 是否已经挂载过路由
         if (getRoute.length > 0) {
-            if (to.path === "/") {
-                next({ path: getRoute[0].path, replace: true });
-                return;
-            }
             next();
             return;
         }

@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import type { RouteLocationNormalizedLoaded } from "vue-router";
+import type { RouteLocationNormalizedLoaded, Router } from "vue-router";
 import { store } from "../index";
 
 interface TagState {
@@ -22,7 +22,23 @@ export const useTagStore = defineStore({
     }),
     getters: {},
     actions: {
+        refreshPage(router: Router) {
+            const { currentRoute } = router;
+            this.deleteCacheTag(currentRoute.value);
+            return new Promise((resolve) => {
+                router
+                    .push({
+                        name: "RedirectTo",
+                        query: { path: currentRoute.value.path, ...currentRoute.value.query }
+                    })
+                    .then(() => {
+                        resolve(true);
+                    });
+            });
+        },
+
         addTag(route: RouteLocationNormalizedLoaded) {
+            if (route.name === "RedirectTo") return;
             const index = this.tagList.findIndex((item) => item.fullPath === route.fullPath);
             if (index === -1) {
                 this.tagList.push({
@@ -46,7 +62,7 @@ export const useTagStore = defineStore({
             this.deleteCacheTag(current);
         },
 
-        deleteCacheTag(current: TagRouteType) {
+        deleteCacheTag(current: RouteLocationNormalizedLoaded) {
             const index = this.cacheTagList.indexOf(<string>current.name);
             if (index === -1) return;
             this.cacheTagList.splice(index, 1);
@@ -57,7 +73,7 @@ export const useTagStore = defineStore({
             this.deleteOtherCacheTag(current);
         },
 
-        deleteOtherCacheTag(current: TagRouteType) {
+        deleteOtherCacheTag(current: RouteLocationNormalizedLoaded) {
             const index = this.cacheTagList.indexOf(<string>current.name);
             if (index === -1) return;
             this.cacheTagList = this.cacheTagList.slice(index, index + 1);

@@ -28,7 +28,7 @@
                 </div>
             </template>
             <slot name="table"></slot>
-            <base-table v-bind="tableConfig" v-if="!$slots.table" :max-height="getHeight">
+            <base-table v-bind="tableConfig" v-if="!$slots.table" :max-height="tableMaxHeight">
                 <template #tableColumn="{ scope, column }">
                     <slot name="tableColumn" :scope="scope" :column="column"></slot>
                 </template>
@@ -39,6 +39,8 @@
 
 <script lang="ts" setup>
 import { isFunction } from "@/utils";
+import { useResizeObserver, useDebounceFn } from "@vueuse/core";
+import { useTagViewSetting } from "@/layouts/hooks/useTagViewSetting";
 
 const props = defineProps({
     tableTitle: {
@@ -54,15 +56,34 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["refresh"]);
+
 const slots = useSlots();
+
+const { getTagFullscreen } = useTagViewSetting();
 
 const baseFilterRef = ref();
 
-const getHeight = computed(() => {
+const tableMaxHeight = ref<string | number>(0);
+
+const getHeight = () => {
+    const headerHeight = unref(getTagFullscreen) ? 37 : 85;
+
+    const mainPadding = 20;
+
+    const filterMargin = 16;
+
     const filterHeight = unref(baseFilterRef)?.instance.offsetHeight || 0;
-    const buttonHeight = slots.buttons ? 40 : 0;
-    return `calc(100vh - ${filterHeight + buttonHeight + 197}px)`;
-});
+
+    const tableMargin = 20;
+
+    const titleHeight = slots.buttons ? 101 : 54;
+
+    const paginationHeight = props.tableConfig!.showPagination === false ? 0 : 40;
+
+    const restHeight = headerHeight + filterHeight + titleHeight + tableMargin + paginationHeight + mainPadding + filterMargin;
+
+    tableMaxHeight.value = `calc(100vh - ${restHeight}px)`;
+};
 
 const handleRefresh = () => {
     if (isFunction(props.tableConfig?.onRefresh)) {
@@ -70,6 +91,13 @@ const handleRefresh = () => {
     }
     emit("refresh");
 };
+
+useResizeObserver(
+    baseFilterRef,
+    useDebounceFn(() => {
+        getHeight();
+    }, 100)
+);
 </script>
 
 <style lang="scss" scoped>

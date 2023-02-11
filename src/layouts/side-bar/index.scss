@@ -56,9 +56,19 @@ $menuItemHeight: 48px;
                 text-align: center;
                 vertical-align: middle;
             }
-            .el-sub-menu.is-active {
-                .el-sub-menu__title {
-                    color: var(--el-menu-active-color);
+            .el-sub-menu {
+                .el-sub-menu .el-sub-menu__title,
+                .el-menu-item {
+                    background: var(--el-submenu-bg-color);
+                    &.is-active {
+                        background-color: var(--base-menu-active-bg-color);
+                    }
+                }
+
+                &.is-active {
+                    .el-sub-menu__title {
+                        color: var(--el-menu-active-color);
+                    }
                 }
             }
         }

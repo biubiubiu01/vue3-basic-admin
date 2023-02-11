@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { store } from "../index";
+import { store, storeReset } from "../index";
 import { login, getUserInfo } from "@/api/user";
 import { addLoginInfo } from "@/api/log";
 import type { Router } from "vue-router";
@@ -48,11 +48,13 @@ export const useUserStore = defineStore({
             this.addLoginLog();
         },
 
-        logout(router: Router, route: any) {
+        logout(router: Router) {
+            storeReset();
+            const { currentRoute } = router;
             router.replace({
                 path: "/login",
                 query: {
-                    redirect: route.path
+                    redirect: currentRoute.value.path
                 }
             });
         },
