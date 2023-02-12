@@ -1,4 +1,5 @@
 import * as echarts from "echarts/core";
+import "echarts-wordcloud";
 
 import { BarChart, LineChart, PieChart, MapChart, PictorialBarChart, RadarChart, ScatterChart } from "echarts/charts";
 

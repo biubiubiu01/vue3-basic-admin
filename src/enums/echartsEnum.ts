@@ -1,7 +1,9 @@
 export enum EChartsEnum {
     LINE = "line",
     BAR = "bar",
-    PIE = "pie"
+    PIE = "pie",
+    WORDCLOUD = "wordcloud",
+    RADAR = "radar"
 }
 
 export type EChartsType = `${EChartsEnum}`;

@@ -2,7 +2,7 @@
     <div class="card-list-wrapper">
         <el-row :gutter="16">
             <el-col v-for="item in cardListData" :key="item.title" :span="6">
-                <base-box :loading="loading" class="card-item">
+                <base-box :loading="loading" class="card-item" hover>
                     <div class="card-item-title text-hidden">{{ item.title }}</div>
                     <div class="mt20 mb20 pl20">
                         <span class="card-item-prefix" v-if="item.prefix">{{ item.prefix }}</span>

@@ -3,6 +3,7 @@ import type { EChartsOption } from "echarts";
 import echarts from "@/plugins/echarts";
 import { useResizeObserver, useDebounceFn, useTimeoutFn, tryOnUnmounted } from "@vueuse/core";
 import { useDark } from "./useDark";
+import { deepClone } from "@/utils";
 
 export const useECharts = (elRef: Ref<HTMLDivElement>) => {
     const { isDark } = useDark();
@@ -47,7 +48,7 @@ export const useECharts = (elRef: Ref<HTMLDivElement>) => {
     };
 
     const setOption = async (options: EChartsOption, clear = true) => {
-        cacheOption.value = options;
+        cacheOption.value = deepClone(options);
         await nextTick();
 
         useTimeoutFn(() => {

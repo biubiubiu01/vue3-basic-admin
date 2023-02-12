@@ -1,5 +1,5 @@
 <template>
-    <div class="base-box-container base-box-bg" :class="{ shadow: shadow }" ref="baseBoxRef">
+    <div class="base-box-container base-box-bg" :class="{ shadow, hover }" ref="baseBoxRef">
         <div class="base-box-header" v-if="title || $slots.title">
             <div class="flex-row-center justify-between">
                 <div class="base-box-title flex-row-center" v-if="!$slots.title">
@@ -32,6 +32,10 @@ const props = defineProps({
         default: ""
     },
     shadow: {
+        type: Boolean,
+        default: false
+    },
+    hover: {
         type: Boolean,
         default: false
     },
@@ -72,6 +76,7 @@ defineExpose({
     border: 1px solid var(--base-tag-border);
     overflow: hidden;
     transition: var(--el-transition-duration);
+    &.hover:hover,
     &.shadow {
         box-shadow: var(--el-box-shadow-light);
     }
