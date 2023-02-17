@@ -111,6 +111,10 @@ div:focus {
     justify-content: center;
     display: flex;
 }
+.flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
 .justify-between {
     justify-content: space-between;
 }

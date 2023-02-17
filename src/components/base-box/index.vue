@@ -16,7 +16,7 @@
             <slot name="title"></slot>
         </div>
         <div class="base-box-content">
-            <el-scrollbar :max-height="maxHeight" :height="height">
+            <el-scrollbar :style="getStyle">
                 <base-skeleton :loading="loading" is-box>
                     <slot></slot>
                 </base-skeleton>
@@ -26,6 +26,8 @@
 </template>
 
 <script lang="ts" setup>
+import { isString } from "@/utils";
+
 const props = defineProps({
     title: {
         type: String,
@@ -64,6 +66,14 @@ const props = defineProps({
 });
 
 const baseBoxRef = ref();
+
+const getStyle = computed(() => {
+    const { height, maxHeight } = props;
+    return {
+        height: isString(height) ? height : `${height}px`,
+        maxHeight: isString(maxHeight) ? maxHeight : `${maxHeight}px`
+    };
+});
 
 defineExpose({
     instance: baseBoxRef

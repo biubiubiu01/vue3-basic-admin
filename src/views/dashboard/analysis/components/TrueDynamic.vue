@@ -65,11 +65,11 @@ const scrollOption = ref({
     border-radius: 6px;
 
     .dynamic-item-time {
-        font-size: 14px;
+        font-size: var(--el-font-size-base);
         color: rgb(140, 150, 167);
     }
     .dynamic-item-content {
-        font-size: 14px;
+        font-size: var(--el-font-size-base);
         color: rgb(140, 150, 167);
         .dynamic-item-value {
             margin: 0 2px;

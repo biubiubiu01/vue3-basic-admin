@@ -16,6 +16,7 @@ specifiers:
   axios: ^0.27.2
   dayjs: ^1.11.7
   echarts: ^5.3.3
+  echarts-liquidfill: '3'
   echarts-wordcloud: '2'
   element-plus: ^2.2.19
   eslint: ^8.0.1
@@ -54,6 +55,7 @@ dependencies:
   axios: 0.27.2
   dayjs: 1.11.7
   echarts: 5.4.0
+  echarts-liquidfill: 3.1.0_echarts@5.4.0
   echarts-wordcloud: 2.1.0_echarts@5.4.0
   element-plus: 2.2.19_vue@3.2.41
   mockjs: 1.1.0
@@ -2071,6 +2073,14 @@ packages:
   /eastasianwidth/0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
+
+  /echarts-liquidfill/3.1.0_echarts@5.4.0:
+    resolution: {integrity: sha512-5Dlqs/jTsdTUAsd+K5LPLLTgrbbNORUSBQyk8PSy1Mg2zgHDWm83FmvA4s0ooNepCJojFYRITTQ4GU1UUSKYLw==}
+    peerDependencies:
+      echarts: ^5.0.1
+    dependencies:
+      echarts: 5.4.0
+    dev: false
 
   /echarts-wordcloud/2.1.0_echarts@5.4.0:
     resolution: {integrity: sha512-Kt1JmbcROgb+3IMI48KZECK2AP5lG6bSsOEs+AsuwaWJxQom31RTNd6NFYI01E/YaI1PFZeueaupjlmzSQasjQ==}

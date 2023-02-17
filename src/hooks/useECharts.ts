@@ -10,6 +10,8 @@ export const useECharts = (elRef: Ref<HTMLDivElement>) => {
 
     let chartInstance: echarts.ECharts | null = null;
 
+    const isLoad = ref(false);
+
     const cacheOption = ref<EChartsOption>({});
 
     const getOption = computed((): EChartsOption => {
@@ -37,13 +39,17 @@ export const useECharts = (elRef: Ref<HTMLDivElement>) => {
 
     const initCharts = () => {
         if (!unref(elRef)) return;
+        isLoad.value = false;
         chartInstance = echarts.init(unref(elRef), unref(isDark) ? "dark" : "default");
 
         useResizeObserver(
             unref(elRef),
-            useDebounceFn(() => {
-                resize();
-            }, 50)
+            useDebounceFn((e) => {
+                const contentRect = e[0].contentRect;
+                if (Math.round(contentRect.width) !== chartInstance?.getWidth() || Math.round(contentRect.height) !== chartInstance?.getHeight()) {
+                    resize();
+                }
+            }, 100)
         );
     };
 

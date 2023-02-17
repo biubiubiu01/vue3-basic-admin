@@ -2,7 +2,6 @@ import { MockMethod } from "vite-plugin-mock";
 import dayjs from "dayjs";
 import { userData, deptData, roleData, dictKey, dictData } from "../constant";
 import { RequestParams, resultSuccess } from "../utils";
-import { deepClone } from "@/utils";
 
 function filterTable(filter: any) {
     const { type = "equal", data, key, value } = filter;
@@ -14,7 +13,7 @@ function filterTable(filter: any) {
 }
 
 function filterStatus(list: any[]) {
-    const arr = deepClone(list);
+    const arr = JSON.parse(JSON.stringify(list));
     return arr.filter((item: any) => {
         if (item.status === 1 && item.children) {
             item.children = filterStatus(item.children);

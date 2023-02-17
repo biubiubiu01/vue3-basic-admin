@@ -27,11 +27,6 @@ const barConfig: EChartsOption = {
     yAxis: [
         {
             type: "value",
-            splitLine: {
-                lineStyle: {
-                    // color: "rgb(165, 178, 198)"
-                }
-            },
             axisTick: {
                 show: false
             }

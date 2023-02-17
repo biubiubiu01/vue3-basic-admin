@@ -131,28 +131,22 @@ const radarOption: EChartsOption = reactive({
     radar: {
         indicator: [
             {
-                name: "奶茶",
-                max: 100
+                name: "奶茶"
             },
             {
-                name: "咖啡",
-                max: 100
+                name: "咖啡"
             },
             {
-                name: "牛奶",
-                max: 100
+                name: "牛奶"
             },
             {
-                name: "矿泉水",
-                max: 100
+                name: "矿泉水"
             },
             {
-                name: "可乐",
-                max: 100
+                name: "可乐"
             },
             {
-                name: "其他",
-                max: 100
+                name: "其他"
             }
         ]
     },

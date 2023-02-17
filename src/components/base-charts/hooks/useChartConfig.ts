@@ -6,6 +6,7 @@ import lineConfig from "../config/line";
 import pieConfig from "../config/pie";
 import wordcloudConfig from "../config/wordcloud";
 import radarConfig from "../config/radar";
+import liquidfillConfig from "../config/liquidfill";
 
 const echartsConfigMap = new Map<EChartsType, EChartsOption>();
 
@@ -14,6 +15,7 @@ echartsConfigMap.set(EChartsEnum.LINE, lineConfig);
 echartsConfigMap.set(EChartsEnum.PIE, pieConfig);
 echartsConfigMap.set(EChartsEnum.WORDCLOUD, wordcloudConfig);
 echartsConfigMap.set(EChartsEnum.RADAR, radarConfig);
+echartsConfigMap.set(EChartsEnum.LIQUIDfILL, liquidfillConfig);
 
 export const useChartConfig = (type: EChartsType) => {
     const defaultConfig = echartsConfigMap.get(type) || {};
