@@ -58,21 +58,27 @@ const props = defineProps({
 
 const source = ref(props.startVal);
 
-const transitionValue = useTransition(source, {
-    duration: props.duration,
-    transition: (TransitionPresets as any)[props.transition]
-});
+let transitionValue: any = null;
 
 const value = computed(() => formatNumber(unref(transitionValue)));
 
 const getStyle = computed(() => ({ color: props.color, fontSize: props.size + "px" }));
 
 const start = () => {
+    initTransition();
     source.value = props.endVal;
 };
 
 const reset = () => {
     source.value = props.startVal;
+};
+
+const initTransition = () => {
+    source.value = props.startVal;
+    transitionValue = useTransition(source, {
+        duration: props.duration,
+        transition: (TransitionPresets as any)[props.transition]
+    });
 };
 
 const formatNumber = (num: number | string) => {

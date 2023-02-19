@@ -1,6 +1,6 @@
 <template>
     <el-form :model="model" v-bind="getPropsValue" @submit.prevent ref="baseFormRef">
-        <el-row v-bind="rowProps" :gutter="0">
+        <el-row v-bind="rowProps" :gutter="0" class="hidden">
             <el-col v-for="item in getColumnList" :key="item.fieldName" v-bind="item.colProps || colProps">
                 <el-form-item :label="item.fieldDesc" :prop="item.fieldName" class="w100" v-bind="item">
                     <component

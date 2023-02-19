@@ -17,7 +17,7 @@ const props = defineProps({
     type: {
         type: String,
         validator(value: string) {
-            return ["primary", "success", "warning", "danger", "info", "text"].includes(value);
+            return ["primary", "success", "warning", "danger", "info", "default"].includes(value);
         }
     },
     plain: {
@@ -40,11 +40,7 @@ const attrs = useAttrs();
 
 const getPropsValue = computed(() => {
     const newProps = { ...omit(props, "auth") } as any;
-    if (props.type === "text") {
-        newProps.type = "primary";
-        newProps.link = true;
-    }
-    return { ...newProps, ...omit(attrs, "link") };
+    return { ...newProps, ...attrs };
 });
 
 const hasPermission = computed(() => {
