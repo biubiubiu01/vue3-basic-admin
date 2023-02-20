@@ -1,5 +1,5 @@
 <template>
-    <el-container class="all-container" ref="layoutRef">
+    <el-container class="all-container flex" ref="layoutRef">
         <SideBar v-show="!getTagFullscreen" />
         <el-container class="base-app-bg">
             <el-header :height="headerHeader" class="pl0 pr0">

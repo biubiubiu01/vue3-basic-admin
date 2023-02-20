@@ -24,7 +24,7 @@ const options = reactive({
     separator: ",",
     prefix: "",
     suffix: "",
-    size: 24,
+    size: 45,
     color: "#409eff"
 });
 </script>

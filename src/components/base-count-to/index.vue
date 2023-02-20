@@ -65,15 +65,11 @@ const value = computed(() => formatNumber(unref(transitionValue)));
 const getStyle = computed(() => ({ color: props.color, fontSize: props.size + "px" }));
 
 const start = () => {
-    initTransition();
+    reset();
     source.value = props.endVal;
 };
 
 const reset = () => {
-    source.value = props.startVal;
-};
-
-const initTransition = () => {
     source.value = props.startVal;
     transitionValue = useTransition(source, {
         duration: props.duration,
@@ -89,7 +85,7 @@ const formatNumber = (num: number | string) => {
     num = Number(num).toFixed(decimals) + "";
 
     let numberValue = num.split(".")[0];
-    const decimalValue = num.split(".")[1] || "";
+    const decimalValue = decimals > 0 ? "." + num.split(".")[1] : "";
 
     const rgx = /(\d+)(\d{3})/;
     if (separator && !isNumber(separator)) {

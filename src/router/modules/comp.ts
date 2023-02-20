@@ -31,7 +31,7 @@ const comp: AppRouteType[] = [
                 component: () => import("@/views/comp/icon/index.vue"),
                 meta: {
                     title: "Icon",
-                    sort: 1,
+                    sort: 2,
                     permission: "admin_comp_icon",
                     icon: ""
                 }
@@ -42,8 +42,74 @@ const comp: AppRouteType[] = [
                 component: () => import("@/views/comp/count-to/index.vue"),
                 meta: {
                     title: "数字滚动",
-                    sort: 2,
+                    sort: 3,
                     permission: "admin_comp_count_to",
+                    icon: ""
+                }
+            },
+            {
+                path: "dialog",
+                name: "Dialog",
+                component: () => import("@/views/comp/dialog/index.vue"),
+                meta: {
+                    title: "Dialog",
+                    sort: 4,
+                    permission: "admin_comp_dialog",
+                    icon: ""
+                }
+            },
+            {
+                path: "loading",
+                name: "Loading",
+                component: () => import("@/views/comp/loading/index.vue"),
+                meta: {
+                    title: "Loading",
+                    sort: 5,
+                    permission: "admin_comp_loading",
+                    icon: ""
+                }
+            },
+            {
+                path: "seamscroll",
+                name: "SeamScroll",
+                component: () => import("@/views/comp/seamscroll/index.vue"),
+                meta: {
+                    title: "无缝滚动",
+                    sort: 6,
+                    permission: "admin_comp_seamscroll",
+                    icon: ""
+                }
+            },
+            {
+                path: "select",
+                name: "Select",
+                component: () => import("@/views/comp/select/index.vue"),
+                meta: {
+                    title: "Select",
+                    sort: 7,
+                    permission: "admin_comp_select",
+                    icon: ""
+                }
+            },
+            {
+                path: "table",
+                name: "Table",
+                component: () => import("@/views/comp/table/index.vue"),
+                meta: {
+                    title: "Table",
+                    sort: 8,
+                    permission: "admin_comp_table",
+                    icon: ""
+                }
+            },
+            {
+                path: "form",
+                name: "Form",
+                component: () => import("@/views/comp/table/index.vue"),
+                meta: {
+                    title: "Form",
+                    sort: 9,
+                    permission: "admin_comp_form",
                     icon: ""
                 }
             }

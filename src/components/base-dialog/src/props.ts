@@ -1,6 +1,9 @@
 import { PropType } from "vue";
 
 export const defaultProps = {
+    visible: {
+        type: Boolean
+    },
     title: {
         type: String,
         default: "提示"

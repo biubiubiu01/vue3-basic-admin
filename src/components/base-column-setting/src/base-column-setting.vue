@@ -4,7 +4,9 @@
             <base-icon el-name="setting" class="pointer base-icon-setting" :size="18" hover />
             <template #dropdown>
                 <el-dropdown-menu>
-                    <el-dropdown-item @click="handleShowColumn(0)"> <base-icon svg-name="column" :size="14" />自定义列表字段 </el-dropdown-item>
+                    <el-dropdown-item @click="handleShowColumn(0)" v-if="showTable">
+                        <base-icon svg-name="column" :size="14" />自定义列表字段
+                    </el-dropdown-item>
                     <el-dropdown-item @click="handleShowColumn(1)" v-if="showFilter">
                         <base-icon svg-name="filter" :size="16" />自定义筛选
                     </el-dropdown-item>
@@ -80,6 +82,10 @@ const props = defineProps({
     filterColumns: {
         type: Array as PropType<Column[]>,
         default: () => []
+    },
+    showTable: {
+        type: Boolean,
+        default: true
     },
     showFilter: {
         type: Boolean,

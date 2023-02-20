@@ -27,7 +27,7 @@ const loadingDirective: Directive = {
         const instance = el.instance;
         if (!instance) return;
         if (bind.value) {
-            instance.open(el.getAttribute("loading-full") ? document.body : el);
+            instance.open(el.getAttribute("loading-full") === "true" ? document.body : el);
         } else {
             instance.close();
         }

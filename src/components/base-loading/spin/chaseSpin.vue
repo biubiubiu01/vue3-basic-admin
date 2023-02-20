@@ -1,4 +1,3 @@
-a
 <template>
     <div class="chase-wrapper">
         <div class="chase-item"></div>

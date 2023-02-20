@@ -36,7 +36,7 @@ import { omit, isFunction } from "@/utils";
 
 const props = defineProps(dialogProps);
 
-const emit = defineEmits(["close", "save"]);
+const emit = defineEmits(["close", "save", "update:visible"]);
 
 const attrs = useAttrs();
 
@@ -76,6 +76,7 @@ const showDialog = () => {
 
 const hideDialog = () => {
     dialogVisible.value = false;
+    emit("update:visible", false);
     emit("close");
 };
 
@@ -89,24 +90,20 @@ const handleScrollTop = () => {
     unref(bodyScrollRef).wrap$.scrollTop = 0;
 };
 
-const handleBeforeClose = async (done: () => void) => {
+const handleBeforeClose = async () => {
     try {
         if (props.closeConfirm) {
             await proxy.$messageBox("你确定要关闭弹框吗？");
         }
-        done();
+        hideDialog();
     } catch (err) {}
 };
 
 const handleClose = async () => {
-    const done = () => {
-        dialogVisible.value = false;
-        emit("close");
-    };
     if (isFunction(props.closeFun)) {
-        props.closeFun(done);
+        props.closeFun(hideDialog);
     } else {
-        done();
+        hideDialog();
     }
 };
 
@@ -115,6 +112,10 @@ const handleSave = () => {
         saveLoading.value = bool;
     });
 };
+
+watchEffect(() => {
+    dialogVisible.value = props.visible;
+});
 
 defineExpose({
     showDialog,

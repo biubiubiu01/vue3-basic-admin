@@ -22,7 +22,6 @@ import { useColumn } from "../column";
 import { useMessage } from "@/hooks";
 import { addRole, editRole } from "@/api/system/role";
 import { getMenuList } from "@/api/system/menu";
-import { deepClone } from "@/utils";
 
 const emit = defineEmits(["success"]);
 
