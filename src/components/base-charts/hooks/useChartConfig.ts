@@ -24,8 +24,11 @@ export const useChartConfig = (type: EChartsType) => {
         let key: string;
         for (key in target) {
             if (isObject(target[key])) {
-                mergeConfig(src[key], target[key]);
+                src[key] = mergeConfig(src[key] || {}, target[key]);
             } else if (isArray(target[key])) {
+                if (isUndefined(src[key])) {
+                    src[key] = [];
+                }
                 target[key].forEach((_: any, index: number) => {
                     if (isUndefined(src[key][index])) {
                         src[key][index] = {};

@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import type { PropType, Ref } from "vue";
 import type { EChartsOption } from "echarts";
-import { isString } from "@/utils";
+import { isString, deepClone } from "@/utils";
 import type { EChartsType } from "@/enums/echartsEnum";
 import { useECharts } from "@/hooks";
 import { useChartConfig } from "./hooks/useChartConfig";
@@ -36,11 +36,12 @@ const { config, mergeConfig } = useChartConfig(props.type);
 const { setOption } = useECharts(baseChartRef as Ref<HTMLDivElement>);
 
 onMounted(() => {
+    console.log(getOption.value);
     setOption(unref(getOption));
 });
 
 const getOption = computed((): EChartsOption => {
-    return mergeConfig(config, props.options);
+    return mergeConfig(deepClone(config), props.options);
 });
 
 const style = computed(() => {

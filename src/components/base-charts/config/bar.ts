@@ -8,6 +8,7 @@ const barConfig: EChartsOption = {
         },
         padding: [5, 10]
     },
+    legend: {},
     grid: {
         left: "4%",
         right: "2%",

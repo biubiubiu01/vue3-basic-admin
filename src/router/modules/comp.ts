@@ -105,13 +105,37 @@ const comp: AppRouteType[] = [
             {
                 path: "form",
                 name: "Form",
-                component: () => import("@/views/comp/table/index.vue"),
+                component: () => import("@/views/comp/form/index.vue"),
                 meta: {
                     title: "Form",
                     sort: 9,
                     permission: "admin_comp_form",
                     icon: ""
                 }
+            },
+            {
+                path: "echarts",
+                name: "Echarts",
+                meta: {
+                    title: "Echarts",
+                    sort: 10,
+                    permission: "admin_comp_echarts",
+                    icon: ""
+                },
+                redirect: "/comp/echarts/bar/index",
+                children: [
+                    {
+                        path: "bar",
+                        name: "Bar",
+                        component: () => import("@/views/comp/echarts/bar/index.vue"),
+                        meta: {
+                            title: "柱状图",
+                            sort: 1,
+                            permission: "admin_comp_echarts_bar",
+                            icon: ""
+                        }
+                    }
+                ]
             }
         ]
     }

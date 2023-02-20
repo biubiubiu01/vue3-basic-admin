@@ -7,17 +7,19 @@
                 <TagView />
             </el-header>
             <el-main class="app-main">
-                <RouterView>
-                    <template #default="{ Component, route }">
-                        <transition name="el-fade-in-linear" mode="out-in">
-                            <keep-alive :include="getCacheTagList">
-                                <div class="all-container">
-                                    <component :is="Component" :key="route.fullPath" />
-                                </div>
-                            </keep-alive>
-                        </transition>
-                    </template>
-                </RouterView>
+                <el-scrollbar ref="mainScrollRef">
+                    <RouterView>
+                        <template #default="{ Component, route }">
+                            <transition name="el-fade-in-linear" mode="out-in">
+                                <keep-alive :include="getCacheTagList">
+                                    <div class="all-container">
+                                        <component :is="Component" :key="route.fullPath" />
+                                    </div>
+                                </keep-alive>
+                            </transition>
+                        </template>
+                    </RouterView>
+                </el-scrollbar>
             </el-main>
         </el-container>
     </el-container>
@@ -35,7 +37,11 @@ const { getTagFullscreen, getCacheTagList } = useTagViewSetting();
 
 const { toggleCollapse } = useMenuSetting();
 
+const route = useRoute();
+
 const layoutRef = ref();
+
+const mainScrollRef = ref();
 
 const headerHeader = computed(() => {
     return unref(getTagFullscreen) ? "37px" : "85px";
@@ -56,6 +62,10 @@ useResizeObserver(
         resizeLayout();
     }, 100)
 );
+
+watch([route], () => {
+    unref(mainScrollRef).setScrollTop(0);
+});
 </script>
 
 <style lang="scss" scoped>
