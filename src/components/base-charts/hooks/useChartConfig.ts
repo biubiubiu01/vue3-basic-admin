@@ -7,6 +7,10 @@ import pieConfig from "../config/pie";
 import wordcloudConfig from "../config/wordcloud";
 import radarConfig from "../config/radar";
 import liquidfillConfig from "../config/liquidfill";
+import graphConfig from "../config/graph";
+import mapConfig from "../config/map";
+import scatterConfig from "../config/scatter";
+import heatmapConfig from "../config/heatmap";
 
 const echartsConfigMap = new Map<EChartsType, EChartsOption>();
 
@@ -16,6 +20,10 @@ echartsConfigMap.set(EChartsEnum.PIE, pieConfig);
 echartsConfigMap.set(EChartsEnum.WORDCLOUD, wordcloudConfig);
 echartsConfigMap.set(EChartsEnum.RADAR, radarConfig);
 echartsConfigMap.set(EChartsEnum.LIQUIDfILL, liquidfillConfig);
+echartsConfigMap.set(EChartsEnum.GRAPH, graphConfig);
+echartsConfigMap.set(EChartsEnum.MAP, mapConfig);
+echartsConfigMap.set(EChartsEnum.SCATTER, scatterConfig);
+echartsConfigMap.set(EChartsEnum.HEATMAP, heatmapConfig);
 
 export const useChartConfig = (type: EChartsType) => {
     const defaultConfig = echartsConfigMap.get(type) || {};

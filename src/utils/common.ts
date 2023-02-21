@@ -59,7 +59,7 @@ export function deepMerge<T = any>(src: any = {}, target: any = {}): T {
 }
 
 /**
- * 深度合并
+ * 显示label
  * @param {Array} list
  * @param {String} value
  * @returns {*}

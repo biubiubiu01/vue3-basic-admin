@@ -36,7 +36,6 @@ const { config, mergeConfig } = useChartConfig(props.type);
 const { setOption } = useECharts(baseChartRef as Ref<HTMLDivElement>);
 
 onMounted(() => {
-    console.log(getOption.value);
     setOption(unref(getOption));
 });
 

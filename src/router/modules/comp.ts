@@ -134,6 +134,50 @@ const comp: AppRouteType[] = [
                             permission: "admin_comp_echarts_bar",
                             icon: ""
                         }
+                    },
+                    {
+                        path: "line",
+                        name: "Line",
+                        component: () => import("@/views/comp/echarts/line/index.vue"),
+                        meta: {
+                            title: "折线图",
+                            sort: 2,
+                            permission: "admin_comp_echarts_line",
+                            icon: ""
+                        }
+                    },
+                    {
+                        path: "pie",
+                        name: "Pie",
+                        component: () => import("@/views/comp/echarts/pie/index.vue"),
+                        meta: {
+                            title: "饼图",
+                            sort: 3,
+                            permission: "admin_comp_echarts_pie",
+                            icon: ""
+                        }
+                    },
+                    {
+                        path: "graph",
+                        name: "Graph",
+                        component: () => import("@/views/comp/echarts/graph/index.vue"),
+                        meta: {
+                            title: "关系图",
+                            sort: 4,
+                            permission: "admin_comp_echarts_graph",
+                            icon: ""
+                        }
+                    },
+                    {
+                        path: "map",
+                        name: "Map",
+                        component: () => import("@/views/comp/echarts/map/index.vue"),
+                        meta: {
+                            title: "地图",
+                            sort: 5,
+                            permission: "admin_comp_echarts_map",
+                            icon: ""
+                        }
                     }
                 ]
             }

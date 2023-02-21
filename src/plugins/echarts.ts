@@ -2,7 +2,7 @@ import * as echarts from "echarts/core";
 import "echarts-wordcloud";
 import "echarts-liquidfill";
 
-import { BarChart, LineChart, PieChart, MapChart, PictorialBarChart, RadarChart, ScatterChart } from "echarts/charts";
+import { BarChart, LineChart, PieChart, MapChart, PictorialBarChart, RadarChart, ScatterChart, GraphChart, HeatmapChart } from "echarts/charts";
 
 import {
     TitleComponent,
@@ -45,7 +45,9 @@ echarts.use([
     TimelineComponent,
     CalendarComponent,
     GraphicComponent,
-    ScatterChart
+    ScatterChart,
+    GraphChart,
+    HeatmapChart
 ]);
 
 export default echarts;

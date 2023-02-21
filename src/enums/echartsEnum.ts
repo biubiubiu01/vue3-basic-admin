@@ -4,7 +4,11 @@ export enum EChartsEnum {
     PIE = "pie",
     WORDCLOUD = "wordcloud",
     RADAR = "radar",
-    LIQUIDfILL = "liquidfill"
+    LIQUIDfILL = "liquidfill",
+    GRAPH = "graph",
+    MAP = "map",
+    SCATTER = "scatter",
+    HEATMAP = "heatmap"
 }
 
 export type EChartsType = `${EChartsEnum}`;
