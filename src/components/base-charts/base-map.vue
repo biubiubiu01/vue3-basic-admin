@@ -6,6 +6,7 @@
 import type { PropType, Ref } from "vue";
 import { useTimeoutFn } from "@vueuse/core";
 import type { EChartsOption } from "echarts";
+import echarts from "@/plugins/echarts";
 import { isString, remoteLoad, deepClone, isUndefined } from "@/utils";
 import { AMapCDN, AMapUiCDN } from "@/constant/cdn";
 import { useECharts, useLoading } from "@/hooks";
@@ -34,10 +35,6 @@ const props = defineProps({
     mapKey: {
         type: String,
         required: true
-    },
-    clickDown: {
-        type: Boolean,
-        default: false
     }
 });
 
@@ -47,6 +44,7 @@ const state = reactive<any>({
     geoJsonObj: {},
     code: props.code
 });
+const { setOption } = useECharts(baeMapRef as Ref<HTMLDivElement>);
 
 const { config, mergeConfig } = useChartConfig(props.type);
 
@@ -117,6 +115,7 @@ const getMapJson = async (code: number = props.code, childCode?: number) => {
                 state.geoJsonObj[childCode || code] = {
                     features: geoJson
                 };
+                echarts.registerMap("map", state.geoJsonObj[childCode || code]);
                 state.code = childCode || code;
 
                 setMapOption();
@@ -127,18 +126,8 @@ const getMapJson = async (code: number = props.code, childCode?: number) => {
 
 // 根据配置渲染map
 const setMapOption = () => {
-    const { setOption, getInstance } = useECharts(baeMapRef as Ref<HTMLDivElement>, state.geoJsonObj[state.code]);
-    const instance: any = getInstance();
     close();
     setOption(unref(getOption));
-
-    instance.off("click");
-    if (props.clickDown) {
-        instance.on("click", (params: any) => {
-            const clickCode = state.geoJsonObj[state.code].features[params.dataIndex]!.properties!.adcode;
-            getMapJson(clickCode);
-        });
-    }
 };
 
 watch(

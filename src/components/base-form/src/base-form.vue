@@ -21,7 +21,7 @@
 <script lang="ts" setup>
 import dialogProps, { extraProps } from "./props";
 import { componentMap } from "@/enums/componentEnum";
-import { isBoolean, isFunction, omit } from "@/utils";
+import { isBoolean, isFunction, isUndefined, omit } from "@/utils";
 
 const props = defineProps(dialogProps);
 
@@ -43,7 +43,7 @@ const getColumnList = computed(() => {
         if (isBoolean(item.show)) {
             return item.show;
         }
-        return true;
+        return isUndefined(item.active) || item.active;
     });
 });
 

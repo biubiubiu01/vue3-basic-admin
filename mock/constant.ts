@@ -179,6 +179,7 @@ export const roleData = [
             "admin_comp_echarts_pie",
             "admin_comp_echarts_graph",
             "admin_comp_echarts_map",
+            "admin_comp_echarts_other",
             "admin_dashboard",
             "admin_dashboard_analysis",
             "admin_dashboard_workbench",

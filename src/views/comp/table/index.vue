@@ -27,7 +27,9 @@
         </base-box>
 
         <base-box title="列字段配置">
-            <base-column-setting v-model:table-columns="table3Config.columns" :show-filter="false" />
+            <template #extra>
+                <base-column-setting v-model:table-columns="table3Config.columns" :show-filter="false" />
+            </template>
             <base-table :columns="table3Config.columns" :data="tableData2" show-setting>
                 <template #tableColumn="{ scope, column }">
                     <div v-if="column.fieldName === 'img'">

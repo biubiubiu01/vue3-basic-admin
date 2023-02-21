@@ -178,6 +178,17 @@ const comp: AppRouteType[] = [
                             permission: "admin_comp_echarts_map",
                             icon: ""
                         }
+                    },
+                    {
+                        path: "other",
+                        name: "Other",
+                        component: () => import("@/views/comp/echarts/other/index.vue"),
+                        meta: {
+                            title: "其他图表",
+                            sort: 6,
+                            permission: "admin_comp_echarts_other",
+                            icon: ""
+                        }
                     }
                 ]
             }

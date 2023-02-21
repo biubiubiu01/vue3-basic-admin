@@ -19,6 +19,9 @@
                     /></base-button>
                 </div>
             </template>
+            <template v-for="item in filterColumnList" #[item.fieldName]>
+                <slot :name="item.fieldName"></slot>
+            </template>
         </base-form>
     </div>
 </template>

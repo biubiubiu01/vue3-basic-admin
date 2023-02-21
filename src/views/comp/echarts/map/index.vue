@@ -1,6 +1,6 @@
 <template>
     <div class="com-echarts-map-container hidden">
-        <base-box title="分布图 (点击下钻,黑夜模式下效果更佳哦)">
+        <base-box title="分布图">
             <base-map height="600px" type="map" :map-key="AMapKey" click-down />
         </base-box>
         <base-box title="散点图 ">
