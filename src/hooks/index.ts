@@ -4,3 +4,4 @@ export { useLoading } from "./useLoading";
 export { useECharts } from "./useECharts";
 export { useDark } from "./useDark";
 export { useStorage } from "./useStorage";
+export { useWatermark } from "./useWatermark";

@@ -69,7 +69,7 @@ export const messageBox = async (message: string, config?: MessageBoxConfig) => 
     });
 };
 
-const message = (type: MessageType, text: string, close: () => void, config: MessageConfig) => {
+const message = (type: MessageType, text: string, close?: () => void, config?: MessageConfig) => {
     const options = Object.assign({}, defaultMessageConfig, config);
     return ElMessage({
         message: text,
@@ -79,7 +79,7 @@ const message = (type: MessageType, text: string, close: () => void, config: Mes
     });
 };
 
-export const messageSuccess = (text: string, close: () => void, config: MessageConfig) => message("success", text, close, config);
-export const messageWarning = (text: string, close: () => void, config: MessageConfig) => message("warning", text, close, config);
-export const messageInfo = (text: string, close: () => void, config: MessageConfig) => message("info", text, close, config);
-export const messageError = (text: string, close: () => void, config: MessageConfig) => message("error", text, close, config);
+export const messageSuccess = (text: string, close?: () => void, config?: MessageConfig) => message("success", text, close, config);
+export const messageWarning = (text: string, close?: () => void, config?: MessageConfig) => message("warning", text, close, config);
+export const messageInfo = (text: string, close?: () => void, config?: MessageConfig) => message("info", text, close, config);
+export const messageError = (text: string, close?: () => void, config?: MessageConfig) => message("error", text, close, config);
