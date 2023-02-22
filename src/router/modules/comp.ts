@@ -191,6 +191,39 @@ const comp: AppRouteType[] = [
                         }
                     }
                 ]
+            },
+            {
+                path: "editor",
+                name: "Editor",
+                component: () => import("@/views/comp/editor/index.vue"),
+                meta: {
+                    title: "富文本编辑器",
+                    sort: 11,
+                    permission: "admin_comp_editor",
+                    icon: ""
+                }
+            },
+            {
+                path: "markdown",
+                name: "Markdown",
+                component: () => import("@/views/comp/markdown/index.vue"),
+                meta: {
+                    title: "Markdown",
+                    sort: 12,
+                    permission: "admin_comp_markdown",
+                    icon: ""
+                }
+            },
+            {
+                path: "json",
+                name: "Json",
+                component: () => import("@/views/comp/json/index.vue"),
+                meta: {
+                    title: "JSON编辑器",
+                    sort: 13,
+                    permission: "admin_comp_json",
+                    icon: ""
+                }
             }
         ]
     }

@@ -9,4 +9,5 @@ declare module "*.vue" {
 interface Window {
     AMap: any;
     AMapUI: any;
+    tinymce: any;
 }

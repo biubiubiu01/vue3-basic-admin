@@ -2,7 +2,7 @@
 export default defineComponent({
     props: {
         size: {
-            type: [Number, String]
+            type: Number
         },
         color: {
             type: String

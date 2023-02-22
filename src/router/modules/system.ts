@@ -10,7 +10,7 @@ const system: AppRouteType[] = [
         meta: {
             title: "系统管理",
             icon: "setting",
-            sort: 5,
+            sort: 6,
             permission: "admin_system"
         },
         children: [

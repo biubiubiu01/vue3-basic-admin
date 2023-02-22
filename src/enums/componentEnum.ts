@@ -3,6 +3,8 @@ import BaseSelect from "@/components/base-select/base-select.vue";
 import BaseInputNumber from "@/components/base-input-number/base-input-number.vue";
 import BaseIconPicker from "@/components/base-icon/base-icon-picker.vue";
 import BaseDatePicker from "@/components/base-date-picker/base-date-picker.vue";
+import BaseTinymce from "@/components/base-tinymce/base-tinymce.vue";
+import BaseVditor from "@/components/base-vditor/base-vditor.vue";
 import { ElSwitch } from "element-plus";
 import type { Component } from "vue";
 
@@ -19,6 +21,8 @@ export enum FormTypeEnum {
     TAG = "tag",
     SLOT = "slot",
     OPERATION = "operation",
+    TINYMCE = "tinymce",
+    VDITOR = "vditor",
     ICON = "icon"
 }
 
@@ -30,5 +34,7 @@ componentMap.set(FormTypeEnum.SELECT, BaseSelect);
 componentMap.set(FormTypeEnum.SWITCH, ElSwitch);
 componentMap.set(FormTypeEnum.ICON, BaseIconPicker);
 componentMap.set(FormTypeEnum.DATE, BaseDatePicker);
+componentMap.set(FormTypeEnum.TINYMCE, BaseTinymce);
+componentMap.set(FormTypeEnum.VDITOR, BaseVditor);
 
 export { componentMap };

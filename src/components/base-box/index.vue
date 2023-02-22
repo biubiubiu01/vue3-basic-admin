@@ -102,6 +102,7 @@ defineExpose({
     }
     .base-box-content {
         padding: 25px;
+        box-sizing: border-box;
     }
 }
 </style>
