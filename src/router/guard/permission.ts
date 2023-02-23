@@ -5,7 +5,8 @@ import { WHITE_LIST } from "../basic";
 
 export const createPermission = (router: Router) => {
     router.beforeEach(async (to, from, next) => {
-        const { getToken: token } = useUserStoreWithOut();
+        const useStore = useUserStoreWithOut();
+        const { getToken: token } = storeToRefs(useStore);
         const usePermissionStore = usePermissionStoreWithOut();
         const { getRoute } = usePermissionStore;
 

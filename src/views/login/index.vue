@@ -84,9 +84,11 @@ const handleLogin = async () => {
         try {
             loading.value = true;
             await userStore.login(loginForm);
-            router.push({
-                path: "/"
-            });
+            setTimeout(() => {
+                router.push({
+                    path: "/"
+                });
+            }, 100);
         } finally {
             loading.value = false;
         }

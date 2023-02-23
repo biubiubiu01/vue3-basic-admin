@@ -191,6 +191,7 @@ export const roleData = [
             "admin_func_drag_resize",
             "admin_func_watermark",
             "admin_func_message",
+            "admin_func_axios",
             "admin_page",
             "admin_page_403",
             "admin_page_404",

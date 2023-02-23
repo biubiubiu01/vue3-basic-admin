@@ -4,7 +4,7 @@ import { useErrorLogStoreWithOut } from "@/stores/modules/errorLog";
 import { useMessage } from "@/hooks";
 import { addOperationInfo, Api } from "@/api/log";
 
-const { error } = useMessage();
+const { error, success } = useMessage();
 
 export const setErrorMessage = (err: any) => {
     const { data, status } = err;
@@ -39,7 +39,7 @@ export const setErrorMessage = (err: any) => {
 
 export const addAjaxErrorLog = (err: any, message: string) => {
     addAjaxLog(err);
-    const { url, method, params, data } = err.config;
+    const { url, method, params, data, requestOptions } = err.config;
     const errorLogStore = useErrorLogStoreWithOut();
     errorLogStore.addErrorLog({
         type: ErrorTypeEnum.AJAX,
@@ -51,12 +51,14 @@ export const addAjaxErrorLog = (err: any, message: string) => {
         detail: JSON.stringify(err),
         time: dayjs().format("YYYY-MM-DD HH:mm:ss")
     });
-    error(message);
+    requestOptions.errorMessage && error(message);
 };
 
 export const addAjaxLog = (response: any) => {
-    const { url, method } = response.config;
+    const { url, method, requestOptions } = response.config;
     if ([Api.ADD_OPERATION_INFO, Api.ADD_ERROR_INFO, Api.ADD_LOGIN_INFO].includes(url) || method === "get") return;
+    requestOptions.successMessage && success(response?.data?.message);
+
     addOperationInfo({
         method,
         url,

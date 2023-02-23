@@ -19,14 +19,12 @@ export function useLoading(config: LoadingType = {}) {
     const minTime = config.minTime || 0;
 
     const open = (target: HTMLElement = document.body) => {
-        setTimeout(() => {
-            if (!instance) {
-                instance = loadingConstructor.mount(document.createElement("div"));
-            }
-            if (!instance || !instance.$el) return;
-            target?.appendChild?.(instance.$el);
-            startTime = performance.now();
-        }, 0);
+        if (!instance) {
+            instance = loadingConstructor.mount(document.createElement("div"));
+        }
+        if (!instance || !instance.$el) return;
+        target?.appendChild?.(instance.$el);
+        startTime = performance.now();
     };
 
     const close = () => {

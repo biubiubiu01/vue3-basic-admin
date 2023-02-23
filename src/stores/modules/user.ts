@@ -45,7 +45,7 @@ export const useUserStore = defineStore({
             const res = await login(params);
             this.setToken(res.data.token);
             await this.getUserInfo();
-            this.addLoginLog();
+            await this.addLoginLog();
         },
 
         logout(router: Router) {

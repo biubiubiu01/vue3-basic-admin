@@ -57,6 +57,17 @@ const func: AppRouteType[] = [
                     permission: "admin_func_message",
                     icon: ""
                 }
+            },
+            {
+                path: "axios",
+                name: "Axios",
+                component: () => import("@/views/func/axios/index.vue"),
+                meta: {
+                    title: "Axios",
+                    sort: 5,
+                    permission: "admin_func_axios",
+                    icon: ""
+                }
             }
         ]
     }

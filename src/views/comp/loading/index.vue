@@ -17,6 +17,11 @@
                 loading{{ index + 1 }}
             </base-button>
         </base-box>
+
+        <base-box title="loading最小时长">
+            <base-input-number v-model="time" class="mr25" />
+            <base-button type="primary" @click="startTimeLoading"> 点击触发loading </base-button>
+        </base-box>
     </div>
 </template>
 
@@ -25,6 +30,8 @@ import { useLoading } from "@/hooks";
 
 const loading = ref(false);
 const full = ref(false);
+
+const time = ref(1000);
 
 const loadingList = ref(["pulse", "rect", "plane", "cube", "preloader", "chase", "dot"]);
 
@@ -42,6 +49,12 @@ const startLoading = (item: any) => {
     setTimeout(() => {
         close();
     }, 2000);
+};
+
+const startTimeLoading = () => {
+    const { open, close } = useLoading({ minTime: time.value });
+    open();
+    close();
 };
 </script>
 

@@ -1,29 +1,44 @@
-import type { Canceler, AxiosRequestConfig } from "axios";
-import axios from "axios";
+import type { AxiosRequestConfig } from "axios";
 
-const pendingMap = new Map<string, Canceler>();
+export class AxiosCancel {
+    pendingMap: Map<string, AbortController>;
+    constructor() {
+        this.pendingMap = new Map<string, AbortController>();
+    }
 
-export const getPendingUrl = (config: AxiosRequestConfig) => [config.method, config.url].join("&");
+    generateReqKey(config: AxiosRequestConfig): string {
+        const { method, url } = config;
+        return [url || "", method || "", JSON.stringify(config.params), JSON.stringify(config.data)].join("&");
+    }
 
-export const addPending = (config: AxiosRequestConfig) => {
-    // const url = getPendingUrl(config);
-    // config.cancelToken = new axios.CancelToken((cancel) => {
-    //     if (!pendingMap.has(url)) {
-    //         console.log(pendingMap);
-    //         pendingMap.set(url, cancel);
-    //     }
-    // });
-};
+    addPending(config: AxiosRequestConfig) {
+        this.removePending(config);
+        const requestKey: string = this.generateReqKey(config);
+        if (!this.pendingMap.has(requestKey)) {
+            const controller = new AbortController();
+            config.signal = controller.signal;
+            this.pendingMap.set(requestKey, controller);
+        } else {
+            config.signal = (this.pendingMap.get(requestKey) as AbortController).signal;
+        }
+    }
 
-export const removePending = (config: AxiosRequestConfig) => {
-    // const url = getPendingUrl(config);
-    // if (pendingMap.has(url)) {
-    //     const cancel = pendingMap.get(url);
-    //     cancel && cancel(url);
-    //     pendingMap.delete(url);
-    // }
-};
+    removePending(config: AxiosRequestConfig) {
+        const requestKey: string = this.generateReqKey(config);
+        if (this.pendingMap.has(requestKey)) {
+            (this.pendingMap.get(requestKey) as AbortController).abort();
+            this.pendingMap.delete(requestKey);
+        }
+    }
 
-export const removeAllPending = () => {};
+    removeAllPending() {
+        this.pendingMap.forEach((cancel: AbortController) => {
+            cancel.abort();
+        });
+        this.reset();
+    }
 
-export const reset = () => {};
+    reset() {
+        this.pendingMap = new Map<string, AbortController>();
+    }
+}
