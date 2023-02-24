@@ -192,6 +192,7 @@ export const roleData = [
             "admin_func_watermark",
             "admin_func_message",
             "admin_func_axios",
+            "admin_func_time_ago",
             "admin_page",
             "admin_page_403",
             "admin_page_404",

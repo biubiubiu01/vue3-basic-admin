@@ -4,7 +4,7 @@ import { useEnv } from "@/hooks";
 import { ResultEnum, ContentTypeEnum } from "@/enums/httpEnum";
 import { useUserStoreWithOut } from "@/stores/modules/user";
 import { setErrorMessage, addAjaxErrorLog, addAjaxLog } from "./log";
-import { addLoading, closeLoading } from "./loading";
+import { AxiosLoading } from "./loading";
 import { AxiosCancel } from "./cancel";
 import { AxiosRetry } from "./retry";
 
@@ -28,6 +28,8 @@ const { VITE_BASE_API } = useEnv();
 
 const axiosCancel = new AxiosCancel();
 
+const axiosLoading = new AxiosLoading();
+
 const service: AxiosInstance = axios.create({
     baseURL: VITE_BASE_API,
     timeout: 10 * 1000, // 请求超时时间
@@ -45,7 +47,7 @@ service.interceptors.request.use((config: AxiosRequestConfig) => {
     if (getToken) {
         config!.headers!.Authorization = unref(`Bearer ${getToken}`) ?? "";
     }
-    addLoading();
+    axiosLoading.addLoading();
     return config;
 });
 
@@ -99,7 +101,7 @@ const request = {
                     reject(e);
                 })
                 .finally(() => {
-                    closeLoading();
+                    axiosLoading.closeLoading();
                 });
         });
     }

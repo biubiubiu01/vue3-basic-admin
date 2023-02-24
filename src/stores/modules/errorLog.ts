@@ -17,20 +17,14 @@ interface ErrorLogInfo {
 
 interface ErrorLogState {
     errorLogList: ErrorLogInfo[];
-    errorCount: number;
 }
 
 export const useErrorLog = defineStore({
     id: "error-log",
     state: (): ErrorLogState => ({
-        errorLogList: [],
-        errorCount: 0
+        errorLogList: []
     }),
-    getters: {
-        getErrorCount(): number {
-            return this.errorCount;
-        }
-    },
+    getters: {},
     actions: {
         async addErrorLog(err: ErrorLogInfo) {
             const errorInfo = {
@@ -41,7 +35,6 @@ export const useErrorLog = defineStore({
             if (errorInfo.url === Api.ADD_ERROR_INFO) return;
             await addErrorInfo(errorInfo);
             this.errorLogList.push({ ...errorInfo });
-            this.errorCount++;
         }
     }
 });

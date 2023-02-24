@@ -5,10 +5,10 @@
             <Breadcrumb />
         </div>
         <div class="nav-actions flex-row-center h100">
-            <el-tooltip placement="bottom" content="搜索">
-                <base-icon svg-name="search" class="pointer box-hover action-item" :size="20" />
-            </el-tooltip>
-            <base-icon svg-name="remind" class="pointer box-hover action-item" :size="20" />
+            <NavSearch />
+            <el-badge :value="count" :hidden="count === 0" :max="10" class="mr5">
+                <base-icon svg-name="remind" class="pointer" :size="20" @click="handleGoError" />
+            </el-badge>
             <NavFullscreen />
             <NavSwitch />
             <NavTextSize />
@@ -20,14 +20,29 @@
 
 <script lang="ts" setup>
 import { useMenuSetting } from "../hooks/useMenuSetting";
+import { useRouter } from "vue-router";
 
 import Breadcrumb from "./breadcrumb.vue";
 import NavUser from "./nav-user.vue";
+import NavSearch from "./nav-search.vue";
 import NavSwitch from "./nav-switch.vue";
 import NavTextSize from "./nav-text-size.vue";
 import NavFullscreen from "./nav-fullscreen.vue";
 
 const { getCollapse, toggleCollapse } = useMenuSetting();
+const router = useRouter();
+
+const count = ref(6);
+
+const handleGoError = () => {
+    router
+        .push({
+            name: "ErrorLog"
+        })
+        .then(() => {
+            count.value = 0;
+        });
+};
 </script>
 
 <style lang="scss" scoped>
@@ -44,7 +59,7 @@ const { getCollapse, toggleCollapse } = useMenuSetting();
     }
     .nav-actions {
         :deep(.action-item) {
-            padding: 0 8px;
+            padding: 0 12px;
         }
     }
     :deep(.box-hover) {

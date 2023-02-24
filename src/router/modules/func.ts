@@ -68,6 +68,17 @@ const func: AppRouteType[] = [
                     permission: "admin_func_axios",
                     icon: ""
                 }
+            },
+            {
+                path: "time-ago",
+                name: "TimeAgo",
+                component: () => import("@/views/func/time-ago/index.vue"),
+                meta: {
+                    title: "相对时间",
+                    sort: 6,
+                    permission: "admin_func_time_ago",
+                    icon: ""
+                }
             }
         ]
     }

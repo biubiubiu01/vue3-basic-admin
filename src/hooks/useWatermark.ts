@@ -1,6 +1,5 @@
 import type { Ref } from "vue";
 import { useThrottleFn, useResizeObserver } from "@vueuse/core";
-import { deepClone } from "@/utils";
 
 const domSymbol = Symbol("watermark-dom");
 

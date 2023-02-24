@@ -1,11 +1,16 @@
 import { MockMethod } from "vite-plugin-mock";
 import { resultSuccess } from "../utils";
+
 export default [
     {
         url: "/api/test/getTest",
         method: "get",
         response: () => {
-            return resultSuccess();
+            const data = [];
+            for (let i = 0; i < 10000; i++) {
+                data.push(i);
+            }
+            return resultSuccess(data);
         }
     },
     {
@@ -19,7 +24,11 @@ export default [
         url: "/api/test/sameTest",
         method: "get",
         response: () => {
-            return resultSuccess();
+            const data = [];
+            for (let i = 0; i < 10000; i++) {
+                data.push(i);
+            }
+            return resultSuccess(data);
         }
     }
 ] as MockMethod[];

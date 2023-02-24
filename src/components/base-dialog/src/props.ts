@@ -67,6 +67,10 @@ export const extraProps = {
         type: Boolean,
         default: true
     },
+    showHeader: {
+        type: Boolean,
+        default: true
+    },
     btnPosition: {
         type: String as PropType<"left" | "right" | "center">,
         default: "center"

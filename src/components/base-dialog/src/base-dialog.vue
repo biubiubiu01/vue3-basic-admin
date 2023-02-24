@@ -1,7 +1,7 @@
 <template>
     <el-dialog v-model="dialogVisible" v-bind="getPropsValue" class="base-dialog" :before-close="handleBeforeClose">
         <template #header="{ close }">
-            <div class="base-dialog-header">
+            <div class="base-dialog-header" v-if="showHeader">
                 <span v-if="!$slots.title"> {{ title }}</span>
                 <slot name="title"></slot>
                 <el-space :size="14" class="base-header-icon">

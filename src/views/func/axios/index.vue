@@ -58,18 +58,10 @@ const handleInitApi = async () => {
 
 const handleSameApi = () => {
     sameTestApi();
-    setTimeout(() => {
-        sameTestApi();
-    }, 5);
-    setTimeout(() => {
-        sameTestApi();
-    }, 6);
-    setTimeout(() => {
-        sameTestApi();
-    }, 7);
-    setTimeout(() => {
-        sameTestApi();
-    }, 8);
+    sameTestApi();
+    sameTestApi();
+    sameTestApi();
+    sameTestApi();
 };
 
 const handleRetry = () => {
