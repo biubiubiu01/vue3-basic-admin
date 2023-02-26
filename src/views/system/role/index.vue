@@ -5,8 +5,8 @@
                 <base-button type="primary" @click="handleAddRole">新增角色</base-button>
             </template>
         </base-page-table>
+        <RoleDialog ref="roleDialogRef" @success="handleSearch" />
     </div>
-    <RoleDialog ref="roleDialogRef" @success="handleSearch" />
 </template>
 
 <script lang="ts" setup name="Role">

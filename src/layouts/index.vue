@@ -7,7 +7,7 @@
                 <TagView />
             </el-header>
             <el-main class="app-main">
-                <el-scrollbar ref="mainScrollRef">
+                <el-scrollbar ref="mainScrollRef" view-class="main-scroll">
                     <RouterView>
                         <template #default="{ Component, route }">
                             <transition name="el-fade-in-linear" mode="out-in">

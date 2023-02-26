@@ -2,10 +2,10 @@ import type { Ref } from "vue";
 import type { EChartsOption } from "echarts";
 import echarts from "@/plugins/echarts";
 import { useResizeObserver, useDebounceFn, useTimeoutFn, tryOnUnmounted } from "@vueuse/core";
-import { useDark } from "./useDark";
+import { useDark } from "@/hooks/useDark";
 import { deepClone } from "@/utils";
 
-export const useECharts = (elRef: Ref<HTMLDivElement>) => {
+export const useCharts = (elRef: Ref<HTMLDivElement>, geoJson?: any) => {
     const { isDark } = useDark();
 
     let chartInstance: echarts.ECharts | null = null;
@@ -18,26 +18,12 @@ export const useECharts = (elRef: Ref<HTMLDivElement>) => {
             : (cacheOption.value as EChartsOption);
     });
 
-    tryOnUnmounted(() => {
-        if (!chartInstance) return;
-        chartInstance.dispose();
-        chartInstance = null;
-    });
-
-    onActivated(() => {
-        if (!chartInstance) return;
-        resize();
-    });
-
-    onDeactivated(() => {
-        if (!chartInstance) return;
-        chartInstance.dispose();
-        chartInstance = null;
-    });
-
     const initCharts = () => {
         if (!unref(elRef)) return;
         chartInstance = echarts.init(unref(elRef), unref(isDark) ? "dark" : "default");
+        if (unref(geoJson)) {
+            echarts.registerMap("map", unref(geoJson));
+        }
         useResizeObserver(
             unref(elRef),
             useDebounceFn((e) => {
@@ -81,22 +67,42 @@ export const useECharts = (elRef: Ref<HTMLDivElement>) => {
         return chartInstance;
     };
 
+    tryOnUnmounted(() => {
+        clear();
+    });
+
+    onActivated(() => {
+        clear();
+    });
+
+    onDeactivated(() => {
+        clear();
+    });
+
     watch(
         () => isDark.value,
         () => {
             if (chartInstance) {
-                chartInstance.dispose();
-                initCharts();
+                clear();
                 setOption(cacheOption.value as EChartsOption);
             }
         }
     );
 
+    watch(
+        () => geoJson.value,
+        () => {
+            if (chartInstance && unref(geoJson)) {
+                clear();
+                setOption(cacheOption.value as EChartsOption);
+            }
+        },
+        { deep: true }
+    );
+
     return {
         initCharts,
         getInstance,
-        getOption: getOption.value,
-
         setOption,
         resize,
         clear

@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { store, storeReset } from "../index";
 import { login, getUserInfo } from "@/api/user";
 import { addLoginInfo } from "@/api/log";
+import { resetRouter } from "@/router";
 import type { Router } from "vue-router";
 
 interface UserState {
@@ -50,6 +51,7 @@ export const useUserStore = defineStore({
 
         logout(router: Router) {
             storeReset();
+            resetRouter();
             const { currentRoute } = router;
             router.replace({
                 path: "/login",

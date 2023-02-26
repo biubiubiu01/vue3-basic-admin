@@ -13,7 +13,7 @@
             <NavSwitch />
             <NavTextSize />
             <NavUser />
-            <base-icon el-name="setting" class="pointer box-hover action-item" :size="18" />
+            <Setting />
         </div>
     </div>
 </template>
@@ -28,6 +28,7 @@ import NavSearch from "./nav-search.vue";
 import NavSwitch from "./nav-switch.vue";
 import NavTextSize from "./nav-text-size.vue";
 import NavFullscreen from "./nav-fullscreen.vue";
+import Setting from "../setting/index.vue";
 
 const { getCollapse, toggleCollapse } = useMenuSetting();
 const router = useRouter();

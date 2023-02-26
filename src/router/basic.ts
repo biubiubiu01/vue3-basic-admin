@@ -28,12 +28,11 @@ const RedirectRoute: AppRouteType = {
     ]
 };
 
-//  const PageError: AppRouteType[] = [
-//     {
-//         path: "/:path(.*)*",
-//         redirect: "/404"
-//     }
-// ];
+const PageError = {
+    path: "/:path(.*)*",
+    name: "",
+    component: () => import("@/views/page/403.vue")
+};
 
 const getAsyncRoute = (): AppRouteType[] => {
     const modules = import.meta.glob("./modules/**/*.ts", { eager: true, import: "default" });
@@ -57,7 +56,7 @@ const getRouteName = (routeList: AppRouteType[]) => {
 };
 
 // 基础路由
-export const basicRoutes = [LoginRoute, RedirectRoute, RootRoute];
+export const basicRoutes = [LoginRoute, RedirectRoute, RootRoute, PageError];
 
 // 异步路由
 export const asyncRoutes = getAsyncRoute();

@@ -48,9 +48,6 @@ function filterAsyncRoute(routes: AppRouteType[], role: string[]): AppRouteType[
 }
 
 function hasRole(route: AppRouteType, role: string[]) {
-    if (route.meta?.hidden) {
-        return false;
-    }
     if (route.meta && route.meta.permission) {
         return role.includes(route?.meta?.permission);
     }

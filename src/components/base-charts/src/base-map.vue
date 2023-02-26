@@ -6,11 +6,12 @@
 import type { PropType, Ref } from "vue";
 import { useTimeoutFn } from "@vueuse/core";
 import type { EChartsOption } from "echarts";
-import echarts from "@/plugins/echarts";
-import { isString, remoteLoad, deepClone, isUndefined } from "@/utils";
+import { isString, remoteLoad, isUndefined } from "@/utils";
 import { AMapCDN, AMapUiCDN } from "@/constant/cdn";
-import { useECharts, useLoading } from "@/hooks";
-import { useChartConfig } from "./hooks/useChartConfig";
+import { AMapKey } from "@/constant/key";
+import { useLoading } from "@/hooks";
+import { useCharts } from "./hooks/useCharts";
+import { useChartConfig } from "./hooks/useChartsConfig";
 
 const props = defineProps({
     width: {
@@ -34,7 +35,7 @@ const props = defineProps({
     },
     mapKey: {
         type: String,
-        required: true
+        default: AMapKey
     }
 });
 
@@ -44,11 +45,6 @@ const state = reactive<any>({
     geoJsonObj: {},
     code: props.code
 });
-const { setOption } = useECharts(baeMapRef as Ref<HTMLDivElement>);
-
-const { config, mergeConfig } = useChartConfig(props.type);
-
-const { open, close } = useLoading();
 
 onMounted(() => {
     getMapJson();
@@ -62,9 +58,15 @@ const style = computed(() => {
     };
 });
 
-const getOption = computed((): EChartsOption => {
-    return mergeConfig(deepClone(config), props.options);
+const getGeoJson = computed(() => {
+    return state.geoJsonObj[state.code];
 });
+
+const { setOption } = useCharts(baeMapRef as Ref<HTMLDivElement>, getGeoJson);
+
+const { getConfig } = useChartConfig(props.type, props.options);
+
+const loading = useLoading();
 
 // AMap和AMapUI挂载
 const initMap = async () => {
@@ -87,18 +89,19 @@ const getMapJson = async (code: number = props.code, childCode?: number) => {
     if (!window.AMap || !window.AMapUI) {
         await initMap();
     }
+    loading.open(baeMapRef.value as any);
+
     if (state.geoJsonObj[code] && !isUndefined(state.geoJsonObj[childCode as number])) {
         state.code = childCode || code;
         setMapOption();
         return;
     }
-    open(baeMapRef.value as any);
     useTimeoutFn(() => {
         window.AMapUI.loadUI(["geo/DistrictExplorer"], (DistrictExplorer: any) => {
             const districtExplorer = new DistrictExplorer();
             districtExplorer.loadAreaNode(code, function (error: Error, areaNode: any) {
                 if (error) {
-                    close();
+                    loading.close();
                     return;
                 }
 
@@ -115,7 +118,6 @@ const getMapJson = async (code: number = props.code, childCode?: number) => {
                 state.geoJsonObj[childCode || code] = {
                     features: geoJson
                 };
-                echarts.registerMap("map", state.geoJsonObj[childCode || code]);
                 state.code = childCode || code;
 
                 setMapOption();
@@ -126,8 +128,8 @@ const getMapJson = async (code: number = props.code, childCode?: number) => {
 
 // 根据配置渲染map
 const setMapOption = () => {
-    close();
-    setOption(unref(getOption));
+    loading.close();
+    setOption(unref(getConfig));
 };
 
 watch(

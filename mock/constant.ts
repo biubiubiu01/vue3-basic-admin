@@ -213,7 +213,18 @@ export const roleData = [
         createTime: "2023-01-12 12:32:45",
         status: 1,
         remark: "普通用户，拥有大部分权限",
-        menuIds: ["admin_dashboard", "admin_dashboard_analysis", "admin_dashboard_workbench", "admin_icon"]
+        menuIds: [
+            "admin_dashboard",
+            "admin_dashboard_analysis",
+            "admin_dashboard_workbench",
+            "admin_comp",
+            "admin_comp_table",
+            "admin_comp_form",
+            "admin_comp_icon",
+            "admin_comp_editor",
+            "admin_comp_markdown",
+            "admin_comp_json"
+        ]
     },
     {
         id: 103,

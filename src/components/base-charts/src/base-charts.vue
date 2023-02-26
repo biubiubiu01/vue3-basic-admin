@@ -6,9 +6,9 @@
 import type { PropType, Ref } from "vue";
 import type { EChartsOption } from "echarts";
 import { isString, deepClone } from "@/utils";
-import type { EChartsType } from "@/enums/echartsEnum";
-import { useECharts } from "@/hooks";
-import { useChartConfig } from "./hooks/useChartConfig";
+import type { EChartsType } from "./types";
+import { useCharts } from "./hooks/useCharts";
+import { useChartConfig } from "./hooks/useChartsConfig";
 
 const props = defineProps({
     width: {
@@ -31,16 +31,12 @@ const props = defineProps({
 
 const baseChartRef = ref<HTMLDivElement | null>(null);
 
-const { config, mergeConfig } = useChartConfig(props.type);
+const { getConfig } = useChartConfig(props.type, props.options);
 
-const { setOption } = useECharts(baseChartRef as Ref<HTMLDivElement>);
+const { setOption } = useCharts(baseChartRef as Ref<HTMLDivElement>);
 
 onMounted(() => {
-    setOption(unref(getOption));
-});
-
-const getOption = computed((): EChartsOption => {
-    return mergeConfig(deepClone(config), props.options);
+    setOption(unref(getConfig));
 });
 
 const style = computed(() => {
@@ -54,7 +50,7 @@ const style = computed(() => {
 watch(
     () => props.options,
     () => {
-        setOption(unref(getOption));
+        setOption(unref(getConfig));
     },
     { deep: true }
 );

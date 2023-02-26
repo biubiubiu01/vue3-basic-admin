@@ -11,7 +11,7 @@ export const createPermission = (router: Router) => {
         const { getRoute } = usePermissionStore;
 
         // 白名单
-        if (WHITE_LIST.includes(<string>to.name)) {
+        if (to.name && WHITE_LIST.includes(<string>to.name)) {
             next();
             return;
         }
@@ -37,7 +37,11 @@ export const createPermission = (router: Router) => {
 
         // 是否已经挂载过路由
         if (getRoute.length > 0) {
-            next();
+            if (router.hasRoute(<string>to.name)) {
+                next();
+            } else {
+                next(getRoute[0]);
+            }
             return;
         }
 
@@ -47,7 +51,7 @@ export const createPermission = (router: Router) => {
         });
 
         let redirectPath = (from.query.redirect || to.path) as string;
-        if (redirectPath === "/") {
+        if (redirectPath === "/dashboard") {
             redirectPath = routeList[0].path;
         }
         const redirect = decodeURIComponent(redirectPath);

@@ -1,20 +1,18 @@
 <template>
     <div class="com-echarts-map-container hidden">
-        <base-box title="分布图">
-            <base-map height="600px" type="map" :map-key="AMapKey" click-down />
+        <base-box title="分布图" class="dark-bg">
+            <base-map height="600px" type="map" click-down />
         </base-box>
-        <base-box title="散点图 ">
-            <base-map height="600px" type="scatter" :map-key="AMapKey" :options="scatterOptions" />
+        <base-box title="散点图" class="dark-bg">
+            <base-map height="600px" type="scatter" :options="scatterOptions" />
         </base-box>
-        <base-box title="热力图">
-            <base-map height="600px" type="heatmap" :map-key="AMapKey" :options="heatmapOptions" />
+        <base-box title="热力图" class="dark-bg">
+            <base-map height="600px" type="heatmap" :options="heatmapOptions" />
         </base-box>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { AMapKey } from "@/constant/key";
-
 const scatterOptions = ref({
     series: [
         {
@@ -166,4 +164,11 @@ const heatmapOptions = ref({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.dark-bg {
+    background-color: #001a3a;
+    :deep(.base-box-title) {
+        color: #fff;
+    }
+}
+</style>

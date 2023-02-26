@@ -8,8 +8,8 @@
                 </template>
             </base-page-table>
         </div>
+        <UserDialog ref="userDialogRef" @success="handleSearch" />
     </div>
-    <UserDialog ref="userDialogRef" @success="handleSearch" />
 </template>
 
 <script lang="ts" setup name="Account">
