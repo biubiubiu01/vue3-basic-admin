@@ -17,7 +17,7 @@ export const createPermission = (router: Router) => {
         }
 
         // 没有token
-        if (!token) {
+        if (!unref(token)) {
             if (!to?.meta?.permission && getRoute.length > 0) {
                 next();
                 return;
