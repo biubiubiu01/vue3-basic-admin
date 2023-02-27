@@ -69,7 +69,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
                 prodEnabled: isBuild,
                 // 生产使用mock
                 injectCode: `
-                  import { setupProdMockServer } from './mockProdServer';
+                  import { setupProdMockServer } from '../mock/mockProdServer';
           
                   setupProdMockServer();
                 `
@@ -103,15 +103,15 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
             open: true // 服务启动时是否自动打开浏览器
         },
         build: {
-            chunkSizeWarningLimit: 1000,
+            sourcemap: false,
+            reportCompressedSize: false,
+            chunkSizeWarningLimit: 2000,
             rollupOptions: {
+                // 静态资源分类打包
                 output: {
-                    // 分包
-                    manualChunks(id) {
-                        if (id.includes("node_modules")) {
-                            return id.toString().split("node_modules/")[1].split("/")[0].toString();
-                        }
-                    }
+                    chunkFileNames: "static/js/[name]-[hash].js",
+                    entryFileNames: "static/js/[name]-[hash].js",
+                    assetFileNames: "static/[ext]/[name]-[hash].[ext]"
                 }
             }
         }
