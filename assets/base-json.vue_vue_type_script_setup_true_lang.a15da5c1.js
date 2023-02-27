@@ -1,1 +1,0 @@
-import{d as t,o as s,v as o,X as r,u as n,b2 as u}from"./.pnpm.b1628590.js";const d=t({__name:"base-json",props:{data:Object},setup(e){return(a,c)=>(s(),o(n(u),r({deep:3,showLength:!0,showLineNumber:!0,showIcon:!0},a.$attrs,{data:e.data}),null,16,["data"]))}});export{d as _};

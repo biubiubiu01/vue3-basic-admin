@@ -1,0 +1,1 @@
+import{d as a,o as r,f as n,M as c,a8 as u}from"./.pnpm.47a6ea52.js";import{e as p,o as i}from"./index.03a8dd6c.js";const m={class:"page-redirect-container"},q=a({__name:"index",setup(_){const e=c(),o=u(),{open:t,close:s}=p({modal:!1});return t(),setTimeout(()=>{s(),o.replace({path:e.query.path,query:{...i(e.query,"path")}})},700),(d,l)=>(r(),n("div",m))}});export{q as default};
