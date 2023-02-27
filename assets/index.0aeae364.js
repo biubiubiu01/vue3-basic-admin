@@ -1,0 +1,1 @@
+import{d as s,aE as r,aF as n,o as c,c as u,aG as p,l as i}from"./index.c50eeaf2.js";const l={class:"page-redirect-container"},h=s({__name:"index",setup(_){const e=p(),t=i(),{open:o,close:a}=r({modal:!1});return o(),setTimeout(()=>{a(),t.replace({path:e.query.path,query:{...n(e.query,"path")}})},700),(d,m)=>(c(),u("div",l))}});export{h as default};
