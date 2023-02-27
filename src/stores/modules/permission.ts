@@ -3,6 +3,8 @@ import { store } from "../index";
 import { useUserStore } from "./user";
 import { AppRouteType } from "@/router/types";
 import { asyncRoutes } from "@/router/basic";
+import router from "@/router/index";
+import { deepClone } from "@/utils";
 
 interface PermissionState {
     route: AppRouteType[];
@@ -24,11 +26,18 @@ export const usePermissionStore = defineStore({
         },
 
         async initRoute() {
-            const { getRoleIds } = useUserStore();
-            const routeList = filterAsyncRoute(asyncRoutes, getRoleIds);
+            const useStore = useUserStore();
+            const routeList = filterAsyncRoute(asyncRoutes, useStore.getRoleIds);
             sortRoute(routeList);
             this.setRoute(routeList);
             return routeList;
+        },
+
+        async changeRole() {
+            const routeList = await this.initRoute();
+            routeList.forEach((route) => {
+                router.addRoute(route);
+            });
         }
     }
 });

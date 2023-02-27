@@ -156,7 +156,7 @@ watch(searchKey, () => {
         cursor: pointer;
         border: 1px solid var(--base-column-header-color);
         &.active {
-            background-color: var(--base-menu-active-bg-color);
+            background-color: var(--el-color-primary);
             color: var(--el-menu-active-color);
             box-shadow: 0 1px 3px var(--base-tag-shadow);
         }

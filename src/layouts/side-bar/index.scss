@@ -41,7 +41,7 @@ $menuItemHeight: 48px;
                 color: var(--el-menu-active-color);
             }
             .el-menu-item.is-active {
-                background-color: var(--base-menu-active-bg-color);
+                background-color: var(--el-color-primary);
             }
             .el-menu-item {
                 transition: all 0.2s;
@@ -61,7 +61,7 @@ $menuItemHeight: 48px;
                 .el-menu-item {
                     background: var(--el-submenu-bg-color);
                     &.is-active {
-                        background-color: var(--base-menu-active-bg-color);
+                        background-color: var(--el-color-primary);
                     }
                 }
 

@@ -81,12 +81,23 @@ const comp: AppRouteType[] = [
                 }
             },
             {
+                path: "tree-select",
+                name: "TreeSelect",
+                component: () => import("@/views/comp/tree-select/index.vue"),
+                meta: {
+                    title: "Tree选择",
+                    sort: 7,
+                    permission: "admin_comp_tree_select",
+                    icon: ""
+                }
+            },
+            {
                 path: "select",
                 name: "Select",
                 component: () => import("@/views/comp/select/index.vue"),
                 meta: {
                     title: "Select",
-                    sort: 7,
+                    sort: 8,
                     permission: "admin_comp_select",
                     icon: ""
                 }
@@ -97,7 +108,7 @@ const comp: AppRouteType[] = [
                 component: () => import("@/views/comp/table/index.vue"),
                 meta: {
                     title: "Table",
-                    sort: 8,
+                    sort: 9,
                     permission: "admin_comp_table",
                     icon: ""
                 }
@@ -108,7 +119,7 @@ const comp: AppRouteType[] = [
                 component: () => import("@/views/comp/form/index.vue"),
                 meta: {
                     title: "Form",
-                    sort: 9,
+                    sort: 10,
                     permission: "admin_comp_form",
                     icon: ""
                 }
@@ -118,7 +129,7 @@ const comp: AppRouteType[] = [
                 name: "Echarts",
                 meta: {
                     title: "Echarts",
-                    sort: 10,
+                    sort: 11,
                     permission: "admin_comp_echarts",
                     icon: ""
                 },
@@ -198,7 +209,7 @@ const comp: AppRouteType[] = [
                 component: () => import("@/views/comp/editor/index.vue"),
                 meta: {
                     title: "富文本编辑器",
-                    sort: 11,
+                    sort: 12,
                     permission: "admin_comp_editor",
                     icon: ""
                 }
@@ -209,7 +220,7 @@ const comp: AppRouteType[] = [
                 component: () => import("@/views/comp/markdown/index.vue"),
                 meta: {
                     title: "Markdown",
-                    sort: 12,
+                    sort: 13,
                     permission: "admin_comp_markdown",
                     icon: ""
                 }
@@ -220,7 +231,7 @@ const comp: AppRouteType[] = [
                 component: () => import("@/views/comp/json/index.vue"),
                 meta: {
                     title: "JSON编辑器",
-                    sort: 13,
+                    sort: 14,
                     permission: "admin_comp_json",
                     icon: ""
                 }

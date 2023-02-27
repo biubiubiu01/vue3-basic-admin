@@ -1,9 +1,5 @@
 .base-column-setting {
     .base-column-content {
-        height: calc(100% - 32px);
-        .base-column-title {
-            background-color: var(--base-column-header-color);
-        }
         .base-column-list {
             border: 1px solid var(--base-column-header-color);
             .base-column-checkbox {
@@ -16,13 +12,14 @@
                 }
             }
         }
+        .base-column-title {
+            height: 32px;
+            line-height: 32px;
+            background-color: var(--base-column-header-color);
+        }
         .base-column-choose {
             border: 1px solid var(--base-column-header-color);
             width: 200px;
-            .base-column-title {
-                height: 32px;
-                line-height: 32px;
-            }
             .base-column-choose-content {
                 height: 450px;
                 .base-column-choose-item {

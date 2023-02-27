@@ -34,7 +34,7 @@ const props = defineProps({
     }
 });
 
-const { getRoleIds } = useUserStoreWithOut();
+const userStore = useUserStoreWithOut();
 
 const attrs = useAttrs();
 
@@ -45,7 +45,7 @@ const getPropsValue = computed(() => {
 
 const hasPermission = computed(() => {
     if (!props.auth) return true;
-    return getRoleIds.includes(props.auth);
+    return userStore.getRoleIds.includes(props.auth);
 });
 </script>
 

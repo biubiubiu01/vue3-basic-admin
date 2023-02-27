@@ -3,7 +3,7 @@ import App from "./App.vue";
 
 import { setupPinia } from "./stores";
 import { setupIcon, setupGlobalUtils, setupErrorHandler } from "@/plugins";
-import { setupLoadingDirective } from "./directive";
+import { setupLoadingDirective, setupPermissionDirective } from "./directive";
 import router from "./router/index";
 import { setupRouterGuard } from "@/router/guard";
 
@@ -25,6 +25,8 @@ const setupPlugins = () => {
 const setupDirective = () => {
     // 注册loading自定义指令
     setupLoadingDirective(app);
+    // 注册permission自定义指令
+    setupPermissionDirective(app);
 };
 
 setupPlugins();

@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { store, storeReset } from "../index";
 import { login, getUserInfo } from "@/api/user";
 import { addLoginInfo } from "@/api/log";
+import { usePermissionStore } from "./permission";
 import { resetRouter } from "@/router";
 import type { Router } from "vue-router";
 
@@ -72,6 +73,20 @@ export const useUserStore = defineStore({
             await addLoginInfo({
                 username: this.userInfo.username
             });
+        },
+
+        async changeRole(role: string) {
+            storeReset();
+            resetRouter();
+            let params: any = {};
+            if (role === "admin") {
+                params = { username: "admin", password: 123456 };
+            } else {
+                params = { username: "test", password: 123456 };
+            }
+            await this.login(params);
+            const usePermission = usePermissionStore();
+            usePermission.changeRole();
         }
     }
 });
