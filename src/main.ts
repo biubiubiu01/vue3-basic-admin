@@ -6,6 +6,7 @@ import { setupIcon, setupGlobalUtils, setupErrorHandler } from "@/plugins";
 import { setupLoadingDirective, setupPermissionDirective } from "./directive";
 import router from "./router/index";
 import { setupRouterGuard } from "@/router/guard";
+import { setupProdMockServer } from "../mock/mockProdServer";
 
 import "./styles/index.scss";
 
@@ -29,6 +30,7 @@ const setupDirective = () => {
     setupPermissionDirective(app);
 };
 
+setupProdMockServer();
 setupPlugins();
 setupDirective();
 // 注册路由守卫

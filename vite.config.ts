@@ -66,13 +66,13 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
                 // 本地调试
                 localEnabled: !isBuild,
                 // 打包mock
-                prodEnabled: isBuild,
+                prodEnabled: isBuild
                 // 生产使用mock
-                injectCode: `
-                  import { setupProdMockServer } from '../mock/mockProdServer';
-          
-                  setupProdMockServer();
-                `
+                // injectCode: `
+                //   import { setupProdMockServer } from '../mock/mockProdServer';
+
+                //   setupProdMockServer();
+                // `
             }),
             createHtmlPlugin({
                 minify: isBuild,
