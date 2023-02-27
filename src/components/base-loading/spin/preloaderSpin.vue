@@ -2,7 +2,7 @@
     <div class="preloader-wrapper"></div>
 </template>
 
-<script></script>
+<script lang="ts" setup></script>
 <style lang="scss" scoped>
 .preloader-wrapper {
     position: relative;

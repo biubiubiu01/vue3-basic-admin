@@ -60,7 +60,7 @@ const addVueError = () => {
 };
 
 watch(
-    () => errorLogStore.getErrorCount,
+    () => errorLogStore.errorLogList,
     () => {
         handleSearch();
     }
