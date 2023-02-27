@@ -69,7 +69,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
                 prodEnabled: isBuild,
                 // 生产使用mock
                 injectCode: `
-                  import { setupProdMockServer } from '../mock/mockProdServer';
+                  import { setupProdMockServer } from './mockProdServer';
           
                   setupProdMockServer();
                 `
