@@ -1,15 +1,9 @@
 import { createProdMockServer } from "vite-plugin-mock/es/createProdMockServer";
-
-const getMockModule = () => {
-    const modules = import.meta.glob("./mock/controller/**/*.ts", { eager: true, import: "default" });
-    const mockModules: any[] = [];
-    Object.values(modules).forEach((value: any) => {
-        const moduleList = Array.isArray(value) ? [...(value as any)] : [value];
-        mockModules.push(...moduleList);
-    });
-    return mockModules;
-};
+import log from "./controller/log";
+import system from "./controller/system";
+import test from "./controller/test";
+import user from "./controller/user";
 
 export function setupProdMockServer() {
-    createProdMockServer(getMockModule());
+    createProdMockServer([...log, ...system, ...test, ...user]);
 }
