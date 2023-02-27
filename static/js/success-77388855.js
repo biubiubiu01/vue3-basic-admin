@@ -1,1 +1,0 @@
-import{_ as t}from"./base-result.vue_vue_type_script_setup_true_lang-eda46f4b.js";import{m as c,o as e,B as o}from"./index-0b27933a.js";const r={};function n(_,a){const s=t;return e(),o(s,{title:"\u64CD\u4F5C\u6210\u529F",status:"success",style:{"margin-top":"10%"}})}const i=c(r,[["render",n]]);export{i as default};
