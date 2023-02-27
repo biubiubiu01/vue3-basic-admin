@@ -101,6 +101,19 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
             host: "0.0.0.0",
             port: 4000, // 服务端口号
             open: true // 服务启动时是否自动打开浏览器
+        },
+        build: {
+            chunkSizeWarningLimit: 1000,
+            rollupOptions: {
+                output: {
+                    // 分包
+                    manualChunks(id) {
+                        if (id.includes("node_modules")) {
+                            return id.toString().split("node_modules/")[1].split("/")[0].toString();
+                        }
+                    }
+                }
+            }
         }
     };
 };
