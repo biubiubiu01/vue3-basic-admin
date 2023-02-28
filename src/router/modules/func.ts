@@ -10,7 +10,7 @@ const func: AppRouteType[] = [
         meta: {
             title: "功能",
             icon: "svg-func",
-            sort: 3,
+            sort: 5,
             permission: "admin_func"
         },
         children: [

@@ -8,6 +8,7 @@ import { useTimeoutFn } from "@vueuse/core";
 import type { EChartsOption } from "echarts";
 import { isString, remoteLoad, isUndefined } from "@/utils";
 import { AMapCDN, AMapUiCDN } from "@/constant/cdn";
+import echarts from "@/plugins/echarts";
 import { AMapKey } from "@/constant/key";
 import { useLoading } from "@/hooks";
 import { useCharts } from "./hooks/useCharts";
@@ -58,11 +59,7 @@ const style = computed(() => {
     };
 });
 
-const getGeoJson = computed(() => {
-    return state.geoJsonObj[state.code];
-});
-
-const { setOption } = useCharts(baeMapRef as Ref<HTMLDivElement>, getGeoJson);
+const { setOption } = useCharts(baeMapRef as Ref<HTMLDivElement>);
 
 const { getConfig } = useChartConfig(props.type, props.options);
 
@@ -118,6 +115,7 @@ const getMapJson = async (code: number = props.code, childCode?: number) => {
                 state.geoJsonObj[childCode || code] = {
                     features: geoJson
                 };
+                echarts.registerMap("map", state.geoJsonObj[state.code]);
                 state.code = childCode || code;
 
                 setMapOption();

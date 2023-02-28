@@ -10,11 +10,11 @@
                 </template>
             </template>
         </base-page-table>
+        <MenuDialog ref="menuDialogRef" @success="handleSearch" />
     </div>
-    <MenuDialog ref="menuDialogRef" @success="handleSearch" />
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="Menu">
 import { useColumn } from "./column";
 import { getMenuList } from "@/api/system/menu";
 import MenuDialog from "./components/MenuDialog.vue";

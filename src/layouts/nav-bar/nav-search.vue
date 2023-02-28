@@ -72,16 +72,14 @@ function handleSearchMenu(val: string) {
 function filterMenu(menuList: any[], keyword: string, parent?: any) {
     const res: any[] = [];
     menuList.forEach((item) => {
-        Object.assign(item, {
-            meta: {
-                icon: parent ? parent.meta.icon : item.meta.icon,
-                title: parent ? `${parent.meta.title} > ${item.meta.title}` : item.meta.title
-            }
+        Object.assign(item.meta, {
+            icon: parent ? parent.meta.icon : item.meta.icon,
+            title: parent ? `${parent.meta.title} > ${item.meta.title}` : item.meta.title
         });
         if (!item.meta.hidden && item.meta.title.toLocaleLowerCase().includes(keyword)) {
             res.push(item);
         }
-        if (item.children) {
+        if (!item.meta.hideChildren && item.children) {
             res.push(...filterMenu(item.children, keyword, item));
         }
     });

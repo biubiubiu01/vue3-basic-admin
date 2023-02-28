@@ -5,7 +5,7 @@ import { useResizeObserver, useDebounceFn, useTimeoutFn, tryOnUnmounted } from "
 import { useDark } from "@/hooks/useDark";
 import { deepClone } from "@/utils";
 
-export const useCharts = (elRef: Ref<HTMLDivElement>, geoJson?: any) => {
+export const useCharts = (elRef: Ref<HTMLDivElement>) => {
     const { isDark } = useDark();
 
     let chartInstance: echarts.ECharts | null = null;
@@ -21,9 +21,6 @@ export const useCharts = (elRef: Ref<HTMLDivElement>, geoJson?: any) => {
     const initCharts = () => {
         if (!unref(elRef)) return;
         chartInstance = echarts.init(unref(elRef), unref(isDark) ? "dark" : "default");
-        if (unref(geoJson)) {
-            echarts.registerMap("map", unref(geoJson));
-        }
         useResizeObserver(
             unref(elRef),
             useDebounceFn((e) => {
@@ -87,17 +84,6 @@ export const useCharts = (elRef: Ref<HTMLDivElement>, geoJson?: any) => {
                 setOption(cacheOption.value as EChartsOption);
             }
         }
-    );
-
-    watch(
-        () => geoJson.value,
-        () => {
-            if (chartInstance && unref(geoJson)) {
-                clear();
-                setOption(cacheOption.value as EChartsOption);
-            }
-        },
-        { deep: true }
     );
 
     return {

@@ -51,20 +51,20 @@ async function handleSearch() {
 }
 
 const addAjaxError = async () => {
-    await testErrorApi();
+    try {
+        await testErrorApi();
+    } catch {
+        handleSearch();
+    }
 };
 
 const addVueError = () => {
+    setTimeout(() => {
+        handleSearch();
+    }, 100);
     const a: any = null;
     a.b = 5;
 };
-
-watch(
-    () => errorLogStore.errorLogList,
-    () => {
-        handleSearch();
-    }
-);
 </script>
 
 <style lang="scss" scoped></style>

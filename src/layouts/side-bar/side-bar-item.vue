@@ -1,6 +1,11 @@
 <template>
     <template v-if="!item?.children || item?.meta?.hideChildren">
-        <el-menu-item :index="resolvePath(item.redirect ?? item.path)" :title="item?.meta?.title" v-if="!item?.meta?.hidden">
+        <el-menu-item
+            :index="resolvePath(item.redirect ?? item.path)"
+            :title="item?.meta?.title"
+            v-if="!item?.meta?.hidden"
+            @click="handleMenuClick(item)"
+        >
             <base-icon :icon="item?.meta?.icon" class="base-icon" :size="18" />
             <template #title>
                 <span class="base-menu-title text-hidden">{{ item?.meta?.title }}</span>
@@ -46,6 +51,12 @@ const resolvePath = (path: string): string => {
     }
 
     return path;
+};
+
+const handleMenuClick = (val: AppRouteType) => {
+    if (isInterLink(val.path)) {
+        window.open(val.path);
+    }
 };
 </script>
 

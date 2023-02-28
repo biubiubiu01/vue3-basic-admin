@@ -10,7 +10,7 @@ const systemLog: AppRouteType[] = [
         meta: {
             title: "系统日志",
             icon: "svg-log",
-            sort: 5,
+            sort: 9,
             permission: "admin_system_log"
         },
         children: [

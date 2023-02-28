@@ -1,17 +1,26 @@
 import echarts from "@/plugins/echarts";
 import type { EChartsOption } from "echarts";
 
-const getImgList = () => {
-    const modules = import.meta.glob("@/assets/graph/**/*", { eager: true, import: "default" });
-    const re = "([^/]*)(\\.\\w+)$";
-    const imgList: any = {};
-    Object.keys(modules).forEach((item) => {
-        const name = <string>item.match(re)?.[1];
-        imgList[name] = modules[item];
-    });
-    return imgList;
-};
-const imgList = getImgList();
+const imgList = [
+    "https://i.328888.xyz/2023/02/28/zZUaU.gif",
+    "https://i.328888.xyz/2023/02/28/zZDep.gif",
+    "https://i.328888.xyz/2023/02/28/zZtkv.gif",
+    "https://i.328888.xyz/2023/02/28/zZWB3.gif",
+    "https://i.328888.xyz/2023/02/28/zZkJy.gif",
+    "https://i.328888.xyz/2023/02/28/zZCA5.gif",
+    "https://i.328888.xyz/2023/02/28/zZlr8.gif",
+    "https://i.328888.xyz/2023/02/28/zZw5Z.gif",
+    "https://i.328888.xyz/2023/02/28/zZHZF.gif",
+    "https://i.328888.xyz/2023/02/28/zZOOH.gif",
+    "https://i.328888.xyz/2023/02/28/zZbeQ.gif",
+    "https://i.328888.xyz/2023/02/28/zZjaE.gif",
+    "https://i.328888.xyz/2023/02/28/zZI0C.gif",
+    "https://i.328888.xyz/2023/02/28/zZNBP.gif",
+    "https://i.328888.xyz/2023/02/28/zZrJX.gif",
+    "https://i.328888.xyz/2023/02/28/zZRDt.jpeg",
+    "https://i.328888.xyz/2023/02/28/zZcrJ.jpeg",
+    "https://i.328888.xyz/2023/02/28/zZm5c.jpeg"
+];
 
 const colorList = [
     "#28CAD8",
@@ -1043,75 +1052,75 @@ export const GraphOptions2: EChartsOption = {
                 {
                     name: "路飞",
                     symbolSize: 110,
-                    symbol: "image://" + imgList[70789]
+                    symbol: "image://" + imgList[2]
                 },
                 {
                     name: "娜美",
-                    symbol: "image://" + imgList[70813]
+                    symbol: "image://" + imgList[6]
                 },
                 {
                     name: "索隆",
-                    symbol: "image://" + imgList[70823]
+                    symbol: "image://" + imgList[10]
                 },
                 {
                     name: "乌索普",
-                    symbol: "image://" + imgList[70816]
+                    symbol: "image://" + imgList[8]
                 },
                 {
                     name: "山治",
-                    symbol: "image://" + imgList[70810]
+                    symbol: "image://" + imgList[5]
                 },
                 {
                     name: "乔巴",
-                    symbol: "image://" + imgList[62898]
+                    symbol: "image://" + imgList[1]
                 },
                 {
                     name: "罗宾",
-                    symbol: "image://" + imgList[70815]
+                    symbol: "image://" + imgList[7]
                 },
                 {
                     name: "弗兰奇",
-                    symbol: "image://" + imgList[70886]
+                    symbol: "image://" + imgList[14]
                 },
                 {
                     name: "布鲁克",
-                    symbol: "image://" + imgList.blk
+                    symbol: "image://" + imgList[16]
                 },
                 {
                     name: "甚平",
-                    symbol: "image://" + imgList.shenping
+                    symbol: "image://" + imgList[17]
                 },
                 {
                     name: "龙",
-                    symbol: "image://" + imgList[70807]
+                    symbol: "image://" + imgList[3]
                 },
                 {
                     name: "卡普",
-                    symbol: "image://" + imgList[70808]
+                    symbol: "image://" + imgList[4]
                 },
                 {
                     name: "雷利",
-                    symbol: "image://" + imgList[70878]
+                    symbol: "image://" + imgList[13]
                 },
                 {
                     name: "艾斯",
-                    symbol: "image://" + imgList[62719]
+                    symbol: "image://" + imgList[0]
                 },
                 {
                     name: "萨博",
-                    symbol: "image://" + imgList[70818]
+                    symbol: "image://" + imgList[9]
                 },
                 {
                     name: "女帝",
-                    symbol: "image://" + imgList[70858]
+                    symbol: "image://" + imgList[11]
                 },
                 {
                     name: "罗",
-                    symbol: "image://" + imgList[70859]
+                    symbol: "image://" + imgList[12]
                 },
                 {
                     name: "草帽大船团",
-                    symbol: "image://" + imgList.big
+                    symbol: "image://" + imgList[15]
                 }
             ]
         }

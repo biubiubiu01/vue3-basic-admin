@@ -4,7 +4,7 @@
     </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="DictionaryKey">
 import { useColumn } from "./column";
 import { getDictKeyList } from "@/api/system/dict";
 

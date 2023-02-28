@@ -1,7 +1,7 @@
 import type { AppRouteType } from "@/router/types";
 import LAYOUT from "@/layouts/index.vue";
 
-const page: AppRouteType[] = [
+const permission: AppRouteType[] = [
     {
         path: "/permission",
         name: "Permission",
@@ -10,7 +10,7 @@ const page: AppRouteType[] = [
         meta: {
             title: "权限控制",
             icon: "svg-permission",
-            sort: 1,
+            sort: 2,
             permission: "admin_permission"
         },
         children: [
@@ -40,4 +40,4 @@ const page: AppRouteType[] = [
     }
 ];
 
-export default page;
+export default permission;

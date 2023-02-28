@@ -10,7 +10,7 @@ const nested: AppRouteType[] = [
         meta: {
             title: "嵌套路由",
             icon: "svg-nested",
-            sort: 3
+            sort: 8
         },
         children: [
             {

@@ -4,7 +4,7 @@
     </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="Api">
 import { useColumn } from "./column";
 import { getApiList } from "@/api/system/api";
 

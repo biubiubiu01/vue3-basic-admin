@@ -1,5 +1,5 @@
 <template>
-    <div class="page-analysis-container">
+    <div class="page-analysis-container hidden">
         <CardList :loading="loading" />
         <TurnoverAnalysis :loading="loading" class="mt20" />
         <DetailAnalysis :loading="loading" class="mt20" />

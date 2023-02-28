@@ -50,9 +50,6 @@
 
 <script lang="ts" setup>
 import { TableColumn, TableColumn2, TableCheckList } from "../colums";
-import test1 from "@/assets/images/test/test1.jpg";
-import test2 from "@/assets/images/test/test2.jpg";
-import test3 from "@/assets/images/test/test3.jpg";
 
 const tableData = ref([
     {
@@ -77,12 +74,12 @@ const tableData2 = ref([
     {
         id: "123",
         status: "成功",
-        img: test1
+        img: "https://i.328888.xyz/2023/02/28/eu4MP.jpeg"
     },
     {
         id: "124",
         status: "成功,Nice",
-        img: test2
+        img: "https://i.328888.xyz/2023/02/28/euUmt.jpeg"
     }
 ]);
 
@@ -90,7 +87,11 @@ const table3Config = reactive({
     columns: TableColumn2
 });
 
-const imgList = [test1, test2, test3];
+const imgList = [
+    "https://i.328888.xyz/2023/02/28/eu4MP.jpeg",
+    "https://i.328888.xyz/2023/02/28/euUmt.jpeg",
+    "https://i.328888.xyz/2023/02/28/euDtX.jpeg"
+];
 const checkList = ref(["showHeader", "highlightCurrentRow"]);
 
 const tableConfig = reactive<any>({

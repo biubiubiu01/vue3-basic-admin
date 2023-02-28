@@ -30,7 +30,7 @@ export default [
         url: "/api/error/addErrorInfo",
         method: "post",
         response: (request: RequestParams) => {
-            errorList.push(request.body);
+            errorList.unshift(request.body);
             return resultSuccess();
         }
     },

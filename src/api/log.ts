@@ -15,13 +15,13 @@ export enum Api {
     ERROR_TEST = "/error/test"
 }
 
-export const addOperationInfo = (data?: any) => request.post(Api.ADD_OPERATION_INFO, data);
+export const addOperationInfo = (data?: any) => request.post(Api.ADD_OPERATION_INFO, data, { loading: false });
 
-export const getOperationList = (data?: any) => request.get(Api.GET_OPERATION_LIST, data);
+export const getOperationList = (data?: any) => request.get(Api.GET_OPERATION_LIST, data, { loading: false });
 
-export const addErrorInfo = (data?: any) => request.post(Api.ADD_ERROR_INFO, data);
+export const addErrorInfo = (data?: any) => request.post(Api.ADD_ERROR_INFO, data, { loading: false });
 
-export const getErrorList = (data?: any) => request.get(Api.GET_ERROR_LIST, data);
+export const getErrorList = (data?: any) => request.get(Api.GET_ERROR_LIST, data, { loading: false });
 
 export const addLoginInfo = (data?: any) => {
     const params = Object.assign(
@@ -34,10 +34,10 @@ export const addLoginInfo = (data?: any) => {
         },
         data
     );
-    return request.post(Api.ADD_LOGIN_INFO, params);
+    return request.post(Api.ADD_LOGIN_INFO, params, { loading: false });
 };
 
-export const getLoginList = (data?: any) => request.get(Api.GET_LOGON_LIST, data);
+export const getLoginList = (data?: any) => request.get(Api.GET_LOGON_LIST, data, { loading: false });
 
 // form errorlog test
 export const testErrorApi = () => request.get(Api.ERROR_TEST);

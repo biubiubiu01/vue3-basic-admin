@@ -9,8 +9,8 @@ const system: AppRouteType[] = [
         redirect: "/system/account",
         meta: {
             title: "系统管理",
-            icon: "setting",
-            sort: 6,
+            icon: "svg-setting",
+            sort: 10,
             permission: "admin_system"
         },
         children: [

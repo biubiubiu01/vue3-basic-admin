@@ -5,11 +5,11 @@
                 <base-button type="primary" @click="handleAddDept">新增部门</base-button>
             </template>
         </base-page-table>
+        <DeptDialog ref="deptDialogRef" @success="handleSearch" />
     </div>
-    <DeptDialog ref="deptDialogRef" @success="handleSearch" />
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="Department">
 import DeptDialog from "./components/DeptDialog.vue";
 import { getDeptList } from "@/api/system/dept";
 import { useColumn } from "./column";

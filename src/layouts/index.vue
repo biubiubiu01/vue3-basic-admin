@@ -7,14 +7,12 @@
                 <TagView />
             </el-header>
             <el-main class="app-main">
-                <el-scrollbar ref="mainScrollRef" view-class="main-scroll">
+                <el-scrollbar ref="mainScrollRef" view-class="h100">
                     <RouterView>
                         <template #default="{ Component, route }">
                             <transition name="el-fade-in-linear" mode="out-in">
                                 <keep-alive :include="getCacheTagList">
-                                    <div class="all-container">
-                                        <component :is="Component" :key="route.fullPath" />
-                                    </div>
+                                    <component :is="Component" :key="route.fullPath" />
                                 </keep-alive>
                             </transition>
                         </template>

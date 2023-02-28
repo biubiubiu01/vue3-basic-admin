@@ -14,6 +14,7 @@ interface axiosConfig {
     cancelSame?: boolean;
     retryCount?: number;
     isRetry?: boolean;
+    loading?: boolean;
 }
 
 const defaultConfig: axiosConfig = {
@@ -21,7 +22,8 @@ const defaultConfig: axiosConfig = {
     errorMessage: true,
     cancelSame: false,
     isRetry: false,
-    retryCount: 3
+    retryCount: 3,
+    loading: true
 };
 
 const { VITE_BASE_API } = useEnv();
@@ -39,7 +41,7 @@ const service: AxiosInstance = axios.create({
 service.interceptors.request.use((config: AxiosRequestConfig) => {
     const { getToken } = useUserStoreWithOut();
     // @ts-ignore
-    const { cancelSame } = config.requestOptions;
+    const { cancelSame, loading } = config.requestOptions;
     if (cancelSame) {
         axiosCancel.addPending(config);
     }
@@ -47,7 +49,10 @@ service.interceptors.request.use((config: AxiosRequestConfig) => {
     if (getToken) {
         config!.headers!.Authorization = unref(`Bearer ${getToken}`) ?? "";
     }
-    axiosLoading.addLoading();
+    if (loading) {
+        axiosLoading.addLoading();
+    }
+
     return config;
 });
 
@@ -101,7 +106,9 @@ const request = {
                     reject(e);
                 })
                 .finally(() => {
-                    axiosLoading.closeLoading();
+                    if (options.loading) {
+                        axiosLoading.closeLoading();
+                    }
                 });
         });
     }

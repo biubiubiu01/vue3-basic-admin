@@ -10,7 +10,7 @@ const comp: AppRouteType[] = [
         meta: {
             title: "组件",
             icon: "svg-comp",
-            sort: 2,
+            sort: 6,
             permission: "admin_comp"
         },
         children: [

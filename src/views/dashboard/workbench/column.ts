@@ -1,6 +1,3 @@
-import test1 from "@/assets/images/test/test1.jpg";
-import test2 from "@/assets/images/test/test2.jpg";
-import test3 from "@/assets/images/test/test3.jpg";
 import avatar01 from "@/assets/images/user/avatar01.png";
 import avatar15 from "@/assets/images/user/avatar15.png";
 import headImg from "@/assets/images/user/headImg.gif";
@@ -109,7 +106,11 @@ export const dynamicList: DynamicType[] = [
         type: "image",
         time: "20分钟前",
         remark: "发布了一组照片",
-        content: [test1, test2, test3],
+        content: [
+            "https://i.328888.xyz/2023/02/28/eu4MP.jpeg",
+            "https://i.328888.xyz/2023/02/28/euUmt.jpeg",
+            "https://i.328888.xyz/2023/02/28/euDtX.jpeg"
+        ],
         headImg: avatar15
     },
     {

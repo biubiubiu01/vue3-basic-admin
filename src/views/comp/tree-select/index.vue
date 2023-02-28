@@ -21,8 +21,8 @@
                 </el-col>
             </el-row>
         </base-box>
+        <base-tree-select ref="baseTreeSelectRef" node-key="deptId" :fieldNames="fieldNames" :data="treeData" />
     </div>
-    <base-tree-select ref="baseTreeSelectRef" node-key="deptId" :fieldNames="fieldNames" :data="treeData" />
 </template>
 
 <script lang="ts" setup>
