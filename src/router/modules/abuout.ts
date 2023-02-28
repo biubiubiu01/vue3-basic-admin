@@ -1,6 +1,4 @@
 import type { AppRouteType } from "@/router/types";
-// import LAYOUT from "@/layouts/index.vue";
-import { LAYOUT } from "../basic";
 
 const about: AppRouteType[] = [
     {

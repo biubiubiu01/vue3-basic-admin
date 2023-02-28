@@ -1,8 +1,6 @@
 import type { AppRouteType } from "@/router/types";
 import { isArray } from "@/utils";
 
-const LAYOUT = () => import("@/layout/index.vue");
-
 const LoginRoute: AppRouteType = {
     path: "/login",
     name: "Login",
@@ -18,7 +16,7 @@ const RootRoute: AppRouteType = {
 const RedirectRoute: AppRouteType = {
     path: "/redirect",
     name: "Redirect",
-    component: LAYOUT,
+    component: () => import("../layouts/index.vue"),
     redirect: "/redirect/index",
     children: [
         {
@@ -64,5 +62,3 @@ export const asyncRoutes = getAsyncRoute();
 
 // 路由白名单
 export const WHITE_LIST = getRouteName(basicRoutes);
-
-export { LAYOUT };

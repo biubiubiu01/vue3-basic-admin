@@ -54,7 +54,9 @@ const addAjaxError = async () => {
     try {
         await testErrorApi();
     } catch {
-        handleSearch();
+        setTimeout(() => {
+            handleSearch();
+        }, 100);
     }
 };
 

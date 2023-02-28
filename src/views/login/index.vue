@@ -11,10 +11,16 @@
                         <div class="login-title">{{ getSystemTitle }}</div>
                         <el-form :model="loginForm" :rules="loginRules" ref="loginFormRef">
                             <el-form-item prop="username">
-                                <base-input v-model="loginForm.username" placeholder="账号" />
+                                <base-input v-model="loginForm.username" placeholder="账号" @keyup.enter="goPassword" />
                             </el-form-item>
                             <el-form-item prop="password">
-                                <base-input v-model="loginForm.password" showPassword placeholder="密码" />
+                                <base-input
+                                    v-model="loginForm.password"
+                                    ref="passwordRef"
+                                    showPassword
+                                    placeholder="密码"
+                                    @keyup.enter="handleLogin"
+                                />
                             </el-form-item>
                             <div class="flex-row-center justify-between">
                                 <el-checkbox v-model="loginForm.remember" :true-label="1" :false-label="0">记住我</el-checkbox>
@@ -53,6 +59,7 @@ const userStore = useUserStoreWithOut();
 const router = useRouter();
 
 const loginFormRef = ref();
+const passwordRef = ref();
 const loading = ref(false);
 
 const loginForm = reactive({
@@ -93,6 +100,10 @@ const handleLogin = async () => {
             loading.value = false;
         }
     });
+};
+
+const goPassword = () => {
+    unref(passwordRef).instance.focus();
 };
 </script>
 

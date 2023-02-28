@@ -10,6 +10,7 @@
         :show-password="showPassword"
         :prefix-icon="prefixIcon"
         :suffix-icon="suffixIcon"
+        ref="baseInputRef"
         v-if="!text"
         v-bind="$attrs"
     >
@@ -33,11 +34,17 @@
 import inputProps from "./props";
 import { useVModel } from "@vueuse/core";
 
+const baseInputRef = ref();
+
 const props = defineProps(inputProps);
 
 const emit = defineEmits(["update:modelValue"]);
 
 const value = useVModel(props, "modelValue", emit, { defaultValue: "" });
+
+defineExpose({
+    instance: baseInputRef
+});
 </script>
 
 <style scoped></style>
