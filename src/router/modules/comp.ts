@@ -1,11 +1,11 @@
 import type { AppRouteType } from "@/router/types";
-import LAYOUT from "@/layouts/index.vue";
+import { LAYOUT } from "../basic";
 
 const comp: AppRouteType[] = [
     {
         path: "/comp",
         name: "Comp",
-        component: LAYOUT,
+        component: () => import("@/layouts/index.vue"),
         redirect: "/comp/button",
         meta: {
             title: "组件",

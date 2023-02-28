@@ -1,11 +1,11 @@
 import type { AppRouteType } from "@/router/types";
-import LAYOUT from "@/layouts/index.vue";
+import { LAYOUT } from "../basic";
 
 const dashboard: AppRouteType[] = [
     {
         path: "/dashboard",
         name: "Dashboard",
-        component: LAYOUT,
+        component: () => import("@/layouts/index.vue"),
         redirect: "/dashboard/analysis",
         meta: {
             title: "首页",

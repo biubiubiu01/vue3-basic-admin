@@ -1,11 +1,11 @@
 import type { AppRouteType } from "@/router/types";
-import LAYOUT from "@/layouts/index.vue";
+import { LAYOUT } from "../basic";
 
 const systemLog: AppRouteType[] = [
     {
         path: "/system-log",
         name: "SystemLog",
-        component: LAYOUT,
+        component: () => import("@/layouts/index.vue"),
         redirect: "/system-log/operation-log",
         meta: {
             title: "系统日志",

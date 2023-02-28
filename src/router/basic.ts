@@ -1,6 +1,7 @@
 import type { AppRouteType } from "@/router/types";
 import { isArray } from "@/utils";
-import LAYOUT from "@/layouts/index.vue";
+
+const LAYOUT = () => import("@/layout/index.vue");
 
 const LoginRoute: AppRouteType = {
     path: "/login",
@@ -63,3 +64,5 @@ export const asyncRoutes = getAsyncRoute();
 
 // 路由白名单
 export const WHITE_LIST = getRouteName(basicRoutes);
+
+export { LAYOUT };

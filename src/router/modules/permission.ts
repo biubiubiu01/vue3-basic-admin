@@ -1,11 +1,11 @@
 import type { AppRouteType } from "@/router/types";
-import LAYOUT from "@/layouts/index.vue";
+import { LAYOUT } from "../basic";
 
 const permission: AppRouteType[] = [
     {
         path: "/permission",
         name: "Permission",
-        component: LAYOUT,
+        component: () => import("@/layouts/index.vue"),
         redirect: "/permission/page",
         meta: {
             title: "权限控制",

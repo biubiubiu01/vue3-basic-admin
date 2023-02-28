@@ -1,11 +1,11 @@
 import type { AppRouteType } from "@/router/types";
-import LAYOUT from "@/layouts/index.vue";
+import { LAYOUT } from "../basic";
 
 const outLink: AppRouteType[] = [
     {
         path: "/out-link",
         name: "OutLink",
-        component: LAYOUT,
+        component: () => import("@/layouts/index.vue"),
         meta: {
             title: "其他项目",
             icon: "svg-out",

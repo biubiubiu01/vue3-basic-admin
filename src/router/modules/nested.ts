@@ -1,11 +1,11 @@
 import type { AppRouteType } from "@/router/types";
-import LAYOUT from "@/layouts/index.vue";
+import { LAYOUT } from "../basic";
 
 const nested: AppRouteType[] = [
     {
         path: "/nested",
         name: "Nested",
-        component: LAYOUT,
+        component: () => import("@/layouts/index.vue"),
         redirect: "/nested/menu1",
         meta: {
             title: "嵌套路由",

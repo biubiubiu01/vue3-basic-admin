@@ -123,7 +123,9 @@ export function createVitePlugins(env: any, isBuild: boolean) {
             inject: {
                 data: {
                     title: VITE_APP_NAME,
-                    injectScript: `<script>console.log('version':'${pkg.version}')</script>`
+                    injectScript: `<script>
+                          console.log("version:${pkg.version}")
+                    </script>`
                 }
             }
         }),

@@ -1,11 +1,12 @@
 import type { AppRouteType } from "@/router/types";
-import LAYOUT from "@/layouts/index.vue";
+// import LAYOUT from "@/layouts/index.vue";
+import { LAYOUT } from "../basic";
 
 const about: AppRouteType[] = [
     {
         path: "/about",
         name: "About",
-        component: LAYOUT,
+        component: () => import("@/layouts/index.vue"),
         redirect: "/about/index",
         meta: {
             title: "关于",

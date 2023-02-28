@@ -1,11 +1,10 @@
 import type { AppRouteType } from "@/router/types";
-import LAYOUT from "@/layouts/index.vue";
 
 const system: AppRouteType[] = [
     {
         path: "/system",
         name: "System",
-        component: LAYOUT,
+        component: () => import("@/layouts/index.vue"),
         redirect: "/system/account",
         meta: {
             title: "系统管理",

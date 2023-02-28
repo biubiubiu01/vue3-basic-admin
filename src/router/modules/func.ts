@@ -1,11 +1,11 @@
 import type { AppRouteType } from "@/router/types";
-import LAYOUT from "@/layouts/index.vue";
+import { LAYOUT } from "../basic";
 
 const func: AppRouteType[] = [
     {
         path: "/func",
         name: "func",
-        component: LAYOUT,
+        component: () => import("@/layouts/index.vue"),
         redirect: "/func/draggable",
         meta: {
             title: "功能",
