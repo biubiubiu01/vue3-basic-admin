@@ -1,1 +1,0 @@
-const a=[{label:"\u542F\u7528",value:1},{label:"\u505C\u7528",value:0}],l=[{label:"\u6210\u529F",value:200},{label:"\u5931\u8D25",value:500}],e=[{label:"GET",value:"GET"},{label:"POST",value:"POST"},{label:"PUT",value:"PUT"},{label:"DELETE",value:"DELETE"}];export{a as S,l as a,e as m};
