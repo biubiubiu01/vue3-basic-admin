@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 .history
+report.html
 components.d.ts
 auto-imports.d.ts
 
