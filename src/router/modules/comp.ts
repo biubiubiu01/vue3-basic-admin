@@ -80,6 +80,17 @@ const comp: AppRouteType[] = [
                 }
             },
             {
+                path: "virtualscroll",
+                name: "VirtualScroll",
+                component: () => import("@/views/comp/virtualscroll/index.vue"),
+                meta: {
+                    title: "虚拟滚动",
+                    sort: 6,
+                    permission: "admin_comp_virtualscroll",
+                    icon: ""
+                }
+            },
+            {
                 path: "tree-select",
                 name: "TreeSelect",
                 component: () => import("@/views/comp/tree-select/index.vue"),

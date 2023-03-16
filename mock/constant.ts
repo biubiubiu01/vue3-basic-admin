@@ -170,6 +170,7 @@ export const roleData = [
             "admin_comp_dialog",
             "admin_comp_loading",
             "admin_comp_seamscroll",
+            "admin_comp_virtualscroll",
             "admin_comp_select",
             "admin_comp_table",
             "admin_comp_form",
