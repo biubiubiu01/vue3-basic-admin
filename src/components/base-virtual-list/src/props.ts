@@ -9,20 +9,20 @@ const listProps = {
         type: [Object, String, Array] as PropType<StyleValue>
     },
     height: {
-        type: [String, Number],
+        type: Number,
         default: 500
     },
     width: {
         type: [Number, String],
-        required: false
-    },
-    total: {
-        type: Number,
-        default: 0
+        default: "100%"
     },
     itemHeight: {
         type: Number,
         default: 30
+    },
+    dynamic: {
+        type: Boolean,
+        default: false
     },
     cache: {
         type: Number,
