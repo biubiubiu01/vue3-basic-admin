@@ -245,6 +245,17 @@ const comp: AppRouteType[] = [
                     permission: "admin_comp_json",
                     icon: ""
                 }
+            },
+            {
+                path: "photograph",
+                name: "Photograph",
+                component: () => import("@/views/comp/photograph/index.vue"),
+                meta: {
+                    title: "拍照视频",
+                    sort: 15,
+                    permission: "admin_comp_photograph",
+                    icon: ""
+                }
             }
         ]
     }

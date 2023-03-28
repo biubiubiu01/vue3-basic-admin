@@ -6,6 +6,7 @@ import { useErrorLogStoreWithOut } from "@/stores/modules/errorLog";
 const VueErrorHandler = (err: any, vm: any) => {
     if (!err.message) return;
     const errorLogStore = useErrorLogStoreWithOut();
+    console.error(err);
     errorLogStore.addErrorLog({
         type: ErrorTypeEnum.VUE,
         url: window.location.href.split("/#")[1],

@@ -2,7 +2,7 @@
     <div class="com-virtualscroll-container">
         <el-row>
             <el-col :span="12">
-                <base-box title="固定高度">
+                <base-box title="固定高度(传统滚动)">
                     <base-virtual-list :data="basicData" :item-height="50">
                         <template #default="{ item }">
                             <div class="item" style="text-align: center; height: 50px">
@@ -13,7 +13,7 @@
                 </base-box></el-col
             >
             <el-col :span="12">
-                <base-box title="动态高度">
+                <base-box title="动态高度(传统方法)">
                     <base-virtual-list :data="data" :item-height="50" dynamic>
                         <template #default="{ item }">
                             <div class="item">
@@ -23,6 +23,19 @@
                     </base-virtual-list>
                 </base-box>
             </el-col>
+        </el-row>
+        <el-row class="mt20">
+            <el-col :span="12">
+                <base-box title="固定高度(IntersectionObserver)">
+                    <base-virtual-observer :data="basicData" :item-height="50">
+                        <template #default="{ item }">
+                            <div class="item" style="text-align: center; height: 50px">
+                                {{ item }}
+                            </div>
+                        </template>
+                    </base-virtual-observer>
+                </base-box></el-col
+            >
         </el-row>
     </div>
 </template>
