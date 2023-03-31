@@ -31,6 +31,8 @@
 
 vue2 版本，地址：[vue-antd-admin](https://github.com/biubiubiu01/vue-antd-admin)
 
+精简版 ，地址：[vue3-basic-template](https://github.com/biubiubiu01/vue3-basic-template)
+
 ## 预览
 
 -   [点我预览](https://gist006.gitee.io/vue3-basic-admin)
