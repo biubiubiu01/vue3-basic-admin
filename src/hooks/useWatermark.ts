@@ -104,5 +104,9 @@ export const useWatermark = (appendEl: Ref<HTMLElement | null> = ref(document.bo
         }
     }
 
+    onBeforeUnmount(() => {
+        clear();
+    });
+
     return { setWatermark, clear };
 };
