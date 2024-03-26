@@ -214,6 +214,17 @@ const comp: AppRouteType[] = [
                 ]
             },
             {
+                path: "three",
+                name: "Three",
+                component: () => import("@/views/comp/three/index.vue"),
+                meta: {
+                    title: "Three",
+                    sort: 12,
+                    permission: "admin_comp_three",
+                    icon: ""
+                }
+            },
+            {
                 path: "editor",
                 name: "Editor",
                 component: () => import("@/views/comp/editor/index.vue"),

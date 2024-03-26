@@ -15,6 +15,7 @@
     "dependencies": {
         "@element-plus/icons-vue": "^2.0.10",
         "axios": "^0.27.2",
+        "d3": "^7.9.0",
         "dayjs": "^1.11.7",
         "echarts": "^5.3.3",
         "echarts-liquidfill": "3",
@@ -25,6 +26,7 @@
         "path-browserify": "^1.0.1",
         "pinia": "^2.0.18",
         "pinia-plugin-persistedstate": "^2.3.0",
+        "three": "^0.162.0",
         "tinymce": "^6.3.1",
         "vditor": "^3.9.0",
         "vue": "^3.2.37",
@@ -35,10 +37,12 @@
     "devDependencies": {
         "@commitlint/cli": "^17.2.0",
         "@commitlint/config-conventional": "^17.2.0",
+        "@types/d3": "^7.4.3",
         "@types/mockjs": "^1.0.7",
         "@types/node": "^18.11.9",
         "@types/nprogress": "^0.2.0",
         "@types/path-browserify": "^1.0.0",
+        "@types/three": "^0.162.0",
         "@typescript-eslint/eslint-plugin": "^5.42.0",
         "@typescript-eslint/parser": "^5.42.0",
         "@vitejs/plugin-vue": "^3.0.2",
