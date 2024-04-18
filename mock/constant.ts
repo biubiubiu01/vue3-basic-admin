@@ -175,6 +175,7 @@ export const roleData = [
             "admin_comp_table",
             "admin_comp_form",
             "admin_comp_three",
+            "admin_comp_open_layers",
             "admin_comp_echarts",
             "admin_comp_echarts_bar",
             "admin_comp_echarts_line",

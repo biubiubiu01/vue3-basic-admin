@@ -23,6 +23,7 @@
         "element-plus": "^2.2.19",
         "mockjs": "^1.1.0",
         "nprogress": "^0.2.0",
+        "ol": "^9.1.0",
         "path-browserify": "^1.0.1",
         "pinia": "^2.0.18",
         "pinia-plugin-persistedstate": "^2.3.0",

@@ -4,3 +4,4 @@ export { useLoading } from "./useLoading";
 export { useDark } from "./useDark";
 export { useStorage } from "./useStorage";
 export { useWatermark } from "./useWatermark";
+export { useOpenLayersMap } from "./useOpenLayersMap";

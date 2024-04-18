@@ -214,6 +214,17 @@ const comp: AppRouteType[] = [
                 ]
             },
             {
+                path: "openlayers",
+                name: "OpenLayers",
+                component: () => import("@/views/comp/openlayers/index.vue"),
+                meta: {
+                    title: "OpenLayers",
+                    sort: 12,
+                    permission: "admin_comp_open_layers",
+                    icon: ""
+                }
+            },
+            {
                 path: "three",
                 name: "Three",
                 component: () => import("@/views/comp/three/index.vue"),
